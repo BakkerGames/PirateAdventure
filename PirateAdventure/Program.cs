@@ -1,0 +1,489 @@
+﻿// Program.cs - 09/06/2017
+
+using System;
+
+namespace PirateAdventure
+{
+    partial class Program
+    {
+        private static int IL_itemCount = 60;
+        private static int CL_commandCount = 151;
+        private static int NL_wordCountF = 59;
+        private static int RL_roomCount = 33;
+        private static int MX_maxCarry = 5;
+        private static int AR_startRoom = 1;
+        private static int TT = 2;
+        private static int LN_wordSize = 3;
+        private static int LT_lightTotal = 200;
+        private static int ML = 71;
+        private static int TR = 1;
+
+        private static bool gameOver = false;
+        private static string TPS_commandLine = "";
+        private static bool F_commandNotOK = false;
+        private static int R_currRoom;
+        private static int LX_lightRemaining;
+        private static bool DF_roomIsDark;
+
+        private static Random sysRand = new Random();
+
+        static void Main(string[] args)
+        {
+            Initialize();
+            // 130 GOSUB 50
+            ShowIntroduction();
+            while (!gameOver)
+            {
+                // 131 GOSUB 240
+                // 132 GOTO 160
+                ShowLocation();
+                // 160 NV(0)=0
+                // 161 GOSUB 360
+                // 162 GOTO 140
+                NV[0] = 0;
+                DoActions();
+                F_commandNotOK = false;
+                while (!gameOver && !F_commandNotOK)
+                {
+                    GetCommand();
+                    F_commandNotOK = ParseCommand();
+                    // 142 GOSUB 170
+                    // 143 IF F THEN PRINT "YOU USE WORD(S) I DON'T KNOW":GOTO 140
+                    if (F_commandNotOK)
+                    {
+                        Console.WriteLine("YOU USE WORD(S) I DON'T KNOW");
+                        Console.WriteLine();
+                    }
+                }
+                // 150 GOSUB 360
+                DoActions();
+                // 151 IF IA(9)=-1 THEN LX=LX-1:IF LX<0 THEN PRINT "LIGHT HAS RUN OUT":IA(9)=0 ELSE IF LX<25 THEN PRINT "LIGHT RUNS OUT IN";LX;"TURNS!"
+                if (IA[9] == -1)
+                {
+                    LX_lightRemaining -= 1;
+                    if (LX_lightRemaining < 0)
+                    {
+                        Console.WriteLine("LIGHT HAS RUN OUT");
+                        IA[9] = 0;
+                    }
+                    else if (LX_lightRemaining < 25)
+                    {
+                        Console.WriteLine($"LIGHT RUNS OUT IN {LX_lightRemaining} TURNS!");
+                    }
+                }
+            }
+        }
+
+        private static void ShowLocation()
+        {
+            // 240 IF DF THEN IF IA(9)<>-1 AND IA(9)<>R THEN PRINT "I CAN'T SEE, ITS TOO DARK.":RETURN
+            if (DF_roomIsDark && (IA[9] != -1) && (IA[9] != R_currRoom))
+            {
+                Console.WriteLine("I CAN'T SEE, ITS TOO DARK.");
+                return;
+            }
+            // 251 IF LEFT$(RS$(R),1)="*" THEN PRINT MID$(RS$(R),2); ELSE PRINT "I'M IN A ";RS$(R);
+            if (RSS[R_currRoom].StartsWith("*"))
+            {
+                Console.Write(RSS[R_currRoom].Substring(1));
+            }
+            else
+            {
+                Console.Write("I'M IN A ");
+                Console.Write(RSS[R_currRoom]);
+            }
+            // 250 K=-1
+            bool K_firstItem = true;
+            // 260 FOR Z=0 TO IL
+            for (int z = 0; z <= IL_itemCount; z++)
+            {
+                // 261   IF K THEN IF IA(Z)=R THEN PRINT ". VISIBLE ITEMS HERE:":K=0
+                if (K_firstItem && IA[z] == R_currRoom)
+                {
+                    Console.WriteLine(". VISIBLE ITEMS HERE:");
+                    K_firstItem = false;
+                }
+                // 300   IF IA(Z)<>R THEN 320
+                if (IA[z] == R_currRoom)
+                {
+                    string TPS_itemName;
+                    // 280   TP$=IA$(Z)
+                    TPS_itemName = IAS_itemDescriptions[z];
+                    // 281   IF RIGHT$(TP$,1)="/" THEN 282 ELSE 290
+                    // 282   FOR W=LEN(TP$)-1 TO 1 STEP -1
+                    // 283     IF MID$(TP$,W,1)="/" THEN TP$=LEFT$(TP$,W-1):GOTO 290
+                    // 284   NEXT W
+                    if (TPS_itemName.EndsWith("/"))
+                    {
+                        int posNextSlash = TPS_itemName.LastIndexOf("/", TPS_itemName.Length - 2);
+                        if (posNextSlash > 0)
+                        {
+                            TPS_itemName = TPS_itemName.Substring(0, posNextSlash);
+                        }
+                    }
+                    // 310   PRINT TP$;".  ";
+                    Console.WriteLine($"{TPS_itemName}.");
+                }
+                // 320 NEXT X
+            }
+            // 321 PRINT
+            Console.WriteLine();
+            // 330 K=-1
+            K_firstItem = false;
+            // 331 FOR Z=0 TO 5
+            for (int z = 0; z <= 5; z++)
+            {
+                // 332   IF K THEN IF RM(R,Z)<>0 THEN PRINT "OBVIOUS EXITS: ";:K=0
+                if (K_firstItem && RM[R_currRoom, z] != 0)
+                {
+                    Console.Write("OBVIOUS EXITS: ");
+                    K_firstItem = false;
+                }
+                // 340   IF RM(R,Z)<>0 THEN PRINT NV$(Z+1,1);" ";
+                if (RM[R_currRoom, z] != 0)
+                {
+                    Console.Write(NVS[z + 1, 1]);
+                    Console.Write(" ");
+                }
+                // 350 NEXT Z
+            }
+            // 351 PRINT:PRINT:RETURN
+            Console.WriteLine();
+            Console.WriteLine();
+            return;
+        }
+
+        private static void Initialize()
+        {
+            // 100 R=AR:LX=LT:DF=0:DIM SF(15)
+            R_currRoom = AR_startRoom;
+            LX_lightRemaining = LT_lightTotal;
+            DF_roomIsDark = false;
+            for (int i = 0; i <= 15; i++)
+            {
+                SF_systemFlags[i] = false;
+            }
+            // 101 REM INPUT "USE OLD 'SAVED' GAME";K$:IF LEFT$(K$,1)<>"Y" THEN 130
+            // 110 REM IF D<>-1 THEN CLOSE:OPEN"I",D,SV$ ELSE INPUT "READY SAVED TAPE";K$:PRINT INT(IL*5/60)+1;"MINUTES"
+            // 120 REM INPUT #D,SF,LX,DF,R
+            // 121 REM FOR X=0 TO IL
+            // 122 REM   INPUT #D,IA(X)
+            // 123 REM NEXT X
+            // 124 REM IF D<>-1 CLOSE
+            Console.Write("USE OLD 'SAVED' GAME? ");
+            string KS = Console.ReadLine().ToUpper();
+            if (!KS.StartsWith("Y"))
+            {
+                return;
+            }
+            // todo load saved game
+        }
+
+        private static void ShowIntroduction()
+        {
+            // 50 CLS:PRINT "     ***   WELCOME TO ADVENTURE LAND. (#4.6) ***"
+            // 51 PRINT
+            // 52 PRINT " UNLESS TOLD DIFFERENTLY YOU MUST FIND *TREASURES*"
+            // 53 PRINT "AND-RETURN-THEM-TO-THEIR-PROPER--PLACE!"
+            // 60 PRINT
+            // 61 PRINT "I'M YOUR PUPPET. GIVE ME ENGLISH COMMANDS THAT"
+            // 70 PRINT "CONSIST OF A NOUN AND VERB. SOME EXAMPLES..."
+            // 71 PRINT
+            // 72 PRINT "TO FIND OUT WHAT YOU'RE CARRYING YOU MIGHT SAY: TAKE INVENTORY"
+            // 73 PRINT "TO GO INTO A HOLE YOU MIGHT SAY: GO HOLE"
+            // 74 PRINT "TO SAVE CURRENT GAME: SAVE GAME"
+            // 80 PRINT
+            // 81 PRINT "YOU WILL AT TIMES NEED SPECIAL ITEMS TO DO THINGS, BUT I'M"
+            // 82 PRINT "SURE YOU'LL BE A GOOD ADVENTURER AND FIGURE THESE THINGS OUT."
+            // 90 PRINT
+            // 91 INPUT "     HAPPY ADVENTURING... HIT ENTER TO START";K$:CLS:RETURN
+            Console.WriteLine("*** WELCOME TO ADVENTURE LAND. (#4.6) ***");
+            Console.WriteLine();
+            Console.WriteLine("UNLESS TOLD DIFFERENTLY YOU MUST FIND *TREASURES*");
+            Console.WriteLine("AND-RETURN-THEM-TO-THEIR-PROPER--PLACE!");
+            Console.WriteLine();
+            Console.WriteLine("I'M YOUR PUPPET. GIVE ME ENGLISH COMMANDS THAT");
+            Console.WriteLine("CONSIST OF A NOUN AND VERB. SOME EXAMPLES...");
+            Console.WriteLine();
+            Console.WriteLine("TO FIND OUT WHAT YOU'RE CARRYING YOU MIGHT SAY: TAKE INVENTORY");
+            Console.WriteLine("TO GO INTO A HOLE YOU MIGHT SAY: GO HOLE");
+            Console.WriteLine("TO SAVE CURRENT GAME: SAVE GAME");
+            Console.WriteLine();
+            Console.WriteLine("YOU WILL AT TIMES NEED SPECIAL ITEMS TO DO THINGS, BUT I'M");
+            Console.WriteLine("SURE YOU'LL BE A GOOD ADVENTURER AND FIGURE THESE THINGS OUT.");
+            Console.WriteLine();
+            Console.Write("HAPPY ADVENTURING... HIT ENTER TO START");
+            Console.ReadLine();
+            Console.WriteLine();
+        }
+
+        private static void DoActions()
+        {
+            // 360 F2=-1:F=-1:F3=0
+            bool F2_allCmds = true;
+            bool F = true;
+            bool F3 = false;
+            // 362 FOR X=0 TO CL
+            for (int X = 0; X < CL_commandCount; X++)
+            {
+                // 363   V=CA(X,0)/150:IF NV(0)=0 THEN IF V<>0 THEN RETURN
+                int V_verb = CA[X, 0] / 150;
+                if (NV[0] == 0 && V_verb != 0)
+                {
+                    return; // done doing background actions
+                }
+                // 370   IF NV(0)<>V THEN 980
+                if (NV[0] != V_verb)
+                {
+                    continue;
+                }
+                // 371   N=CA(X,0)-V*150
+                int N_noun = CA[X, 0] - (V_verb * 150);
+                // 380   IF NV(0)=0 THEN F=0:IF RND(100)<=N THEN 400 ELSE 980
+                if (NV[0] == 0)
+                {
+                    F = false;
+                    if (sysRand.Next(100) > N_noun)
+                    {
+                        continue;
+                    }
+                }
+                // 390   IF N<>NV(1) AND N<>0 THEN 980
+                else if (N_noun != NV[1] && N_noun != 0)
+                {
+                    continue;
+                }
+                // 400   F2=-1:F=0:F3=-1
+                F2_allCmds = true;
+                F = false;
+                F3 = true;
+                // 401   FOR Y=1 TO 5
+                for (int Y = 1; Y <= 5; Y++)
+                {
+                    // 402     W=CA(X,Y):LL=W/20:K=W-LL*20:F1=-1
+                    int W = CA[X, Y];
+                    int LL = W / 20;
+                    int K = W - (LL * 20);
+                    bool F1_thisCmd = true;
+                    // 403     ON K+1 GOTO 550,430,450,470,490,500,510,520,530,540,410,420,440,460,480
+                    switch (K + 1)
+                    {
+                        case 1:
+                            // 430     F1=IA(LL)=-1:GOTO 550
+                            F1_thisCmd = (IA[LL] == -1); // item in inventory
+                            break;
+                        case 2:
+                            // 450     F1=IA(LL)=R:GOTO 550
+                            F1_thisCmd = (IA[LL] == R_currRoom); // item in current room
+                            break;
+                        case 3:
+                            // 470     F1=IA(LL)=R OR IA(LL)=-1:GOTO 550
+                            F1_thisCmd = (IA[LL] == R_currRoom || IA[LL] == -1); // item in current room or inventory
+                            break;
+                        case 4:
+                            // 490     F1=R=LL:GOTO 550
+                            F1_thisCmd = (R_currRoom == LL); // current room is LL
+                            break;
+                        case 5:
+                            // 500     F1=IA(LL)<>R:GOTO 550
+                            F1_thisCmd = (IA[LL] != R_currRoom); // item not in current room
+                            break;
+                        case 6:
+                            // 510     F1=IA(LL)<>-1:GOTO 550
+                            F1_thisCmd = (IA[LL] != -1); // item not in inventory
+                            break;
+                        case 7:
+                            // 520     F1=R<>LL:GOTO 550
+                            F1_thisCmd = (R_currRoom != LL); // current room not LL
+                            break;
+                        case 8:
+                            // 530     F1=SF(LL):F1=F1<>0:GOTO 550
+                            F1_thisCmd = SF_systemFlags[LL]; // system flag is true
+                            break;
+                        case 9:
+                            // 540     F1=SF(LL):F1=F1=0:GOTO 550
+                            F1_thisCmd = !SF_systemFlags[LL]; // system flag is false
+                            break;
+                        case 10:
+                            // 410     F1=-1
+                            // 411     FOR Z=0 TO IL
+                            // 412       IF IA(Z)=-1 THEN 550
+                            // 413     NEXT Z
+                            // 414     F1=0:GOTO 550
+                            F1_thisCmd = false; // no items in inventory
+                            for (int Z = 0; Z <= IL_itemCount; Z++)
+                            {
+                                if (IA[Z] == -1) // item in inventory
+                                {
+                                    F1_thisCmd = true; // has some item in inventory
+                                    break;
+                                }
+                            }
+                            break;
+                        case 11:
+                            // 420     F1=0
+                            // 421     FOR Z=0 TO IL
+                            // 422       IF IA(Z)=-1 THEN 550
+                            // 423     NEXT Z
+                            // 424     F1=-1:GOTO 550
+                            F1_thisCmd = true; // inventory is empty
+                            for (int Z = 0; Z <= IL_itemCount; Z++)
+                            {
+                                if (IA[Z] == -1) // item in inventory
+                                {
+                                    F1_thisCmd = false; // inventory not empty
+                                    break;
+                                }
+                            }
+                            break;
+                        case 12:
+                            // 440     F1=IA(LL)<>-1 AND IA(LL)<>R:GOTO 550
+                            F1_thisCmd = (IA[LL] != -1 && IA[LL] != R_currRoom); // item not inventory or current room
+                            break;
+                        case 13:
+                            // 460     F1=IA(LL)<>0:GOTO 550
+                            F1_thisCmd = (IA[LL] != 0); // item is somewhere
+                            break;
+                        case 14:
+                            // 480     F1=IA(LL)=0:GOTO 550
+                            F1_thisCmd = (IA[LL] == 0); // item is nowhere
+                            break;
+                    }
+                    // 550     F2=F2 AND F1:IF F2 THEN 551 ELSE 980
+                    F2_allCmds = (F2_allCmds && F1_thisCmd);
+                    if (!F2_allCmds)
+                    {
+                        break;
+                    }
+                    // 551   NEXT Y
+                }
+                if (!F2_allCmds)
+                {
+                    break;
+                }
+                // 560   IP=0
+                int IP = 0;
+                // 561   FOR Y=1 TO 4
+                for (int Y = 1; Y <= 4; Y++)
+                {
+
+
+
+                    // 960   NEXT Y
+                }
+
+                // 970   IF NV(0)<>0 THEN 990
+                if (NV[0] != 0)
+                {
+                    break;
+                }
+                // 980 NEXT X
+            }
+            // 990 REM
+
+
+
+
+
+            // 361 IF NV(0)=1 AND NV(1)<7 THEN 610
+            if (!(NV[0] == 1 && NV[1] < 7))
+            {
+                // todo handle GO direction
+            }
+        }
+
+        private static void GetCommand()
+        {
+            // 140 INPUT "TELL ME WHAT TO DO";TP$
+            // 141 PRINT
+            Console.Write("TELL ME WHAT TO DO > ");
+            TPS_commandLine = Console.ReadLine().ToUpper();
+            Console.WriteLine();
+        }
+
+        private static bool ParseCommand()
+        {
+            // 170 K=0:NT$(0)="":NT$(1)=""
+            NTS_currCommand[0] = "";
+            NTS_currCommand[1] = "";
+            int K_currWord = 0;
+
+            // 180 FOR X=1 TO LEN(TP$)
+            // 181   K$=MID$(TP$,X,1)
+            // 182   IF K$=" " THEN K=1 ELSE NT$(K)=LEFT$(NT$(K)+K$,LN)
+            // 190 NEXT X
+            bool lastWasSpace = true; // handle leading and multiple spaces gracefully
+            for (int x = 0; x < TPS_commandLine.Length; x++)
+            {
+                if (TPS_commandLine[x] == ' ')
+                {
+                    if (!lastWasSpace)
+                    {
+                        K_currWord++;
+                        if (K_currWord >= 2)
+                        {
+                            break;
+                        }
+                    }
+                    lastWasSpace = true;
+                }
+                else
+                {
+                    lastWasSpace = false;
+                    if (NTS_currCommand[K_currWord].Length < LN_wordSize) // only use up to LN chars
+                    {
+                        NTS_currCommand[K_currWord] += TPS_commandLine[x];
+                    }
+                }
+            }
+
+            // 191 FOR X=0 TO 1
+            // 192   NV(X)=0
+            // 193   IF NT$(X)="" THEN 230
+            // 194   FOR Y=0 TO NL
+            // 195     K$=NV$(Y,X):IF LEFT$(K$,1)="*" THEN K$=MID$(K$,2)
+            // 200     IF X=1 IF Y<7 THEN K$=LEFT$(K$,LN)
+            // 210     IF NT$(X)=K$ THEN NV(X)=Y:GOTO 220
+            // 211   NEXT Y:GOTO 230
+            // 220   IF LEFT$(NV$(NV(X),X),1)="*" THEN NV(X)=NV(X)-1:GOTO 220
+            // 230 NEXT X
+            for (int x = 0; x < 2; x++)
+            {
+                NV[x] = 0;
+                if (NTS_currCommand[x] == "")
+                {
+                    continue;
+                }
+                for (int y = 0; y < NL_wordCountF; y++)
+                {
+                    string KS = NVS[y, x];
+                    if (KS.StartsWith("*"))
+                    {
+                        KS = KS.Substring(1); // remove *
+                    }
+                    if (KS.Length > LN_wordSize)
+                    {
+                        KS = KS.Substring(0, LN_wordSize);
+                    }
+                    if (NTS_currCommand[x].Equals(KS))
+                    {
+                        NV[x] = y;
+                        while (NVS[NV[x], x].StartsWith("*")) // search for prior word without *
+                        {
+                            NV[x] -= 1;
+                        }
+                        break;
+                    }
+                }
+            }
+
+            // 231 F=NV(0)<1 OR LEN(NT$(1))>0 AND NV(1)<1:RETURN
+            return (NV[0] < 1 || (NTS_currCommand[1].Length > 0 && NV[1] < 1));
+        }
+
+        private static void DoCommand()
+        {
+            //throw new NotImplementedException();
+        }
+    }
+}
