@@ -51,6 +51,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\PIRATE.TXT" />
+    <Content Include="Resources\ScansText\SCAN02.TXT" />
+    <Content Include="Resources\ScansText\SCAN03.TXT" />
+    <Content Include="Resources\ScansText\SCAN04.TXT" />
+    <Content Include="Resources\ScansText\SCAN05.TXT" />
+    <Content Include="Resources\ScansText\SCAN06.TXT" />
+    <Content Include="Resources\ScansText\SCAN07.TXT" />
+    <Content Include="Resources\ScansText\SCAN08.TXT" />
+    <Content Include="Resources\Scans\scan01.png" />
+    <Content Include="Resources\Scans\scan10.png" />
+    <Content Include="Resources\Scans\scan02.png" />
+    <Content Include="Resources\Scans\scan03.png" />
+    <Content Include="Resources\Scans\scan04.png" />
+    <Content Include="Resources\Scans\scan05.png" />
+    <Content Include="Resources\Scans\scan06.png" />
+    <Content Include="Resources\Scans\scan07.png" />
+    <Content Include="Resources\Scans\scan08.png" />
+    <Content Include="Resources\Scans\scan09.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
