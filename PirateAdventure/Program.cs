@@ -1,4 +1,4 @@
-﻿// Program.cs - 09/06/2017
+﻿// Program.cs - 09/30/2017
 
 using System;
 
@@ -24,6 +24,9 @@ namespace PirateAdventure
         private static int R_currRoom;
         private static int LX_lightRemaining;
         private static bool DF_roomIsDark;
+
+        // 41 Z$="I'VE TOO MUCH TOO CARRY. TRY -TAKE INVENTORY-"
+        private const string ZS = "I'VE TOO MUCH TOO CARRY. TRY -TAKE INVENTORY-";
 
         private static Random sysRand = new Random();
 
@@ -57,18 +60,27 @@ namespace PirateAdventure
                 }
                 // 150 GOSUB 360
                 DoActions();
-                // 151 IF IA(9)=-1 THEN LX=LX-1:IF LX<0 THEN PRINT "LIGHT HAS RUN OUT":IA(9)=0 ELSE IF LX<25 THEN PRINT "LIGHT RUNS OUT IN";LX;"TURNS!"
-                if (IA[9] == -1)
+                if (!gameOver)
                 {
-                    LX_lightRemaining -= 1;
-                    if (LX_lightRemaining < 0)
+                    // 151 IF IA(9)=-1 THEN 
+                    if (IA[9] == -1)
                     {
-                        Console.WriteLine("LIGHT HAS RUN OUT");
-                        IA[9] = 0;
-                    }
-                    else if (LX_lightRemaining < 25)
-                    {
-                        Console.WriteLine($"LIGHT RUNS OUT IN {LX_lightRemaining} TURNS!");
+                        //LX=LX-1
+                        LX_lightRemaining -= 1;
+                        //:IF LX<0 THEN 
+                        if (LX_lightRemaining < 0)
+                        {
+                            //PRINT "LIGHT HAS RUN OUT"
+                            Console.WriteLine("LIGHT HAS RUN OUT");
+                            //:IA(9)=0 
+                            IA[9] = 0;
+                        }
+                        //ELSE IF LX<25 THEN 
+                        else if (LX_lightRemaining < 25)
+                        {
+                            //PRINT "LIGHT RUNS OUT IN";LX;"TURNS!"
+                            Console.WriteLine($"LIGHT RUNS OUT IN {LX_lightRemaining} TURNS!");
+                        }
                     }
                 }
             }
@@ -76,19 +88,24 @@ namespace PirateAdventure
 
         private static void ShowLocation()
         {
-            // 240 IF DF THEN IF IA(9)<>-1 AND IA(9)<>R THEN PRINT "I CAN'T SEE, ITS TOO DARK.":RETURN
+            // 240 IF DF THEN IF IA(9)<>-1 AND IA(9)<>R THEN 
             if (DF_roomIsDark && (IA[9] != -1) && (IA[9] != R_currRoom))
             {
+                //PRINT "I CAN'T SEE, ITS TOO DARK."
                 Console.WriteLine("I CAN'T SEE, ITS TOO DARK.");
+                //:RETURN
                 return;
             }
-            // 251 IF LEFT$(RS$(R),1)="*" THEN PRINT MID$(RS$(R),2); ELSE PRINT "I'M IN A ";RS$(R);
+            // 251 IF LEFT$(RS$(R),1)="*" THEN 
             if (RSS[R_currRoom].StartsWith("*"))
             {
+                //PRINT MID$(RS$(R),2); 
                 Console.Write(RSS[R_currRoom].Substring(1));
             }
+            //ELSE 
             else
             {
+                //PRINT "I'M IN A ";RS$(R);
                 Console.Write("I'M IN A ");
                 Console.Write(RSS[R_currRoom]);
             }
@@ -121,6 +138,8 @@ namespace PirateAdventure
                             TPS_itemName = TPS_itemName.Substring(0, posNextSlash);
                         }
                     }
+                    // 290 RETURN
+                    // ???
                     // 310   PRINT TP$;".  ";
                     Console.WriteLine($"{TPS_itemName}.");
                 }
@@ -366,6 +385,233 @@ namespace PirateAdventure
                 // 561   FOR Y=1 TO 4
                 for (int Y = 1; Y <= 4; Y++)
                 {
+                    int K = ((Y - 1) / 2) + 6;
+                    int AC;
+                    // 562     K=(Y-1)/2+6:ON Y GOTO 570,580,570,580
+                    if (Y == 1 || Y == 3)
+                    {
+                        // 570    AC=CA(X,K)/150:GOTO 590
+                        AC = CA[X, K] / 150;
+                    }
+                    else
+                    {
+                        // 580     AC=CA(X,Y)-CINT(CA(X,K)/150)*150
+                        AC = CA[X, Y] - CA[X, K] / 150 * 150;
+                    }
+                    if (AC == 0)
+                    {
+                        // 591     IF AC=0 THEN 960
+                        continue;
+                    }
+                    if (AC > 101)
+                    {
+                        // 590     IF AC>101 THEN 600
+                        // 600     PRINT MS$(AC-50):GOTO 960
+                        Console.WriteLine(MSS_messages[AC - 50]);
+                        continue;
+                    }
+                    if (AC < 52)
+                    {
+                        // 592     IF AC<52 THEN PRINT MS$(AC):GOTO 960
+                        Console.WriteLine(MSS_messages[AC]);
+                        continue;
+                    }
+                    // vars for below
+                    int P;
+                    int L;
+                    int Z;
+                    // 593     ON AC-51 GOTO 660,700,740,760,770,780,790,760,810,830,840,850,860,870,890,920,930,940,950,710,750
+                    switch (AC - 51)
+                    {
+                        case 1: // 660
+                                // 660     L=0
+                            L = 0;
+                            // 661     FOR Z=1 TO IL
+                            for (int Z_temp = 1; Z_temp <= IL_itemCount; Z_temp++)
+                            {
+                                // 662       IF IA(Z)=-1
+                                if (IA[Z_temp] == -1)
+                                {
+                                    // LET L=L+1
+                                    L++; // count items carried
+                                }
+                                // 670     NEXT Z
+                            }
+                            // 680     IF L>=MX PRINT Z$:GOTO 970
+                            if (L >= MX_maxCarry)
+                            {
+                                Console.WriteLine(ZS);
+                                break;
+                            }
+                            // 690     GOSUB 1050
+                            P = GOSUB1050(ref IP, X);
+                            //:IA(P)=-1
+                            IA[P] = -1; // carry item
+                            //:GOTO 960
+                            break;
+                        case 2: // 700 - Move item to current room
+                                // 700     GOSUB 1050
+                            P = GOSUB1050(ref IP, X);
+                            //:IA(P)=R
+                            IA[P] = R_currRoom;
+                            //:GOTO 960
+                            break;
+                        case 3: // 740 - Teleport to room P
+                                // 740 GOSUB 1050
+                            P = GOSUB1050(ref IP, X);
+                            //:R=P
+                            R_currRoom = P;
+                            //:GOTO 960
+                            break;
+                        case 4: // 760
+                        case 8: // 760 - Item goes nowhere
+                            // 760 GOSUB 1050
+                            P = GOSUB1050(ref IP, X);
+                            //:IA(P)=0
+                            IA[P] = 0;
+                            //:GOTO 960
+                            break;
+                        case 5: // 770
+                                // 770     DF=-1
+                            DF_roomIsDark = true;
+                            //:GOTO 960
+                            break;
+                        case 6: // 780
+                                // 780     DF=0
+                            DF_roomIsDark = false;
+                            //:GOTO 960
+                            break;
+                        case 7: // 790 - SF_systemFlags[P] = true
+                                // 790     GOSUB 1050
+                            P = GOSUB1050(ref IP, X);
+                            // 800     SF(P)=-1
+                            SF_systemFlags[P] = true;
+                            // 801 GOTO 960
+                            break;
+                        case 9: // 810 - SF_systemFlags[P] = false
+                                // 810     GOSUB 1050
+                            P = GOSUB1050(ref IP, X);
+                            // 820 SF(P)=0
+                            SF_systemFlags[P] = false;
+                            // 821 GOTO 960
+                            break;
+                        case 10: // 830
+                                 // 830     PRINT "I'M DEAD...":R=RL:DF=0:GOTO 860
+                            Console.WriteLine("I'M DEAD...");
+                            R_currRoom = RL_roomCount;
+                            DF_roomIsDark = false;
+                            // 860     GOSUB 240
+                            GOSUB240();
+                            //:GOTO 960
+                            break;
+                        case 11: // 840
+                                 // 840     GOSUB 1050
+                            P = GOSUB1050(ref IP, X);
+                            // 841 L=P
+                            L = P;
+                            // 842 GOSUB 1050
+                            P = GOSUB1050(ref IP, X);
+                            // 843 IA(L)=P
+                            IA[L] = P;
+                            //GOTO 960
+                            break;
+                        case 12: // 850
+                                 // 850     PRINT "THE GAME IS NOW OVER"
+                            Console.WriteLine("THE GAME IS NOW OVER");
+                            //:INPUT "ANOTHER GAME";K$
+                            Console.Write("ANOTHER GAME? ");
+                            string KS = Console.ReadLine();
+                            //:IF LEFT$(K$,1)="N" THEN END
+                            if (KS.ToUpper().StartsWith("N"))
+                            {
+                                // END
+                                gameOver = true;
+
+                            }
+                            // 851     FOR Z=0 TO IL
+                            for (int Z_Temp = 0; Z_Temp <= IL_itemCount; Z_Temp++)
+                            {
+                                // 852       IA(Z)=I2(Z)
+                                IA[Z_Temp] = I2[Z_Temp];
+                                // 853     NEXT Z
+                            }
+                            // 854     GOTO 100
+                            break;
+                        case 13: // 860
+                                 // 860     GOSUB 240:GOTO 960
+                            break;
+                        case 14: // 870
+                                 // 870     L=0
+                                 // 871     FOR Z=1 TO IL
+                                 // 872       IF IA(Z)=TR THEN IF LEFT$(IA$(Z),1)="*" THEN LET L=L+1
+                                 // 880     NEXT Z
+                                 // 881     PRINT "I'VE STORED";L;"TREASURES.ON A SCALE OF 0 TO 100 THAT RATES A";CINT(L/TT*100)
+                                 // 882     IF L=TT THEN PRINT "WELL DONE.":GOTO 850 ELSE 960
+                            break;
+                        case 15: // 890
+                                 // 890     PRINT "I'M CARRYING:":K$="NOTHING"
+                                 // 891     FOR Z=0 TO IL
+                                 // 892       IF IA(Z)<>-1 THEN 910
+                                 // 893       GOSUB 280:IF LEN(TP$)+POS(0)>63 THEN PRINT
+                                 // 900       PRINT TP$;".",;:K$=""
+                                 // 910     NEXT Z
+                                 // 911     PRINT K$:GOTO 960
+                            break;
+                        case 16: // 920
+                                 // 920     P=0:GOTO 800
+                            P = 0;
+                            // 800     SF(P)=-1:GOTO 960
+                            SF_systemFlags[P] = true;
+                            break;
+                        case 17: // 930
+                                 // 930     P=0:GOTO 820
+                            P = 0;
+                            // 820     SF(P)=0:GOTO 960
+                            SF_systemFlags[P] = false;
+                            break;
+                        case 18: // 940
+                                 // 940     LX=LT:IA(9)=-1:GOTO 960
+                            LX_lightRemaining = LT_lightTotal;
+                            IA[9] = -1;
+                            break;
+                        case 19: // 950
+                                 // 950     CLS:GOTO 960
+                            Console.Clear();
+                            break;
+                        case 20: // 710
+                                 // 710     PRINT "SAVING GAME"
+                                 // 711     REM IF D=-1 THEN INPUT "READY OUTPUT TAPE";K$:PRINT INT(IL*5/60)+1;"MINUTES" ELSE OPEN"O",D,SV$
+                                 // 720     REM PRINT #D,SF,LX,DF,R
+                                 // 721     REM FOR W=0 TO IL
+                                 // 722     REM   PRINT #D,IA(W)
+                                 // 723     REM NEXT W:IF D<>-1CLOSE
+                                 // 730     GOTO 960
+                            break;
+                        case 21: // 750 - Swap two values
+                                 // 750     GOSUB 1050
+                            P = GOSUB1050(ref IP, X);
+                            //:L=P
+                            L = P;
+                            //:GOSUB 1050
+                            P = GOSUB1050(ref IP, X);
+                            //:Z=IA(P)
+                            Z = IA[P];
+                            //:IA(P)=IA(L)
+                            IA[P] = IA[L];
+                            //:IA(L)=Z
+                            IA[L] = Z;
+                            //:GOTO 960
+                            break;
+                    }
+                    // 610     L=DF:IF L THEN L=DF AND IA(9)<>R AND IA(9)<>-1:IF L PRINT "DANGEROUS TO MOVE IN THE DARK!"
+                    // 620     IF NV(1)<1 PRINT "GIVE ME A DIRECTION TOO.":GOTO 1040
+                    // 630     K=RM(R,NV(1)-1):IF K<1 IF L THEN PRINT "I FELL DOWN AND BROKE MY NECK.":K=RL:DF=0:ELSE PRINT "I CAN'T GO IN THAT DIRECTION":GOTO 1040
+                    // 640     IF NOT L CLS
+                    // 650     R=K:GOSUB 240:GOTO 1040
+
+
+
+
 
 
 
@@ -484,6 +730,26 @@ namespace PirateAdventure
         private static void DoCommand()
         {
             //throw new NotImplementedException();
+        }
+
+        private static int GOSUB1050(ref int IP, int X)
+        {
+            int P = 0;
+            int W = 0;
+            int M = 0;
+            do
+            {
+                // 1050 IP=IP+1
+                IP++;
+                // 1051 W=CA(X,IP)
+                W = CA[X, IP];
+                // 1052 P=W/20
+                P = W / 20;
+                // 1053 M=W-P*20
+                M = W - (P * 20);
+                // 1054 IF M<>0 THEN 1050 ELSE RETURN
+            } while (M != 0);
+            return P;
         }
     }
 }
