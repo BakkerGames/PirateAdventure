@@ -12,7 +12,7 @@ namespace PirateAdventure
         private static int RL_roomCount = 33;
         private static int MX_maxCarry = 5;
         private static int AR_startRoom = 1;
-        private static int TT = 2;
+        private static int TT_TotalTreasures = 2;
         private static int LN_wordSize = 3;
         private static int LT_lightTotal = 200;
         private static int ML = 71;
@@ -183,18 +183,18 @@ namespace PirateAdventure
                 SF_systemFlags[i] = false;
             }
             // 101 REM INPUT "USE OLD 'SAVED' GAME";K$:IF LEFT$(K$,1)<>"Y" THEN 130
-            // 110 REM IF D<>-1 THEN CLOSE:OPEN"I",D,SV$ ELSE INPUT "READY SAVED TAPE";K$:PRINT INT(IL*5/60)+1;"MINUTES"
-            // 120 REM INPUT #D,SF,LX,DF,R
-            // 121 REM FOR X=0 TO IL
-            // 122 REM   INPUT #D,IA(X)
-            // 123 REM NEXT X
-            // 124 REM IF D<>-1 CLOSE
             Console.Write("USE OLD 'SAVED' GAME? ");
             string KS = Console.ReadLine().ToUpper();
             if (!KS.StartsWith("Y"))
             {
                 return;
             }
+            // 110 REM IF D<>-1 THEN CLOSE:OPEN"I",D,SV$ ELSE INPUT "READY SAVED TAPE";K$:PRINT INT(IL*5/60)+1;"MINUTES"
+            // 120 REM INPUT #D,SF,LX,DF,R
+            // 121 REM FOR X=0 TO IL
+            // 122 REM   INPUT #D,IA(X)
+            // 123 REM NEXT X
+            // 124 REM IF D<>-1 CLOSE
             // todo load saved game
         }
 
@@ -521,12 +521,12 @@ namespace PirateAdventure
                             //:INPUT "ANOTHER GAME";K$
                             Console.Write("ANOTHER GAME? ");
                             string KS = Console.ReadLine();
-                            //:IF LEFT$(K$,1)="N" THEN END
+                            //:IF LEFT$(K$,1)="N" THEN
                             if (KS.ToUpper().StartsWith("N"))
                             {
                                 // END
                                 gameOver = true;
-
+                                // ???
                             }
                             // 851     FOR Z=0 TO IL
                             for (int Z_Temp = 0; Z_Temp <= IL_itemCount; Z_Temp++)
@@ -538,24 +538,61 @@ namespace PirateAdventure
                             // 854     GOTO 100
                             break;
                         case 13: // 860
-                                 // 860     GOSUB 240:GOTO 960
+                                 // 860     GOSUB 240
+                            GOSUB240();
+                            //:GOTO 960
                             break;
                         case 14: // 870
                                  // 870     L=0
-                                 // 871     FOR Z=1 TO IL
-                                 // 872       IF IA(Z)=TR THEN IF LEFT$(IA$(Z),1)="*" THEN LET L=L+1
-                                 // 880     NEXT Z
-                                 // 881     PRINT "I'VE STORED";L;"TREASURES.ON A SCALE OF 0 TO 100 THAT RATES A";CINT(L/TT*100)
-                                 // 882     IF L=TT THEN PRINT "WELL DONE.":GOTO 850 ELSE 960
+                            int L_treasureCount = 0;
+                            // 871     FOR Z=1 TO IL
+                            for (int z = 1; z <= IL_itemCount; z++)
+                            {
+                                // 872       IF IA(Z)=TR THEN IF LEFT$(IA$(Z),1)="*" THEN 
+                                if (IA[z] == TR && IAS_itemDescriptions[z].StartsWith("*"))
+                                {
+                                    //LET L=L+1
+                                    L_treasureCount++;
+                                    // 880     NEXT Z
+                                }
+                            }
+                            // 881     PRINT "I'VE STORED";L;"TREASURES."
+                            Console.WriteLine($"I'VE STORED {L_treasureCount} TREASURES.");
+                            //PRINT"ON A SCALE OF 0 TO 100 THAT RATES A";CINT(L/TT*100)
+                            Console.WriteLine($"ON A SCALE OF 0 TO 100 THAT RATES A {(L_treasureCount / TT_TotalTreasures * 100)}");
+                            // 882     IF L=TT THEN PRINT "WELL DONE.":GOTO 850 ELSE 960
+                            if (L_treasureCount == TT_TotalTreasures)
+                            {
+                                Console.WriteLine("WELL DONE.");
+                                // GOTO 850
+                                // ???
+                            }
                             break;
                         case 15: // 890
-                                 // 890     PRINT "I'M CARRYING:":K$="NOTHING"
-                                 // 891     FOR Z=0 TO IL
-                                 // 892       IF IA(Z)<>-1 THEN 910
-                                 // 893       GOSUB 280:IF LEN(TP$)+POS(0)>63 THEN PRINT
-                                 // 900       PRINT TP$;".",;:K$=""
-                                 // 910     NEXT Z
-                                 // 911     PRINT K$:GOTO 960
+                                 // 890     PRINT "I'M CARRYING:"
+                            Console.WriteLine("I'M CARRYING:");
+                            //:K$="NOTHING"
+                            string KS_temp = "NOTHING";
+                            // 891     FOR Z=0 TO IL
+                            for (int z = 0; z <= IL_itemCount; z++)
+                            {
+                                // 892       IF IA(Z)<>-1 THEN 910
+                                if (!(IA[z] != -1))
+                                {
+                                    // 893       GOSUB 280
+                                    string TPS_temp = GOSUB280();
+                                    //:IF LEN(TP$)+POS(0)>63 THEN PRINT
+                                    // ???
+                                    // 900       PRINT TP$;".",;:K$=""
+                                    Console.WriteLine(TPS_temp);
+                                    KS_temp = "";
+                                }
+
+                                // 910     NEXT Z
+                            }
+                            // 911     PRINT K$
+                            Console.WriteLine(KS_temp);
+                            //:GOTO 960
                             break;
                         case 16: // 920
                                  // 920     P=0:GOTO 800
@@ -580,6 +617,7 @@ namespace PirateAdventure
                             break;
                         case 20: // 710
                                  // 710     PRINT "SAVING GAME"
+                            Console.WriteLine("SAVING GAME");
                                  // 711     REM IF D=-1 THEN INPUT "READY OUTPUT TAPE";K$:PRINT INT(IL*5/60)+1;"MINUTES" ELSE OPEN"O",D,SV$
                                  // 720     REM PRINT #D,SF,LX,DF,R
                                  // 721     REM FOR W=0 TO IL
