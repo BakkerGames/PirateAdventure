@@ -1,4 +1,4 @@
-﻿// Data.cs - 08/07/2017
+﻿// Data.cs - 12/01/2017
 
 namespace PirateAdventure
 {
@@ -12,6 +12,7 @@ namespace PirateAdventure
 
         private static int[,] CA = new int[152, 8] // [CL,7]
             {
+                // random percentage events
                 { 80, 422, 342, 420, 340, 0, 16559, 8850 },
                 { 80, 462, 482, 460, 0, 0, 15712, 1705 },
                 { 100, 521, 552, 540, 229, 220, 203, 8700 },
@@ -39,7 +40,8 @@ namespace PirateAdventure
                 { 100, 8, 0, 0, 0, 0, 10200, 0 },
                 { 100, 104, 0, 0, 0, 0, 8550, 0 },
                 { 80, 462, 282, 280, 1160, 0, 1422, 0 },
-                { 158, 82, 60, 0, 0, 0, 8170, 9600 },
+                // process verb noun events
+                { 158, 82, 60, 0, 0, 0, 8170, 9600 }, // 1,8 : 2,4 - 0,3 - 0,0 - 0,0 - 0,0 : 54,70,64,0 = 3,19,13,0
                 { 4510, 61, 0, 0, 0, 0, 300, 0 },
                 { 163, 22, 100, 0, 0, 0, 8170, 9600 },
                 { 8100, 0, 0, 0, 0, 0, 16200, 0 },
@@ -271,31 +273,31 @@ namespace PirateAdventure
         private static string[] RSS = new string[34] // RS$(RL)
             {
                 "",
-                "APARTMENT IN LONDON",
+                "APARTMENT IN LONDON/APARTMENT/",
                 "ALCOVE",
                 "SECRET PASSAGEWAY",
                 "MUSTY ATTIC",
-                "*I'M OUTSIDE AN OPEN WINDOW ON A LEDGE ON THE SIDE OF A VERY TALL BUILDING",
-                "SANDY BEACH ON A TROPICAL ISLE",
+                "*I'M OUTSIDE AN OPEN WINDOW ON A LEDGE ON THE SIDE OF A VERY TALL BUILDING/LEDGE OF TALL BUILDING/",
+                "SANDY BEACH ON A TROPICAL ISLE/SANDY BEACH/",
                 "MAZE OF CAVES",
                 "MEADOW",
                 "GRASS SHACK",
-                "*I'M IN THE OCEAN",
+                "*I'M IN THE OCEAN/OCEAN/",
                 "PIT",
                 "MAZE OF CAVES",
                 "MAZE OF CAVES",
-                "*I'M AT THE FOOT OF A CAVE RIDDEN HILL. A PATH LEADS TO THE TOP",
+                "*I'M AT THE FOOT OF A CAVE RIDDEN HILL. A PATH LEADS TO THE TOP/FOOT OF HILL/",
                 "TOOL SHED",
                 "LONG HALLWAY",
                 "LARGE CAVERN",
-                "*I'M ON TOP OF A HILL. BELOW IS PIRATES ISLAND. ACROSS THE SEA OFF IN THE DISTANCE I SEE *TREASURE* ISLAND",
+                "*I'M ON TOP OF A HILL. BELOW IS PIRATES ISLAND. ACROSS THE SEA OFF IN THE DISTANCE I SEE *TREASURE* ISLAND/TOP OF HILL/",
                 "MAZE OF CAVES",
-                "*I'M ABOARD PIRATE SHIP ANCHORED OFF SHORE",
-                "*I'M ON THE BEACH AT TREASURE ISLAND",
-                "SPOOKY OLD GRAVEYARD FILLED WITH PILES OF EMPTY AND BROKEN RUM BOTTLES",
+                "*I'M ABOARD PIRATE SHIP ANCHORED OFF SHORE/ON PIRATE SHIP/",
+                "*I'M ON THE BEACH AT TREASURE ISLAND/BEACH AT TREASURE ISLAND/",
+                "SPOOKY OLD GRAVEYARD FILLED WITH PILES OF EMPTY AND BROKEN RUM BOTTLES/GRAVEYARD/",
                 "LARGE BARREN FIELD",
-                "SHALLOW LAGOON. TO THE NORTH IS THE OCEAN",
-                "SACKED AND DESERTED MONASTARY",
+                "SHALLOW LAGOON. TO THE NORTH IS THE OCEAN/LAGOON/",
+                "SACKED AND DESERTED MONASTARY/MONASTARY/",
                 "",
                 "",
                 "",
@@ -303,7 +305,7 @@ namespace PirateAdventure
                 "",
                 "",
                 ".",
-                "*WELCOME TO NEVER NEVER LAND"
+                "*WELCOME TO NEVER NEVER LAND/NEVER NEVER LAND/"
             };
 
         private static string[] MSS_messages = new string[72] // MS$(ML)
