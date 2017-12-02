@@ -1,4 +1,4 @@
-﻿// Program.cs - 09/30/2017
+﻿// Program.cs - 12/01/2017
 
 using System;
 
@@ -31,6 +31,12 @@ namespace PirateAdventure
         private static Random sysRand = new Random();
 
         static void Main(string[] args)
+        {
+            TestData();
+            //RunGame();
+        }
+
+        static void RunGame()
         {
             Initialize();
             // 130 GOSUB 50
