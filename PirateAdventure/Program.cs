@@ -145,7 +145,7 @@ namespace PirateAdventure
                         }
                     }
                     // 290 RETURN
-                    // ???
+                    // 300   IF IA(Z)<>R THEN 320
                     // 310   PRINT TP$;".  ";
                     Console.WriteLine($"{TPS_itemName}.");
                 }
@@ -158,13 +158,13 @@ namespace PirateAdventure
             // 331 FOR Z=0 TO 5
             for (int z = 0; z <= 5; z++)
             {
-                // 332   IF K THEN IF RM(R,Z)<>0 THEN PRINT "OBVIOUS EXITS: ";:K=0
+                // 332 IF K THEN IF RM(R,Z)<>0 THEN PRINT "OBVIOUS EXITS: ";:K=0
                 if (K_firstItem && RM[R_currRoom, z] != 0)
                 {
                     Console.Write("OBVIOUS EXITS: ");
                     K_firstItem = false;
                 }
-                // 340   IF RM(R,Z)<>0 THEN PRINT NV$(Z+1,1);" ";
+                // 340 IF RM(R,Z)<>0 THEN PRINT NV$(Z+1,1);" ";
                 if (RM[R_currRoom, z] != 0)
                 {
                     Console.Write(NVS[z + 1, 1]);
@@ -391,7 +391,7 @@ namespace PirateAdventure
                 // 561   FOR Y=1 TO 4
                 for (int Y = 1; Y <= 4; Y++)
                 {
-                    int K = ((Y - 1) / 2) + 6;
+                    int K = ((Y - 1) / 2) + 6; // 6, 6, 7, 7
                     int AC;
                     // 562     K=(Y-1)/2+6:ON Y GOTO 570,580,570,580
                     if (Y == 1 || Y == 3)
@@ -507,7 +507,7 @@ namespace PirateAdventure
                             R_currRoom = RL_roomCount;
                             DF_roomIsDark = false;
                             // 860     GOSUB 240
-                            GOSUB240();
+                            ShowLocation();
                             //:GOTO 960
                             break;
                         case 11: // 840
@@ -545,7 +545,7 @@ namespace PirateAdventure
                             break;
                         case 13: // 860
                                  // 860     GOSUB 240
-                            GOSUB240();
+                            ShowLocation();
                             //:GOTO 960
                             break;
                         case 14: // 870
@@ -586,11 +586,10 @@ namespace PirateAdventure
                                 if (!(IA[z] != -1))
                                 {
                                     // 893       GOSUB 280
-                                    string TPS_temp = GOSUB280();
+                                    ShowLocation();
                                     //:IF LEN(TP$)+POS(0)>63 THEN PRINT
                                     // ???
                                     // 900       PRINT TP$;".",;:K$=""
-                                    Console.WriteLine(TPS_temp);
                                     KS_temp = "";
                                 }
 
@@ -624,12 +623,12 @@ namespace PirateAdventure
                         case 20: // 710
                                  // 710     PRINT "SAVING GAME"
                             Console.WriteLine("SAVING GAME");
-                                 // 711     REM IF D=-1 THEN INPUT "READY OUTPUT TAPE";K$:PRINT INT(IL*5/60)+1;"MINUTES" ELSE OPEN"O",D,SV$
-                                 // 720     REM PRINT #D,SF,LX,DF,R
-                                 // 721     REM FOR W=0 TO IL
-                                 // 722     REM   PRINT #D,IA(W)
-                                 // 723     REM NEXT W:IF D<>-1CLOSE
-                                 // 730     GOTO 960
+                            // 711     REM IF D=-1 THEN INPUT "READY OUTPUT TAPE";K$:PRINT INT(IL*5/60)+1;"MINUTES" ELSE OPEN"O",D,SV$
+                            // 720     REM PRINT #D,SF,LX,DF,R
+                            // 721     REM FOR W=0 TO IL
+                            // 722     REM   PRINT #D,IA(W)
+                            // 723     REM NEXT W:IF D<>-1CLOSE
+                            // 730     GOTO 960
                             break;
                         case 21: // 750 - Swap two values
                                  // 750     GOSUB 1050
