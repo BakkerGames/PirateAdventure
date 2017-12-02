@@ -110,22 +110,90 @@ namespace PirateAdventure
                 return;
             }
             int P = 0;
+            int P1 = 0;
             switch (value - 51)
             {
                 case 0:
                     // do nothing
                     break;
+                case 1: // take
+                    P = TestGetDataValue(X, ref IP);
+                    Console.WriteLine($"    : take {ItemDesc(P)}");
+                    break;
+                case 2: // drop
+                    P = TestGetDataValue(X, ref IP);
+                    Console.WriteLine($"    : drop {ItemDesc(P)}");
+                    break;
                 case 3: // teleport
-                    P = GetEmbeddedValue(X, ref IP);
+                    P = TestGetDataValue(X, ref IP);
                     Console.WriteLine($"    : teleport to {RoomDesc(P)}");
                     break;
+                case 4: // item to nowhere
+                case 8: // item to nowhere
+                    P = TestGetDataValue(X, ref IP);
+                    Console.WriteLine($"    : send {ItemDesc(P)} to nowhere");
+                    break;
+                case 5: // turn on dark
+                    Console.WriteLine($"    : turn on dark");
+                    break;
+                case 6: // turn off dark
+                    Console.WriteLine($"    : turn off dark");
+                    break;
+                case 7: // turn on flag
+                    P = TestGetDataValue(X, ref IP);
+                    Console.WriteLine($"    : set flag {P} true");
+                    break;
+                case 9: // turn off flag
+                    P = TestGetDataValue(X, ref IP);
+                    Console.WriteLine($"    : set flag {P} false");
+                    break;
+                case 10: // dead
+                    Console.WriteLine("    : dead");
+                    break;
+                case 11: // item goes to room
+                    P = TestGetDataValue(X, ref IP);
+                    P1 = TestGetDataValue(X, ref IP);
+                    Console.WriteLine($"    : {ItemDesc(P)} goes to {RoomDesc(P1)}");
+                    break;
+                case 12: // game over
+                    Console.WriteLine("    : game over");
+                    break;
+                case 13: // look
+                    Console.WriteLine("    : look");
+                    break;
+                case 14: // check treasures
+                    Console.WriteLine("    : check treasures");
+                    break;
+                case 15: // show inventory
+                    Console.WriteLine("    : show inventory");
+                    break;
+                case 16: // flag 0 true
+                    Console.WriteLine("    : set flag 0 true");
+                    break;
+                case 17: // flag 0 false
+                    Console.WriteLine("    : set flag 0 false");
+                    break;
+                case 18: // torch recharged
+                    Console.WriteLine("    : torch is recharged and sent nowhere");
+                    break;
+                case 19: // clear screen
+                    Console.WriteLine("    : clear screen");
+                    break;
+                case 20: // save game
+                    Console.WriteLine("    : save game");
+                    break;
+                case 21: // swap two items
+                    P = TestGetDataValue(X, ref IP);
+                    P1 = TestGetDataValue(X, ref IP);
+                    Console.WriteLine($"    : swap items {ItemDesc(P)} and {ItemDesc(P1)}");
+                    break;
                 default:
-                    Console.WriteLine($"    : {value - 51}");
+                    Console.WriteLine($"    : #{value - 51}#");
                     break;
             }
         }
 
-        private static int GetEmbeddedValue(int X, ref int IP)
+        private static int TestGetDataValue(int X, ref int IP)
         {
             int P = 0;
             int W = 0;

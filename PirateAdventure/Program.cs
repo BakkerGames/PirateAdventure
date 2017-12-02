@@ -15,12 +15,13 @@ namespace PirateAdventure
         private static int TT_TotalTreasures = 2;
         private static int LN_wordSize = 3;
         private static int LT_lightTotal = 200;
-        private static int ML = 71;
+        //private static int ML = 71;
         private static int TR = 1;
 
         private static bool gameOver = false;
         private static string TPS_commandLine = "";
         private static bool F_commandNotOK = false;
+        private static bool F3_commandPossible = false;
         private static int R_currRoom;
         private static int LX_lightRemaining;
         private static bool DF_roomIsDark;
@@ -32,8 +33,8 @@ namespace PirateAdventure
 
         static void Main(string[] args)
         {
-            TestData();
-            //RunGame();
+            //TestData();
+            RunGame();
         }
 
         static void RunGame()
@@ -246,8 +247,8 @@ namespace PirateAdventure
         {
             // 360 F2=-1:F=-1:F3=0
             bool F2_allCmds = true;
-            bool F = true;
-            bool F3 = false;
+            F_commandNotOK = true;
+            F3_commandPossible = false;
             // 362 FOR X=0 TO CL
             for (int X = 0; X < CL_commandCount; X++)
             {
@@ -267,7 +268,7 @@ namespace PirateAdventure
                 // 380   IF NV(0)=0 THEN F=0:IF RND(100)<=N THEN 400 ELSE 980
                 if (NV[0] == 0)
                 {
-                    F = false;
+                    F_commandNotOK = false;
                     if (sysRand.Next(100) > N_noun)
                     {
                         continue;
@@ -280,8 +281,8 @@ namespace PirateAdventure
                 }
                 // 400   F2=-1:F=0:F3=-1
                 F2_allCmds = true;
-                F = false;
-                F3 = true;
+                F_commandNotOK = false;
+                F3_commandPossible = true;
                 // 401   FOR Y=1 TO 5
                 for (int Y = 1; Y <= 5; Y++)
                 {
@@ -450,21 +451,21 @@ namespace PirateAdventure
                                 break;
                             }
                             // 690     GOSUB 1050
-                            P = GOSUB1050(ref IP, X);
+                            P = GetDataValue(ref IP, X);
                             //:IA(P)=-1
                             IA[P] = -1; // carry item
                             //:GOTO 960
                             break;
                         case 2: // 700 - Move item to current room
                                 // 700     GOSUB 1050
-                            P = GOSUB1050(ref IP, X);
+                            P = GetDataValue(ref IP, X);
                             //:IA(P)=R
                             IA[P] = R_currRoom;
                             //:GOTO 960
                             break;
                         case 3: // 740 - Teleport to room P
                                 // 740 GOSUB 1050
-                            P = GOSUB1050(ref IP, X);
+                            P = GetDataValue(ref IP, X);
                             //:R=P
                             R_currRoom = P;
                             //:GOTO 960
@@ -472,7 +473,7 @@ namespace PirateAdventure
                         case 4: // 760
                         case 8: // 760 - Item goes nowhere
                             // 760 GOSUB 1050
-                            P = GOSUB1050(ref IP, X);
+                            P = GetDataValue(ref IP, X);
                             //:IA(P)=0
                             IA[P] = 0;
                             //:GOTO 960
@@ -489,14 +490,14 @@ namespace PirateAdventure
                             break;
                         case 7: // 790 - SF_systemFlags[P] = true
                                 // 790     GOSUB 1050
-                            P = GOSUB1050(ref IP, X);
+                            P = GetDataValue(ref IP, X);
                             // 800     SF(P)=-1
                             SF_systemFlags[P] = true;
                             // 801 GOTO 960
                             break;
                         case 9: // 810 - SF_systemFlags[P] = false
                                 // 810     GOSUB 1050
-                            P = GOSUB1050(ref IP, X);
+                            P = GetDataValue(ref IP, X);
                             // 820 SF(P)=0
                             SF_systemFlags[P] = false;
                             // 821 GOTO 960
@@ -512,11 +513,11 @@ namespace PirateAdventure
                             break;
                         case 11: // 840
                                  // 840     GOSUB 1050
-                            P = GOSUB1050(ref IP, X);
+                            P = GetDataValue(ref IP, X);
                             // 841 L=P
                             L = P;
                             // 842 GOSUB 1050
-                            P = GOSUB1050(ref IP, X);
+                            P = GetDataValue(ref IP, X);
                             // 843 IA(L)=P
                             IA[L] = P;
                             //GOTO 960
@@ -571,6 +572,7 @@ namespace PirateAdventure
                             {
                                 Console.WriteLine("WELL DONE.");
                                 // GOTO 850
+                                gameOver = true;
                                 // ???
                             }
                             break;
@@ -632,11 +634,11 @@ namespace PirateAdventure
                             break;
                         case 21: // 750 - Swap two values
                                  // 750     GOSUB 1050
-                            P = GOSUB1050(ref IP, X);
+                            P = GetDataValue(ref IP, X);
                             //:L=P
                             L = P;
                             //:GOSUB 1050
-                            P = GOSUB1050(ref IP, X);
+                            P = GetDataValue(ref IP, X);
                             //:Z=IA(P)
                             Z = IA[P];
                             //:IA(P)=IA(L)
@@ -775,7 +777,7 @@ namespace PirateAdventure
             //throw new NotImplementedException();
         }
 
-        private static int GOSUB1050(ref int IP, int X)
+        private static int GetDataValue(ref int IP, int X)
         {
             int P = 0;
             int W = 0;
