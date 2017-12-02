@@ -395,8 +395,8 @@ namespace PirateAdventure
                     }
                     else
                     {
-                        // 580     AC=CA(X,Y)-CINT(CA(X,K)/150)*150
-                        AC = CA[X, Y] - CA[X, K] / 150 * 150;
+                        // 580     AC=CA(X,K)-CINT(CA(X,K)/150)*150
+                        AC = CA[X, K] - ((CA[X, K] / 150) * 150);
                     }
                     if (AC == 0)
                     {
