@@ -1,18 +1,27 @@
-﻿// Data.cs - 12/01/2017
+﻿// Data.cs - 12/03/2017
 
 namespace PirateAdventure
 {
     partial class Program
     {
+        private const int IL_itemCount = 60;
+        private const int CL_commandCount = 151;
+        private const int NL_wordCount = 59;
+        private const int RL_roomCount = 33;
+        private const int MX_maxCarry = 5;
+        private const int AR_startRoom = 1;
+        private const int TT_TotalTreasures = 2;
+        private const int LN_wordSize = 3;
+        private const int LT_lightTotal = 200;
+        private const int ML_messageCount = 71;
+        private const int TR_treasureRoom = 1;
+        private const int FC_flagCount = 16;
 
-        private static int[] NV = new int[2]; // NV(1)
-        private static string[] NTS_currCommand = new string[2]; // NT$(1),
-        private static int[] I2 = new int[61]; // I2(IL)
-        private static bool[] SF_systemFlags = new bool[16]; // DIM SF(15)
+        private static bool[] SF_systemFlags = new bool[FC_flagCount + 1]; // DIM SF(15)
 
-        private static int[,] CA = new int[152, 8] // [CL,7]
+        private static int[,] CA = new int[CL_commandCount + 1, 8] // [CL,7]
             {
-                // random percentage events
+                // random events
                 { 80, 422, 342, 420, 340, 0, 16559, 8850 },
                 { 80, 462, 482, 460, 0, 0, 15712, 1705 },
                 { 100, 521, 552, 540, 229, 220, 203, 8700 },
@@ -40,8 +49,8 @@ namespace PirateAdventure
                 { 100, 8, 0, 0, 0, 0, 10200, 0 },
                 { 100, 104, 0, 0, 0, 0, 8550, 0 },
                 { 80, 462, 282, 280, 1160, 0, 1422, 0 },
-                // process verb noun events
-                { 158, 82, 60, 0, 0, 0, 8170, 9600 }, // 1,8 : 2,4 - 0,3 - 0,0 - 0,0 - 0,0 : 54,70,64,0 = 3,19,13,0
+                // verb-noun events
+                { 158, 82, 60, 0, 0, 0, 8170, 9600 },
                 { 4510, 61, 0, 0, 0, 0, 300, 0 },
                 { 163, 22, 100, 0, 0, 0, 8170, 9600 },
                 { 8100, 0, 0, 0, 0, 0, 16200, 0 },
@@ -168,7 +177,7 @@ namespace PirateAdventure
                 { 6300, 0, 0, 0, 0, 0, 450, 0 }
             };
 
-        private static string[,] NVS = new string[60, 2] // NV$(NL,1)
+        private static string[,] NVS = new string[NL_wordCount + 1, 2] // NV$(NL,1)
             {
                 { "AUT", "ANY" },
                 { "GO", "NORTH" },
@@ -232,7 +241,7 @@ namespace PirateAdventure
                 { "", "SNE" },
             };
 
-        private static int[,] RM = new int[34, 6] // RM(RL,5)
+        private static int[,] RM = new int[RL_roomCount + 1, 6] // RM(RL,5)
             {
                 { 0, 0, 0, 0, 0, 0 },  // 
                 { 0, 0, 0, 0, 0, 0 },  // APARTMENT IN LONDON
@@ -270,7 +279,7 @@ namespace PirateAdventure
                 { 0, 0, 0, 0, 0, 0 },  // *WELCOME TO NEVER NEVER LAND
             };
 
-        private static string[] RSS = new string[34] // RS$(RL)
+        private static string[] RSS = new string[RL_roomCount + 1] // RS$(RL)
             {
                 "",
                 "APARTMENT IN LONDON/APARTMENT/",
@@ -308,7 +317,7 @@ namespace PirateAdventure
                 "*WELCOME TO NEVER NEVER LAND/NEVER NEVER LAND/"
             };
 
-        private static string[] MSS_messages = new string[72] // MS$(ML)
+        private static string[] MSS_messages = new string[ML_messageCount + 1] // MS$(ML)
             {
                 "",
                 "THERE'S A STRANGE SOUND",
@@ -381,10 +390,10 @@ namespace PirateAdventure
                 "ABOUT 20 POUNDS. TRY -SET SAIL-",
                 "-TIDES A CHANGING MATEY-",
                 "NOTE HERE -I BE LIKING PARROTS. THEY BE SMART MATEY-",
-                "PIRATE FOLLOWS YOU ASHORE AS IF HE IS WAITING FOR SOMETHING.",
+                "PIRATE FOLLOWS YOU ASHORE AS IF HE IS WAITING FOR SOMETHING."
             };
 
-        private static string[] IAS_itemDescriptions = new string[61] // IA$(IL)
+        private static string[] IAS_itemDescriptions = new string[IL_itemCount + 1] // IA$(IL)
             {
                 "FLIGHT OF STAIRS",
                 "OPEN WINDOW",
@@ -449,7 +458,9 @@ namespace PirateAdventure
                 "",
             };
 
-        private static int[] IA = new int[61] // IA(IL)
+        private static int[] IA = new int[IL_itemCount + 1]; // IA(IL)
+
+        private static int[] I2 = new int[IL_itemCount + 1] // I2(IL)
             {
                 1, // FLIGHT OF STAIRS
                 2, // OPEN WINDOW

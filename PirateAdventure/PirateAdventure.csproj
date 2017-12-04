@@ -43,8 +43,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data.cs" />
+    <Compile Include="Program.Engine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Program.SaveLoad.cs" />
     <Compile Include="Testing.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +57,7 @@
     <Content Include="Resources\PIRATE.TXT" />
     <Content Include="Resources\PIRATE_RAW.TXT" />
     <Content Include="Resources\PIRATE_TOKEN.TXT" />
+    <Content Include="Resources\PIRATE_TOKEN_CMT.TXT" />
     <Content Include="Resources\ScansText\SCAN02.TXT" />
     <Content Include="Resources\ScansText\SCAN03.TXT" />
     <Content Include="Resources\ScansText\SCAN04.TXT" />
