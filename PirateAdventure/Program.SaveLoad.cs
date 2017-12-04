@@ -20,6 +20,14 @@ namespace PirateAdventure
 
         private static void Load()
         {
+            // 110 {IF}D<>-1{THEN}{CLOSE}
+            //     :{OPEN}"I",D,SV${ELSE}{INPUT}"READY SAVED TAPE";K$
+            //     :{PRINT}{INT}(IL*5/60)+1;"MINUTES"
+            // 120 {INPUT}#D,SF,LX,DF,R
+            //     :{FOR}X=0{TO}IL
+            //     :{INPUT}#D,IA(X)
+            //     :{NEXT}
+            //     :{IF}D<>-1{CLOSE}
 
         }
     }
