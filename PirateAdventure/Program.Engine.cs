@@ -202,6 +202,74 @@ namespace PirateAdventure
                     RunAction(AC_action2, X_dataLine, ref IP_dataPointer);
                 }
             }
+            // 1000 {IF}NV(0)=0{THEN}1040
+            if (NV[0] == 0)
+            {
+                return;
+            }
+            // 1010 {GOSUB}1060
+            bool F_cmdOK;
+            bool F2_canDoCmd;
+            RunOtherCommands(out F_cmdOK, out F2_canDoCmd);
+            // 1020 {IF}F{PRINT}"I DON'T UNDERSTAND YOUR COMMAND"
+            //     :{GOTO}1040
+            if (!F_cmdOK)
+            {
+                Console.WriteLine("I DON'T UNDERSTAND YOUR COMMAND");
+                return;
+            }
+            // 1030 {IF}{NOT}F2{PRINT}"I CAN'T DO THAT YET"
+            //     :{GOTO}1040
+            if (!F2_canDoCmd)
+            {
+                Console.WriteLine("I CAN'T DO THAT YET");
+                return;
+            }
+            // 1040 {RETURN}
+            return;
+        }
+
+        private static void RunOtherCommands(out bool f_cmdOK, out bool f2_canDoCmd)
+        {
+            // 1060 {IF}NV(0)<>10{AND}NV(0)<>18{OR}F3{THEN}1230
+            // 1070 {IF}NV(1)=0{PRINT}"WHAT?"
+            //     :{GOTO}1180
+            // 1080 {IF}NV(0)<>10{THEN}1110
+            // 1090 L=0
+            //     :{FOR}Z=0{TO}IL
+            //     :{IF}IA(Z)=-1{THEN}L=L+1
+            // 1100 {NEXT}
+            //     :{IF}L>=MX{PRINT}Z$
+            //     :{GOTO}1180
+            // 1110 K=0
+            //     :{FOR}X=0{TO}IL
+            //     :{IF}{RIGHT$}(IA$(X),1)<>"/"{THEN}1190{ELSE}LL={LEN}(IA$(X))-1
+            //     :TP$={MID$}(IA$(X),1,LL)
+            //     :{FOR}Y=LL{TO}2{STEP}-1
+            //     :{IF}{MID$}(TP$,Y,1)<>"/"{THEN}{NEXT}Y
+            //     :{GOTO}1190
+            // 1120 TP$={LEFT$}({MID$}(TP$,Y+1),LN)
+            // 1130 {IF}TP$<>NV$(NV(1),1){THEN}1190
+            // 1140 {IF}NV(0)=10{THEN}1160
+            // 1150 {IF}IA(X)<>-1{THEN}K=1
+            //     :{GOTO}1190{ELSE}IA(X)=R
+            //     :K=3
+            //     :{GOTO}1170
+            // 1160 {IF}IA(X)<>R{THEN}K=2
+            //     :{GOTO}1190{ELSE}IA(X)=-1
+            //     :K=3
+            // 1170 {PRINT}"OK, ";
+            // 1180 F=0
+            //     :{RETURN}
+            // 1190 {NEXT}X
+            // 1200 {IF}K=1{THEN}{PRINT}"I'M NOT CARRYING IT"{ELSE}{IF}K=2{PRINT}"I DON'T SEE IT HERE"
+            // 1210 {IF}K=0{IF}{NOT}F3{PRINT}"ITS BEYOND MY POWER TO DO THAT"
+            //     :F=0
+            // 1220 {IF}K<>0{THEN}F=0
+            // 1230 {RETURN}
+
+### // todo ###
+            throw new NotImplementedException();
         }
 
         private static void RunAction(int AC_action, int X_dataLine, ref int IP_dataPointer)

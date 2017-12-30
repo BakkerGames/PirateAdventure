@@ -1,16 +1,33 @@
 # CDS-specific files
-.*/
 .*
 !.gitignore
+*.dbmdl
+*.dll
+*.exe
 *.jfm
-[Dd]ebug/
-[Rr]elease/
+*.lnk
+*.log
+*.scc
+*.xls
+*.xlsx
+_*.json
+*proj.user
+~*.*
 BuildAll.bat
+BuildAll.log
+CleanAll.bat
 ClearUserPrograms.bat
 ClearUserSettings.bat
 PublishAll.bat
+Thumbs.db
 VVBackup.bat
-[Tt]est[Dd]ata/
+bin/
+obj/
+x86/
+Debug/
+Release/
+packages/
+TestData/
 !Bin/
 Bin/*.exe
 Bin/*.dll
@@ -18,3 +35,4 @@ Bin/*.xml
 Bin/*.config
 Bin/OfficeInterop/
 Bin/Security/
+Audit Results/
