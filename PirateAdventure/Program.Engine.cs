@@ -434,7 +434,8 @@ namespace PirateAdventure
                 case 0:
                     // do nothing
                     break;
-                case 1: // take //1=660
+                case 1:
+                    // take //1=660
                     // 660 L=0
                     //     :{FOR}Z=1{TO}IL
                     //     :{IF}IA(Z)=-1{LET}L=L+1
@@ -460,53 +461,62 @@ namespace PirateAdventure
                     P_dataValue = GetDataValue(X_dataLine, ref IP_dataPointer);
                     IA[P_dataValue] = -1;
                     break;
-                case 2: // drop to current room //2=700
+                case 2:
+                    // drop to current room //2=700
                     // 700 {GOSUB}1050
                     //     :IA(P)=R
                     //     :{GOTO}960
                     P_dataValue = GetDataValue(X_dataLine, ref IP_dataPointer);
                     IA[P_dataValue] = R_currRoom;
                     break;
-                case 3: // teleport //3=740
+                case 3:
+                    // teleport //3=740
                     // 740 {GOSUB}1050
                     //     :R=P
                     //     :{GOTO}960
                     P_dataValue = GetDataValue(X_dataLine, ref IP_dataPointer);
                     R_currRoom = P_dataValue;
                     break;
-                case 4: // item to nowhere //4=760
-                case 8: // item to nowhere //8=760
+                case 4:
+                // item to nowhere //4=760
+                case 8:
+                    // item to nowhere //8=760
                     // 760 {GOSUB}1050
                     //     :IA(P)=0
                     //     :{GOTO}960
                     P_dataValue = GetDataValue(X_dataLine, ref IP_dataPointer);
                     IA[P_dataValue] = 0;
                     break;
-                case 5: // turn on dark flag //5=770
+                case 5:
+                    // turn on dark flag //5=770
                     // 770 DF=-1
                     //     :{GOTO}960
                     DF_darkFlag = true;
                     break;
-                case 6: // turn off dark flag //6=780
+                case 6:
+                    // turn off dark flag //6=780
                     // 780 DF=0
                     //     :{GOTO}960
                     DF_darkFlag = false;
                     break;
-                case 7: // turn on flag //7=790
+                case 7:
+                    // turn on flag //7=790
                     // 790 {GOSUB}1050
                     // 800 SF=SF {OR}{CINT}(.5+2^P)
                     //     :{GOTO}960
                     P_dataValue = GetDataValue(X_dataLine, ref IP_dataPointer);
                     SF_systemFlags[P_dataValue] = true;
                     break;
-                case 9: // turn off flag //9=810
+                case 9:
+                    // turn off flag //9=810
                     // 810 {GOSUB}1050
                     // 820 SF=SF{AND}{NOT}{CINT}(.5+2^P)
                     //     :{GOTO}960
                     P_dataValue = GetDataValue(X_dataLine, ref IP_dataPointer);
                     SF_systemFlags[P_dataValue] = false;
                     break;
-                case 10: // dead //10=830
+                case 10:
+                    // dead //10=830
                     // 830 {PRINT}"I'M DEAD..."
                     //     :R=RL
                     //     :DF=0
@@ -518,7 +528,8 @@ namespace PirateAdventure
                     //     :{GOTO}960
                     Look();
                     break;
-                case 11: // item goes to room //11=840
+                case 11:
+                    // item goes to room //11=840
                     // 840 {GOSUB}1050
                     //     :L=P
                     //     :{GOSUB}1050
@@ -528,7 +539,8 @@ namespace PirateAdventure
                     P2_dataValue2 = GetDataValue(X_dataLine, ref IP_dataPointer);
                     IA[P_dataValue] = P2_dataValue2;
                     break;
-                case 12: // game over //12=850
+                case 12:
+                    // game over //12=850
                     // 850 {INPUT}"THE GAME IS NOW OVER"
                     //     :{PRINT}"ANOTHER GAME";K$
                     //     :{IF}{LEFT$}(K$,1)="N"{THEN}{END}{ELSE}{FOR}X=0{TO}IL
@@ -537,20 +549,22 @@ namespace PirateAdventure
                     //     :{GOTO}100
                     GameIsOver();
                     break;
-                case 13: // look //13=860
+                case 13:
+                    // look //13=860
                     // 860 {GOSUB}240
                     //     :{GOTO}960
                     Look();
                     break;
-                case 14: // check treasures //14=870
-                         // 870 L=0
-                         //     :{FOR}Z=1{TO}IL
-                         //     :{IF}IA(Z)=TR{IF}{LEFT$}(IA$(Z),1)="*"{LET}L=L+1
-                         // 880 {NEXT}Z
-                         //     :{PRINT}"I'VE STORED";L;"TREASURES."
-                         //     :{PRINT}"ON A SCALE OF 0 TO 100 THAT RATES A";{CINT}(L/TT*100)
-                         //     :{IF}L=TT{THEN}{PRINT}"WELL DONE."
-                         //     :{GOTO}850{ELSE}960
+                case 14:
+                    // check treasures //14=870
+                    // 870 L=0
+                    //     :{FOR}Z=1{TO}IL
+                    //     :{IF}IA(Z)=TR{IF}{LEFT$}(IA$(Z),1)="*"{LET}L=L+1
+                    // 880 {NEXT}Z
+                    //     :{PRINT}"I'VE STORED";L;"TREASURES."
+                    //     :{PRINT}"ON A SCALE OF 0 TO 100 THAT RATES A";{CINT}(L/TT*100)
+                    //     :{IF}L=TT{THEN}{PRINT}"WELL DONE."
+                    //     :{GOTO}850{ELSE}960
                     int L_treasureCount = 0;
                     for (int Z = 0; Z <= IL_itemCount; Z++)
                     {
@@ -568,32 +582,39 @@ namespace PirateAdventure
                     Console.WriteLine("WELL DONE.");
                     GameIsOver();
                     break;
-                case 15: // show inventory //15=890
+                case 15:
+                    // show inventory //15=890
                     Console.WriteLine("    : show inventory");
                     break;
-                case 16: // flag 0 true //16=920
+                case 16:
+                    // flag 0 true //16=920
                     // 920 P=0
                     //     :{GOTO}800
                     // 800 SF=SF {OR}{CINT}(.5+2^P)
                     //     :{GOTO}960
                     SF_systemFlags[0] = true;
                     break;
-                case 17: // flag 0 false //17=930
+                case 17:
+                    // flag 0 false //17=930
                     // 930 P=0
                     //     :{GOTO}820
                     // 820 SF=SF{AND}{NOT}{CINT}(.5+2^P)
                     //     :{GOTO}960
                     SF_systemFlags[0] = false;
                     break;
-                case 18: //18=940
+                case 18:
+                    //18=940
                     break;
-                case 19: // clear screen //19=950
+                case 19:
+                    // clear screen //19=950
                     Console.WriteLine();
                     break;
-                case 20: // save game //20=710
+                case 20:
+                    // save game //20=710
                     Console.WriteLine("    : save game");
                     break;
-                case 21: // swap two items //21=750
+                case 21:
+                    // swap two items //21=750
                     // 750 {GOSUB}1050
                     //     :L=P
                     //     :{GOSUB}1050
