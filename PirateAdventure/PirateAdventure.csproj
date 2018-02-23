@@ -58,6 +58,7 @@
     <Content Include="Resources\PIRATE_RAW.TXT" />
     <Content Include="Resources\PIRATE_TOKEN.TXT" />
     <Content Include="Resources\PIRATE_TOKEN_CMT.TXT" />
+    <Content Include="Resources\PIRATE_TOKEN_FIXFLAG.TXT" />
     <Content Include="Resources\ScansText\SCAN02.TXT" />
     <Content Include="Resources\ScansText\SCAN03.TXT" />
     <Content Include="Resources\ScansText\SCAN04.TXT" />
