@@ -11,118 +11,142 @@ namespace PirateAdventure
             // 360 F2=-1
             //     :F=-1
             //     :F3=0
-            //     :{IF}NV(0)=1{AND}NV(1)<7{THEN}610{ELSE}{FOR}X=0{TO}CL
-            //     :V=CA(X,0)/150
-            //     :{IF}NV(0)=0{IF}V<>0{RETURN}
-            // 370 {IF}NV(0)<>V{THEN}{NEXT}X
-            //     :{GOTO}990{ELSE}N=CA(X,0)-V*150
-            // 380 {IF}NV(0)=0{THEN}F=0
-            //     :{IF}RND(100)<=N{THEN}400{ELSE}{NEXT}X
-            //     :{GOTO}990
-            // 390 {IF}N<>NV(1){AND}N<>0{THEN}{NEXT}X
-            //     :{GOTO}990
+            bool F2_canDoCmd = true;
+            bool F_cmdNotOK = true;
+            bool F3_flag = false;
+            bool F1_conditionsMet = false;
+            //     :{IF}NV(0)=1{AND}NV(1)<7{THEN}610
+            if (currVerb == 1 && currNoun < 7)
+            {
+                GoDirection_610(currNoun);
+                return;
+            }
+            //      {ELSE}{FOR}X=0{TO}CL
             for (int X_dataLine = 0; X_dataLine <= CL_commandCount; X_dataLine++)
             {
                 if (gameOver)
                 {
                     return;
                 }
-                int verb = CA[X_dataLine, 0] / 150;
-                int noun = CA[X_dataLine, 0] % 150;
-                if (verb == 0) // background task
+                //     :V=CA(X,0)/150
+                int V_verb = CA[X_dataLine, 0] / 150;
+                //     :{IF}NV(0)=0{IF}V<>0{RETURN}
+                if (currVerb == 0 && V_verb != 0)
                 {
-                    if (currVerb != 0) // not running background tasks
-                    {
-                        continue;
-                    }
-                    if (noun < 100 && sysRand.Next(100) > noun)
-                    {
-                        continue;
-                    }
-                }
-                else if (currVerb == 1 && currNoun < 7)
-                {
-                    GoDirection(currNoun);
                     return;
                 }
-                else if (verb != currVerb || noun != currNoun)
+                // 370 {IF}NV(0)<>V{THEN}{NEXT}X
+                //     :{GOTO}990
+                if (currVerb != V_verb)
                 {
                     continue;
                 }
-                // check all the conditions on this data line
-
+                //      {ELSE}N=CA(X,0)-V*150
+                int N_noun = CA[X_dataLine, 0] % 150;
+                // 380 {IF}NV(0)=0{THEN}F=0
+                if (currVerb == 0)
+                {
+                    F_cmdNotOK = false;
+                    //     :{IF}{RND}(100)<=N{THEN}400{ELSE}{NEXT}X
+                    //     :{GOTO}990
+                    if (sysRand.Next(100) > N_noun)
+                    {
+                        continue;
+                    }
+                    // 390 {IF}N<>NV(1){AND}N<>0{THEN}{NEXT}X
+                    //     :{GOTO}990
+                    if (N_noun != currNoun && N_noun != 0)
+                    {
+                        continue;
+                    }
+                }
                 // 400 F2=-1
                 //     :F=0
                 //     :F3=-1
+                F2_canDoCmd = true;
+                F_cmdNotOK = false;
+                F3_flag = true;
                 //     :{FOR}Y=1{TO}5
-                //     :W=CA(X,Y)
-                //     :LL=W/20
-                //     :K=W-LL*20
-                //     :F1=-1
-                //     :{ON}K+1{GOTO}550,430,450,470,490,500,510,520,530,540,410,420,440,460,480
-                bool F1_conditionsMet = true;
-                for (int conditionIndex = 1; conditionIndex <= 5; conditionIndex++)
+                for (int Y_index = 1; Y_index <= 5; Y_index++)
                 {
-                    int LL_conditionData = CA[X_dataLine, conditionIndex] / 20;
-                    int conditionNum = CA[X_dataLine, conditionIndex] % 20;
-                    switch (conditionNum)
+                    //     :W=CA(X,Y)
+                    int W = CA[X_dataLine, Y_index];
+                    //     :LL=W/20
+                    int LL_conditionData = W / 20;
+                    //     :K=W-LL*20
+                    int K_conditionNum = W - (LL_conditionData * 20);
+                    //     :F1=-1
+                    F1_conditionsMet = true;
+                    //     :{ON}K+1{GOTO}550,430,450,470,490,500,510,520,530,540,410,420,440,460,480
+                    switch (K_conditionNum)
                     {
                         case 0:
                             // nothing
+                            F1_conditionsMet = true;
                             break;
-                        case 1: // item carried
-                                // 430 F1=IA(LL)=-1
-                                //     :{GOTO}550
+                        case 1:
+                            // item carried
+                            // 430 F1=IA(LL)=-1
+                            //     :{GOTO}550
                             F1_conditionsMet = (IA[LL_conditionData] == -1);
                             break;
-                        case 2: // item in room
-                                // 450 F1=IA(LL)=R
-                                //     :{GOTO}550
+                        case 2:
+                            // item in room
+                            // 450 F1=IA(LL)=R
+                            //     :{GOTO}550
                             F1_conditionsMet = (IA[LL_conditionData] == R_currRoom);
                             break;
-                        case 3: // item carried or in room
-                                // 470 F1=IA(LL)=R{OR}IA(LL)=-1
-                                //     :{GOTO}550
-                            F1_conditionsMet = (IA[LL_conditionData] == -1 || IA[LL_conditionData] == R_currRoom);
+                        case 3:
+                            // item carried or in room
+                            // 470 F1=IA(LL)=R{OR}IA(LL)=-1
+                            //     :{GOTO}550
+                            F1_conditionsMet = (IA[LL_conditionData] == R_currRoom || IA[LL_conditionData] == -1);
                             break;
-                        case 4: // room matches
-                                // 490 F1=R=LL
-                                //     :{GOTO}550
+                        case 4:
+                            // room matches
+                            // 490 F1=R=LL
+                            //     :{GOTO}550
                             F1_conditionsMet = (R_currRoom == LL_conditionData);
                             break;
-                        case 5: // item not in room
-                                // 500 F1=IA(LL)<>R
-                                //     :{GOTO}550
+                        case 5:
+                            // item not in room
+                            // 500 F1=IA(LL)<>R
+                            //     :{GOTO}550
                             F1_conditionsMet = (IA[LL_conditionData] != R_currRoom);
                             break;
-                        case 6: // item not carried
-                                // 510 F1=IA(LL)<>-1
-                                //     :{GOTO}550
+                        case 6:
+                            // item not carried
+                            // 510 F1=IA(LL)<>-1
+                            //     :{GOTO}550
                             F1_conditionsMet = (IA[LL_conditionData] != -1);
                             break;
-                        case 7: // room doesn't match
-                                // 520 F1=R<>LL
-                                //     :{GOTO}550
+                        case 7:
+                            // room doesn't match
+                            // 520 F1=R<>LL
+                            //     :{GOTO}550
                             F1_conditionsMet = (R_currRoom != LL_conditionData);
                             break;
-                        case 8: // flag true
-                                // 530 F1=SF{AND}{CINT}(2^LL+.5)
-                                //     :F1=F1<>0
-                                //     :{GOTO}550
+                        case 8:
+                            // flag is true
+                            // 530 F1=SF{AND}{CINT}(2^LL+.5)
+                            //     :F1=F1<>0
+                            //     :{GOTO}550
                             F1_conditionsMet = (SF_systemFlags[LL_conditionData]);
                             break;
-                        case 9: // flag false
-                                // 540 F1=SF{AND}{CINT}(2^LL+.5)
-                                //     :F1=F1=0
-                                //     :{GOTO}550
+                        case 9:
+                            // flag is false
+                            // 540 F1=SF{AND}{CINT}(2^LL+.5)
+                            //     :F1=F1=0
+                            //     :{GOTO}550
                             F1_conditionsMet = (!SF_systemFlags[LL_conditionData]);
                             break;
-                        case 10: // inventory not empty
-                                 // 410 F1=-1
-                                 //     :{FOR}Z=0{TO}IL
-                                 //     :{IF}IA(Z)=-1{THEN}550{ELSE}{NEXT}
-                                 //     :F1=0
-                                 //     :{GOTO}550
+                        case 10:
+                            // inventory not empty
+                            // 410 F1=-1
+                            //     :{FOR}Z=0{TO}IL
+                            //     :{IF}IA(Z)=-1{THEN}550{ELSE}{NEXT}
+                            //     :F1=0
+                            //     :{GOTO}550
                             F1_conditionsMet = false;
                             for (int Z = 0; Z <= IL_itemCount; Z++)
                             {
@@ -133,12 +157,13 @@ namespace PirateAdventure
                                 }
                             }
                             break;
-                        case 11: // inventory is empty
-                                 // 420 F1=0
-                                 //     :{FOR}Z=0{TO}IL
-                                 //     :{IF}IA(Z)=-1{THEN}550{ELSE}{NEXT}
-                                 //     :F1=-1
-                                 //     :{GOTO}550
+                        case 11:
+                            // inventory is empty
+                            // 420 F1=0
+                            //     :{FOR}Z=0{TO}IL
+                            //     :{IF}IA(Z)=-1{THEN}550{ELSE}{NEXT}
+                            //     :F1=-1
+                            //     :{GOTO}550
                             F1_conditionsMet = true;
                             for (int Z = 0; Z <= IL_itemCount; Z++)
                             {
@@ -149,71 +174,85 @@ namespace PirateAdventure
                                 }
                             }
                             break;
-                        case 12: // item not carried and not in room
-                                 // 440 F1=IA(LL)<>-1{AND}IA(LL)<>R
-                                 //     :{GOTO}550
+                        case 12:
+                            // item not carried and not in room
+                            // 440 F1=IA(LL)<>-1{AND}IA(LL)<>R
+                            //     :{GOTO}550
                             F1_conditionsMet = (IA[LL_conditionData] != -1 && IA[LL_conditionData] != R_currRoom);
                             break;
-                        case 13: // item is anywhere
-                                 // 460 F1=IA(LL)<>0
-                                 //     :{GOTO}550
+                        case 13:
+                            // item is somewhere
+                            // 460 F1=IA(LL)<>0
+                            //     :{GOTO}550
                             F1_conditionsMet = (IA[LL_conditionData] != 0);
                             break;
-                        case 14: // item is nowhere
-                                 // 480 F1=IA(LL)=0
-                                 //     :{GOTO}550
+                        case 14:
+                            // item is nowhere
+                            // 480 F1=IA(LL)=0
+                            //     :{GOTO}550
                             F1_conditionsMet = (IA[LL_conditionData] == 0);
                             break;
                         default:
-                            Console.WriteLine($"#ERROR# Unknown condition: {conditionNum} {LL_conditionData}");
+                            Console.WriteLine($"#ERROR# Unknown condition: {K_conditionNum} {LL_conditionData}");
                             break;
                     }
                     if (!F1_conditionsMet)
                     {
                         break;
                     }
-                }
-                // 550 F2=F2{AND}F1
-                //     :{IF}F2{THEN}{NEXT}Y{ELSE}{NEXT}X
-                //     :{GOTO}990
-                if (!F1_conditionsMet)
+                    // 550 F2=F2{AND}F1
+                    //     :{IF}F2{THEN}{NEXT}Y{ELSE}{NEXT}X
+                    //     :{GOTO}990
+                    F2_canDoCmd = (F2_canDoCmd & F1_conditionsMet);
+                    if (!F2_canDoCmd)
+                    {
+                        break;
+                    }
+                } // NEXT Y
+                if (!F2_canDoCmd)
                 {
-                    continue;
+                    continue; // NEXT X
                 }
-
                 // run actions
                 // 560 IP=0
-                //     :{FOR}Y=1{TO}4
-                //     :K=(Y-1)/2+6
-                //     :{ON}Y{GOTO}570,580,570,580
-                // 570 AC=CA(X,K)/150
-                //     :{GOTO}590
-                // 580 AC=CA(X,K)-{CINT}(CA(X,K)/150)*150
                 int IP_dataPointer = 0;
-                for (int Y = 6; Y <= 7; Y++)
+                //     :{FOR}Y=1{TO}4
+                for (int Y_index = 1; Y_index <= 4; Y_index++)
                 {
-                    int AC_action1 = CA[X_dataLine, Y] / 150;
-                    int AC_action2 = CA[X_dataLine, Y] % 150;
-                    RunAction(AC_action1, X_dataLine, ref IP_dataPointer);
+                    //     :K=(Y-1)/2+6
+                    int K = ((Y_index - 1) / 2) + 6;
+                    //     :{ON}Y{GOTO}570,580,570,580
+                    // 570 AC=CA(X,K)/150
+                    //     :{GOTO}590
+                    // 580 AC=CA(X,K)-{CINT}(CA(X,K)/150)*150
+                    int AC_action1 = CA[X_dataLine, K] / 150;
+                    int AC_action2 = CA[X_dataLine, K] % 150;
+                    RunAction_590(AC_action1, X_dataLine, ref IP_dataPointer);
                     if (gameOver)
                     {
                         return;
                     }
-                    RunAction(AC_action2, X_dataLine, ref IP_dataPointer);
+                    RunAction_590(AC_action2, X_dataLine, ref IP_dataPointer);
+                    // 960 {NEXT}Y
                 }
+                // 970 {IF}NV(0)<>0{THEN}990
+                if (currVerb != 0)
+                {
+                    break;
+                }
+                // 980 {NEXT}X
             }
+            // 990 {REM}
             // 1000 {IF}NV(0)=0{THEN}1040
-            if (NV[0] == 0)
+            if (currVerb == 0)
             {
                 return;
             }
             // 1010 {GOSUB}1060
-            bool F_cmdOK;
-            bool F2_canDoCmd;
-            RunOtherCommands(out F_cmdOK, out F2_canDoCmd);
+            RunOtherCommands(currVerb, currNoun, F3_flag, out F_cmdNotOK, out F2_canDoCmd);
             // 1020 {IF}F{PRINT}"I DON'T UNDERSTAND YOUR COMMAND"
             //     :{GOTO}1040
-            if (!F_cmdOK)
+            if (F_cmdNotOK)
             {
                 Console.WriteLine("I DON'T UNDERSTAND YOUR COMMAND");
                 return;
@@ -229,52 +268,140 @@ namespace PirateAdventure
             return;
         }
 
-        private static void RunOtherCommands(out bool f_cmdOK, out bool f2_canDoCmd)
+        private static void RunOtherCommands(int currVerb, int currNoun, bool F3_flag, out bool F_cmdNotOK, out bool F2_canDoCmd)
         {
+            F_cmdNotOK = false;
+            F2_canDoCmd = true;
             // 1060 {IF}NV(0)<>10{AND}NV(0)<>18{OR}F3{THEN}1230
-            if ((NV[0] != 10 && NV[0] != 18) || F3) { }
+            if ((currVerb != 10 /*get*/ && currVerb != 18 /*drop*/) || F3_flag)
+            {
+                return;
+            }
 
             // 1070 {IF}NV(1)=0{PRINT}"WHAT?"
-            //     :{GOTO}1180
+            if (currNoun == 0)
+            {
+                Console.WriteLine("WHAT?");
+                //     :{GOTO}1180
+                // 1180 F=0
+                F_cmdNotOK = false;
+                //     :{RETURN}
+                return;
+            }
             // 1080 {IF}NV(0)<>10{THEN}1110
-            // 1090 L=0
-            //     :{FOR}Z=0{TO}IL
-            //     :{IF}IA(Z)=-1{THEN}L=L+1
-            // 1100 {NEXT}
-            //     :{IF}L>=MX{PRINT}Z$
-            //     :{GOTO}1180
-            // 1110 K=0
-            //     :{FOR}X=0{TO}IL
-            //     :{IF}{RIGHT$}(IA$(X),1)<>"/"{THEN}1190{ELSE}LL={LEN}(IA$(X))-1
-            //     :TP$={MID$}(IA$(X),1,LL)
-            //     :{FOR}Y=LL{TO}2{STEP}-1
-            //     :{IF}{MID$}(TP$,Y,1)<>"/"{THEN}{NEXT}Y
-            //     :{GOTO}1190
-            // 1120 TP$={LEFT$}({MID$}(TP$,Y+1),LN)
-            // 1130 {IF}TP$<>NV$(NV(1),1){THEN}1190
-            // 1140 {IF}NV(0)=10{THEN}1160
-            // 1150 {IF}IA(X)<>-1{THEN}K=1
-            //     :{GOTO}1190{ELSE}IA(X)=R
-            //     :K=3
-            //     :{GOTO}1170
-            // 1160 {IF}IA(X)<>R{THEN}K=2
-            //     :{GOTO}1190{ELSE}IA(X)=-1
-            //     :K=3
-            // 1170 {PRINT}"OK, ";
-            // 1180 F=0
-            //     :{RETURN}
-            // 1190 {NEXT}X
-            // 1200 {IF}K=1{THEN}{PRINT}"I'M NOT CARRYING IT"{ELSE}{IF}K=2{PRINT}"I DON'T SEE IT HERE"
-            // 1210 {IF}K=0{IF}{NOT}F3{PRINT}"ITS BEYOND MY POWER TO DO THAT"
-            //     :F=0
-            // 1220 {IF}K<>0{THEN}F=0
-            // 1230 {RETURN}
+            if (currVerb != 10 /*get*/)
+            {
 
-### // todo ###
-            throw new NotImplementedException();
+                // 1090 L=0
+                int L_itemCount = 0;
+                //     :{FOR}Z=0{TO}IL
+                for (int Z = 0; Z <= IL_itemCount; Z++)
+                {
+                    //     :{IF}IA(Z)=-1{THEN}L=L+1
+                    if (IA[Z] == -1)
+                    {
+                        L_itemCount++;
+                    }
+                    // 1100 {NEXT}
+                }
+                //     :{IF}L>=MX{PRINT}Z$
+                if (L_itemCount >= MX_maxCarry)
+                {
+                    Console.WriteLine(ZS_inventoryFullMsg);
+                    //     :{GOTO}1180
+                    F_cmdNotOK = false;
+                    return;
+                }
+            }
+
+            // 1110 K=0
+            int K = 0;
+            //     :{FOR}X=0{TO}IL
+            for (int X_itemNum = 0; X_itemNum <= IL_itemCount; X_itemNum++)
+            {
+                //     :{IF}{RIGHT$}(IA$(X),1)<>"/"{THEN}1190
+                if (IAS_itemDescriptions[X_itemNum].EndsWith("/"))
+                {
+                    //      {ELSE}LL={LEN}(IA$(X))-1
+                    int LL_pos = IAS_itemDescriptions[X_itemNum].Length - 1;
+                    //     :TP$={MID$}(IA$(X),1,LL)
+                    //     :{FOR}Y=LL{TO}2{STEP}-1
+                    //     :{IF}{MID$}(TP$,Y,1)<>"/"{THEN}{NEXT}Y
+                    //     :{GOTO}1190
+                    // 1120 TP$={LEFT$}({MID$}(TP$,Y+1),LN)
+                    string TPS_itemName = IAS_itemDescriptions[X_itemNum].Substring(LL_pos - LN_wordSize, LN_wordSize);
+                    // 1130 {IF}TP$<>NV$(NV(1),1){THEN}1190
+                    if (TPS_itemName.Equals(NVS[currNoun, 1]))
+                    {
+                        // 1140 {IF}NV(0)=10{THEN}1160
+                        if (currVerb != 10 /*not get, so drop*/)
+                        {
+                            // 1150 {IF}IA(X)<>-1{THEN}K=1
+                            if (IA[X_itemNum] != -1)
+                            {
+                                K = 1;
+                                //     :{GOTO}1190
+                                continue;
+                            }
+                            else
+                            {
+                                //{ELSE}IA(X)=R
+                                IA[X_itemNum] = R_currRoom;
+                                //     :K=3
+                                K = 3;
+                                //     :{GOTO}1170
+                            }
+                        }
+                        else
+                        {
+                            // 1160 {IF}IA(X)<>R{THEN}K=2
+                            if (IA[X_itemNum] != R_currRoom)
+                            {
+                                K = 2;
+                                //     :{GOTO}1190
+                                continue;
+                            }
+                            //{ELSE}IA(X)=-1
+                            IA[X_itemNum] = -1;
+                            //     :K=3
+                            K = 3;
+                        }
+                        // 1170 {PRINT}"OK, ";
+                        Console.Write("OK, ");
+                        // 1180 F=0
+                        F_cmdNotOK = false;
+                        //     :{RETURN}
+                        return;
+                    }
+                }
+                // 1190 {NEXT}X
+            }
+            // 1200 {IF}K=1{THEN}{PRINT}"I'M NOT CARRYING IT"{ELSE}{IF}K=2{PRINT}"I DON'T SEE IT HERE"
+            if (K == 1)
+            {
+                Console.WriteLine("I'M NOT CARRYING IT");
+            }
+            else if (K == 2)
+            {
+                Console.WriteLine("I DON'T SEE IT HERE");
+            }
+            // 1210 {IF}K=0{IF}{NOT}F3{PRINT}"ITS BEYOND MY POWER TO DO THAT"
+            if (K == 0 && !F3_flag)
+            {
+                Console.WriteLine("ITS BEYOND MY POWER TO DO THAT");
+            }
+            //     :F=0
+            F_cmdNotOK = false;
+            // 1220 {IF}K<>0{THEN}F=0
+            if (K != 0)
+            {
+                F_cmdNotOK = false;
+            }
+            // 1230 {RETURN}
+            return;
         }
 
-        private static void RunAction(int AC_action, int X_dataLine, ref int IP_dataPointer)
+        private static void RunAction_590(int AC_action, int X_dataLine, ref int IP_dataPointer)
         {
             // 590 {IF}AC>101{THEN}600{ELSE}{IF}AC=0{THEN}960{ELSE}{IF}AC<52{THEN}{PRINT}MS$(AC)
             //     :{GOTO}960
@@ -287,7 +414,7 @@ namespace PirateAdventure
             {
                 // 600 {PRINT}MS$(AC-50)
                 //     :{GOTO}960
-                Console.WriteLine($"{MSS_messages[AC_action - 50]}");
+                Console.WriteLine(MSS_messages[AC_action - 50]);
                 return;
             }
             if (AC_action == 0)
@@ -296,7 +423,7 @@ namespace PirateAdventure
             }
             if (AC_action < 52)
             {
-                Console.WriteLine($"{MSS_messages[AC_action]}");
+                Console.WriteLine(MSS_messages[AC_action]);
                 return;
             }
             int P_dataValue = 0;
@@ -484,6 +611,7 @@ namespace PirateAdventure
                     Console.WriteLine($"#ERROR# Unknown action: {AC_action - 51}");
                     break;
             }
+            // 960 {NEXT}Y
         }
 
         private static int GetDataValue(int X_dataLine, ref int IP_dataPointer)
@@ -506,7 +634,7 @@ namespace PirateAdventure
             return P_dataValue;
         }
 
-        private static void GoDirection(int noun)
+        private static void GoDirection_610(int noun)
         {
             // 610 L=DF
             //     :{IF}L{THEN}L=DF{AND}IA(9)<>R {AND}IA(9)<>-1

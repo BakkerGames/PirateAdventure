@@ -105,74 +105,74 @@
 --     :{PRINT}
 --     :{PRINT}
 --     :{RETURN}
--- 360 F2=-1
---     :F=-1
---     :F3=0
---     :{IF}NV(0)=1{AND}NV(1)<7{THEN}610{ELSE}{FOR}X=0{TO}CL
---     :V=CA(X,0)/150
---     :{IF}NV(0)=0{IF}V<>0{RETURN}
--- 370 {IF}NV(0)<>V{THEN}{NEXT}X
---     :{GOTO}990{ELSE}N=CA(X,0)-V*150
--- 380 {IF}NV(0)=0{THEN}F=0
---     :{IF}RND(100)<=N{THEN}400{ELSE}{NEXT}X
---     :{GOTO}990
--- 390 {IF}N<>NV(1){AND}N<>0{THEN}{NEXT}X
---     :{GOTO}990
--- 400 F2=-1
---     :F=0
---     :F3=-1
---     :{FOR}Y=1{TO}5
---     :W=CA(X,Y)
---     :LL=W/20
---     :K=W-LL*20
---     :F1=-1
---     :{ON}K+1{GOTO}550,430,450,470,490,500,510,520,530,540,410,420,440,460,480
--- 410 F1=-1
---     :{FOR}Z=0{TO}IL
---     :{IF}IA(Z)=-1{THEN}550{ELSE}{NEXT}
---     :F1=0
---     :{GOTO}550
--- 420 F1=0
---     :{FOR}Z=0{TO}IL
---     :{IF}IA(Z)=-1{THEN}550{ELSE}{NEXT}
---     :F1=-1
---     :{GOTO}550
--- 430 F1=IA(LL)=-1
---     :{GOTO}550
--- 440 F1=IA(LL)<>-1{AND}IA(LL)<>R
---     :{GOTO}550
--- 450 F1=IA(LL)=R
---     :{GOTO}550
--- 460 F1=IA(LL)<>0
---     :{GOTO}550
--- 470 F1=IA(LL)=R{OR}IA(LL)=-1
---     :{GOTO}550
--- 480 F1=IA(LL)=0
---     :{GOTO}550
--- 490 F1=R=LL
---     :{GOTO}550
--- 500 F1=IA(LL)<>R
---     :{GOTO}550
--- 510 F1=IA(LL)<>-1
---     :{GOTO}550
--- 520 F1=R<>LL
---     :{GOTO}550
--- 530 F1=SF{AND}{CINT}(2^LL+.5)
---     :F1=F1<>0
---     :{GOTO}550
--- 540 F1=SF{AND}{CINT}(2^LL+.5)
---     :F1=F1=0
---     :{GOTO}550
--- 550 F2=F2{AND}F1
---     :{IF}F2{THEN}{NEXT}Y{ELSE}{NEXT}X
---     :{GOTO}990
--- 560 IP=0
---     :{FOR}Y=1{TO}4
---     :K=(Y-1)/2+6
---     :{ON}Y{GOTO}570,580,570,580
--- 570 AC=CA(X,K)/150
---     :{GOTO}590
--- 580 AC=CA(X,K)-{CINT}(CA(X,K)/150)*150
+// 360 F2=-1
+//     :F=-1
+//     :F3=0
+//     :{IF}NV(0)=1{AND}NV(1)<7{THEN}610{ELSE}{FOR}X=0{TO}CL
+//     :V=CA(X,0)/150
+//     :{IF}NV(0)=0{IF}V<>0{RETURN}
+// 370 {IF}NV(0)<>V{THEN}{NEXT}X
+//     :{GOTO}990{ELSE}N=CA(X,0)-V*150
+// 380 {IF}NV(0)=0{THEN}F=0
+//     :{IF}{RND}(100)<=N{THEN}400{ELSE}{NEXT}X
+//     :{GOTO}990
+// 390 {IF}N<>NV(1){AND}N<>0{THEN}{NEXT}X
+//     :{GOTO}990
+// 400 F2=-1
+//     :F=0
+//     :F3=-1
+//     :{FOR}Y=1{TO}5
+//     :W=CA(X,Y)
+//     :LL=W/20
+//     :K=W-LL*20
+//     :F1=-1
+//     :{ON}K+1{GOTO}550,430,450,470,490,500,510,520,530,540,410,420,440,460,480
+// 410 F1=-1
+//     :{FOR}Z=0{TO}IL
+//     :{IF}IA(Z)=-1{THEN}550{ELSE}{NEXT}
+//     :F1=0
+//     :{GOTO}550
+// 420 F1=0
+//     :{FOR}Z=0{TO}IL
+//     :{IF}IA(Z)=-1{THEN}550{ELSE}{NEXT}
+//     :F1=-1
+//     :{GOTO}550
+// 430 F1=IA(LL)=-1
+//     :{GOTO}550
+// 440 F1=IA(LL)<>-1{AND}IA(LL)<>R
+//     :{GOTO}550
+// 450 F1=IA(LL)=R
+//     :{GOTO}550
+// 460 F1=IA(LL)<>0
+//     :{GOTO}550
+// 470 F1=IA(LL)=R{OR}IA(LL)=-1
+//     :{GOTO}550
+// 480 F1=IA(LL)=0
+//     :{GOTO}550
+// 490 F1=R=LL
+//     :{GOTO}550
+// 500 F1=IA(LL)<>R
+//     :{GOTO}550
+// 510 F1=IA(LL)<>-1
+//     :{GOTO}550
+// 520 F1=R<>LL
+//     :{GOTO}550
+// 530 F1=SF{AND}{CINT}(2^LL+.5)
+//     :F1=F1<>0
+//     :{GOTO}550
+// 540 F1=SF{AND}{CINT}(2^LL+.5)
+//     :F1=F1=0
+//     :{GOTO}550
+// 550 F2=F2{AND}F1
+//     :{IF}F2{THEN}{NEXT}Y{ELSE}{NEXT}X
+//     :{GOTO}990
+// 560 IP=0
+//     :{FOR}Y=1{TO}4
+//     :K=(Y-1)/2+6
+//     :{ON}Y{GOTO}570,580,570,580
+// 570 AC=CA(X,K)/150
+//     :{GOTO}590
+// 580 AC=CA(X,K)-{CINT}(CA(X,K)/150)*150
 -- 590 {IF}AC>101{THEN}600{ELSE}{IF}AC=0{THEN}960{ELSE}{IF}AC<52{THEN}{PRINT}MS$(AC)
 --     :{GOTO}960
 --     :{ELSE}{ON}AC-51{GOTO}660,700,740,760,770,780,790,760,810,830,840,850,860,870,890,920,930,940,950,710,750
@@ -262,25 +262,25 @@
 --     :{PRINT}"ON A SCALE OF 0 TO 100 THAT RATES A";{CINT}(L/TT*100)
 --     :{IF}L=TT{THEN}{PRINT}"WELL DONE."
 --     :{GOTO}850{ELSE}960
-// 890 {PRINT}"I'M CARRYING:"
-//     :K$="NOTHING"
-//     :{FOR}Z=0{TO}IL
-//     :{IF}IA(Z)<>-1{THEN}910{ELSE}{GOSUB}280
-//     :{IF}{LEN}(TP$)+POS(0)>63{PRINT}
-// 900 {PRINT}TP$;".",;
-//     :K$=""
-// 910 {NEXT}
-//     :{PRINT}K$
-//     :{GOTO}960
+-- 890 {PRINT}"I'M CARRYING:"
+--     :K$="NOTHING"
+--     :{FOR}Z=0{TO}IL
+--     :{IF}IA(Z)<>-1{THEN}910{ELSE}{GOSUB}280
+--     :{IF}{LEN}(TP$)+POS(0)>63{PRINT}
+-- 900 {PRINT}TP$;".",;
+--     :K$=""
+-- 910 {NEXT}
+--     :{PRINT}K$
+--     :{GOTO}960
 -- 920 P=0
 --     :{GOTO}800
 -- 930 P=0
 --     :{GOTO}820
-// 940 LX=LT
-//     :IA(9)=-1
-//     :{GOTO}960
-// 950 {CLS}
-//     :{GOTO}960
+-- 940 LX=LT
+--     :IA(9)=-1
+--     :{GOTO}960
+-- 950 {CLS}
+--     :{GOTO}960
 // 960 {NEXT}Y
 // 970 {IF}NV(0)<>0{THEN}990
 // 980 {NEXT}X
