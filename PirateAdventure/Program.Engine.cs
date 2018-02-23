@@ -403,13 +403,7 @@ namespace PirateAdventure
 
         private static void RunAction_590(int AC_action, int X_dataLine, ref int IP_dataPointer)
         {
-            // 590 {IF}AC>101{THEN}600{ELSE}{IF}AC=0{THEN}960{ELSE}{IF}AC<52{THEN}{PRINT}MS$(AC)
-            //     :{GOTO}960
-            //     :{ELSE}{ON}AC-51{GOTO}660,700,740,760,770,780,790,760,810,830,840,850,860,870,890,920,930,940,950,710,750
-            // 600 {PRINT}MS$(AC-50)
-            //     :{GOTO}960
-            // 590 {IF}AC>101{THEN}600{ELSE}{IF}AC=0{THEN}960{ELSE}{IF}AC<52{THEN}{PRINT}MS$(AC)
-            //     :{GOTO}960
+            // 590 {IF}AC>101{THEN}600
             if (AC_action > 101)
             {
                 // 600 {PRINT}MS$(AC-50)
@@ -417,12 +411,17 @@ namespace PirateAdventure
                 Console.WriteLine(MSS_messages[AC_action - 50]);
                 return;
             }
+            //{ELSE}{IF}AC=0
             if (AC_action == 0)
             {
+                //{THEN}960
                 return;
             }
+            //{ELSE}{IF}AC<52{THEN}
             if (AC_action < 52)
             {
+                //{PRINT}MS$(AC)
+                //     :{GOTO}960
                 Console.WriteLine(MSS_messages[AC_action]);
                 return;
             }
