@@ -1,4 +1,4 @@
-﻿// Program.Engine.cs - 12/03/2017
+﻿// Program.Engine.cs - 02/17/2018
 
 using System;
 
@@ -232,6 +232,8 @@ namespace PirateAdventure
         private static void RunOtherCommands(out bool f_cmdOK, out bool f2_canDoCmd)
         {
             // 1060 {IF}NV(0)<>10{AND}NV(0)<>18{OR}F3{THEN}1230
+            if ((NV[0] != 10 && NV[0] != 18) || F3) { }
+
             // 1070 {IF}NV(1)=0{PRINT}"WHAT?"
             //     :{GOTO}1180
             // 1080 {IF}NV(0)<>10{THEN}1110
