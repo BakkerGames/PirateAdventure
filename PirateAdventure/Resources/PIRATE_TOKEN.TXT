@@ -481,13 +481,13 @@
 6760 {FOR}X=0{TO}RL
     :{INPUT}#D,AA(0),AA(1),AA(2),AA(3),AA(4),AA(5),A$
     :{FOR}Y=0{TO}5
-    :{IF}AA(Y)<>RM(X,Y){OR}$<>RS$(X){THEN}6790{ELSE}{NEXT}Y,X
+    :{IF}AA(Y)<>RM(X,Y){OR}A$<>RS$(X){THEN}6790{ELSE}{NEXT}Y,X
 6770 {FOR}X=0{TO}ML
     :{INPUT}#D,A$
     :{IF}A$<>MS$(X){THEN}6790{ELSE}{NEXT}
 6780 {FOR}X=0{TO}IL
     :{INPUT}#D,A$,AA(0)
-    :{IF}AA(0)<>IA(X){OR}$<>IA$(X){THEN}6790{ELSE}{NEXT}X
+    :{IF}AA(0)<>IA(X){OR}A$<>IA$(X){THEN}6790{ELSE}{NEXT}X
     :{CLS}
     :{PRINT}"DATA TAPE VERIFIED"
     :{END}
