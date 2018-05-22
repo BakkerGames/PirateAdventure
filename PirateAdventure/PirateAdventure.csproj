@@ -8,9 +8,10 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>PirateAdventure</RootNamespace>
     <AssemblyName>PirateAdventure</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -58,7 +59,7 @@
     <Content Include="Resources\PIRATE_RAW.TXT" />
     <Content Include="Resources\PIRATE_TOKEN.TXT" />
     <Content Include="Resources\PIRATE_TOKEN_CMT.TXT" />
-    <Content Include="Resources\PIRATE_TOKEN_FIXFLAG.TXT" />
+    <Content Include="Resources\PIRATE_TOKEN_LINES.TXT" />
     <Content Include="Resources\ScansText\SCAN02.TXT" />
     <Content Include="Resources\ScansText\SCAN03.TXT" />
     <Content Include="Resources\ScansText\SCAN04.TXT" />

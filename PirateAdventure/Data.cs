@@ -1,4 +1,4 @@
-﻿// Data.cs - 12/03/2017
+﻿// Data.cs - 05/21/2018
 
 namespace PirateAdventure
 {
@@ -179,66 +179,66 @@ namespace PirateAdventure
 
         private static string[,] NVS = new string[NL_wordCount + 1, 2] // NV$(NL,1)
             {
-                { "AUT", "ANY" },
-                { "GO", "NORTH" },
-                { "*CLI", "SOUTH" },
-                { "*WAL", "EAST" },
-                { "*RUN", "WEST" },
-                { "*ENT", "UP" },
-                { "*PAC", "DOWN" },
-                { "*FOL", "STA" },
-                { "SAY", "PAS" },
-                { "SAI", "HAL" },
-                { "GET", "BOO" },
-                { "*TAK", "BOT" },
-                { "*CAT", "*RUM" },
-                { "*PIC", "WIN" },
-                { "*REM", "GAM" },
-                { "*WEA", "MON" },
-                { "*PUL", "PIR" },
-                { "FLY", "ARO" },
-                { "DRO", "BAG" },
-                { "*REL", "*DUF" },
-                { "*THR", "TOR" },
-                { "*LEA", "OFF" },
-                { "*GIV", "MAT" },
-                { "DRI", "YOH" },
-                { "*EAT", "30" },
-                { "INV", "LUM" },
-                { "SAI", "RUG" },
-                { "LOO", "KEY" },
-                { "*SHO", "INV" },
-                { "WAI", "DUB" },
-                { "REA", "SAI" },
-                { ".", "FIS" },
-                { "YOH", "ANC" },
-                { "SCO", "SHA" },
-                { "SAV", "PLA" },
-                { "KIL", "CAV" },
-                { "*ATT", "PAT" },
-                { "LIG", "DOO" },
-                { ".", "CHE" },
-                { "OPE", "PAR" },
-                { "*SMA", "HAM" },
-                { "UNL", "NAI" },
-                { "HEL", "BOA" },
-                { "AWA", "*SHI" },
-                { "*BUN", "SHE" },
-                { "", "CRA" },
-                { "QUI", "WAT" },
-                { "BUI", "*SAL" },
-                { "*MAK", "LAG" },
-                { "WAK", "*TID" },
-                { "SET", "PIT" },
-                { "CAS", "SHO" },
-                { "DIG", "*BEA" },
-                { "BUR", "MAP" },
-                { "FIN", "PAC" },
-                { "JUM", "BON" },
-                { "EMP", "HOL" },
-                { "WEI", "SAN" },
-                { "", "BOX" },
-                { "", "SNE" },
+                { "AUT", "ANY" },    // 0
+                { "GO", "NORTH" },   // 1
+                { "*CLI", "SOUTH" }, // 2
+                { "*WAL", "EAST" },  // 3
+                { "*RUN", "WEST" },  // 4
+                { "*ENT", "UP" },    // 5
+                { "*PAC", "DOWN" },  // 6
+                { "*FOL", "STA" },   // 7
+                { "SAY", "PAS" },    // 8
+                { "SAI", "HAL" },    // 9
+                { "GET", "BOO" },    // 10
+                { "*TAK", "BOT" },   // 11
+                { "*CAT", "*RUM" },  // 12
+                { "*PIC", "WIN" },   // 13
+                { "*REM", "GAM" },   // 14
+                { "*WEA", "MON" },   // 15
+                { "*PUL", "PIR" },   // 16
+                { "FLY", "ARO" },    // 17
+                { "DRO", "BAG" },    // 18
+                { "*REL", "*DUF" },  // 19
+                { "*THR", "TOR" },   // 20
+                { "*LEA", "OFF" },   // 21
+                { "*GIV", "MAT" },   // 22
+                { "DRI", "YOH" },    // 23
+                { "*EAT", "30" },    // 24
+                { "INV", "LUM" },    // 25
+                { "SAI", "RUG" },    // 26
+                { "LOO", "KEY" },    // 27
+                { "*SHO", "INV" },   // 28
+                { "WAI", "DUB" },    // 29
+                { "REA", "SAI" },    // 30
+                { ".", "FIS" },      // 31
+                { "YOH", "ANC" },    // 32
+                { "SCO", "SHA" },    // 33
+                { "SAV", "PLA" },    // 34
+                { "KIL", "CAV" },    // 35
+                { "*ATT", "PAT" },   // 36
+                { "LIG", "DOO" },    // 37
+                { ".", "CHE" },      // 38
+                { "OPE", "PAR" },    // 39
+                { "*SMA", "HAM" },   // 40
+                { "UNL", "NAI" },    // 41
+                { "HEL", "BOA" },    // 42
+                { "AWA", "*SHI" },   // 43
+                { "*BUN", "SHE" },   // 44
+                { "", "CRA" },       // 45
+                { "QUI", "WAT" },    // 46
+                { "BUI", "*SAL" },   // 47
+                { "*MAK", "LAG" },   // 48
+                { "WAK", "*TID" },   // 49
+                { "SET", "PIT" },    // 50
+                { "CAS", "SHO" },    // 51
+                { "DIG", "*BEA" },   // 52
+                { "BUR", "MAP" },    // 53
+                { "FIN", "PAC" },    // 54
+                { "JUM", "BON" },    // 55
+                { "EMP", "HOL" },    // 56
+                { "WEI", "SAN" },    // 57
+                { "", "BOX" },       // 58
+                { "", "SNE" },       // 59
             };
 
         private static int[,] RM = new int[RL_roomCount + 1, 6] // RM(RL,5)
