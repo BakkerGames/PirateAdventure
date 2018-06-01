@@ -1,4 +1,4 @@
-﻿// Program.cs - 12/03/2017
+﻿// Program.cs - 05/31/2018
 
 using System;
 
@@ -27,6 +27,46 @@ namespace PirateAdventure
         }
 
         static void RunGame()
+        {
+            Initialize();
+            while (!gameOver)
+            {
+                Look();
+                bool F_commandOK = false;
+                while (!gameOver && !F_commandOK)
+                {
+                    GetCommand();
+                    F_commandOK = ParseCommand();
+                    if (!F_commandOK)
+                    {
+                        Console.WriteLine("YOU USE WORD(S) I DON'T KNOW");
+                        Console.WriteLine();
+                    }
+                }
+                RunEngine(NV[0], NV[1]);
+            }
+        }
+
+        static void Initialize()
+        {
+            R_currRoom = AR_startRoom;
+            LX_lightRemaining = LT_lightTotal;
+            DF_darkFlag = false;
+            for (int i = 0; i <= FC_flagCount; i++)
+            {
+                SF_systemFlags[i] = false;
+            }
+            // copy items into memory
+            for (int i = 0; i <= IL_itemCount; i++)
+            {
+                IA[i] = I2[i];
+            }
+        }
+
+
+        #region Old
+
+        static void Old_RunGame()
         {
             // 130 {GOSUB}50
             Initialize();
@@ -80,6 +120,7 @@ namespace PirateAdventure
 
         private static void Look()
         {
+            Console.WriteLine();
             // 240 {IF}DF{IF}IA(9)<>-1{AND}IA(9)<>R{PRINT}"I CAN'T SEE, ITS TOO DARK."
             //     :{RETURN}
             if (DF_darkFlag && (IA[9] != -1) && (IA[9] != R_currRoom))
@@ -154,12 +195,12 @@ namespace PirateAdventure
                     Console.Write(" ");
                 }
             }
-            Console.WriteLine();
-            Console.WriteLine();
+            //Console.WriteLine();
+            //Console.WriteLine();
             return;
         }
 
-        private static void Initialize()
+        private static void Old_Initialize()
         {
             // 100 R=AR
             //     :LX=LT
@@ -335,5 +376,8 @@ namespace PirateAdventure
             }
             return value;
         }
+
+        #endregion
+
     }
 }

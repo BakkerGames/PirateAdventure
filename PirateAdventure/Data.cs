@@ -99,7 +99,7 @@ namespace PirateAdventure
                 { 195, 782, 921, 0, 0, 0, 2727, 0 },
                 { 195, 762, 261, 0, 0, 0, 2727, 0 },
                 { 6900, 0, 0, 0, 0, 0, 9450, 0 },
-                { 1526, 602, 0, 0, 0, 0, 2723, 0 },
+                { 1526, 602, 0, 0, 0, 0, 2723, 0 }, // 76
                 { 1541, 621, 602, 640, 520, 600, 7853, 8250 },
                 { 195, 782, 661, 0, 0, 0, 2727, 0 },
                 { 7092, 623, 583, 303, 643, 20, 8700, 0 },
@@ -462,67 +462,67 @@ namespace PirateAdventure
 
         private static int[] I2 = new int[IL_itemCount + 1] // I2(IL)
             {
-                1, // FLIGHT OF STAIRS
-                2, // OPEN WINDOW
-                2, // BOOKS IN A BOOKCASE
-                0, // LARGE LEATHER BOUND BOOK/BOO/
-                0, // BOOKCASE WITH A SECRET PASSAGE BEHIND IT
-                4, // PIRATE'S DUFFLE BAG/BAG/
-                1, // SIGN ON WALL -RETURN TREASURES HERE. SAY SCORE- SIGN BY STAIRS -ANTONYM OF LIGHT IS UNLIGHT-
-                0, // EMPTY BOTTLE/BOT/
-                4, // UNLIT TORCH/TOR/
-                0, // LIT TORCH/TOR/
-                0, // MATCHES/MAT/
-                6, // SMALL SHIP'S KEEL AND MAST
-                9, // WICKED LOOKING PIRATE
-                9, // TREASURE CHEST/CHE/
-                8, // MONGOOSE/MON/
-                24, // RUSTY ANCHOR/ANC/
-                8, // GRASS SHACK
-                11, // MEAN AND HUNGRY LOOKING CROCODILES
-                11, // LOCKED DOOR
-                0, // OPEN DOOR WITH HALL BEYOND
-                17, // PILE OF SAILS/SAI/
-                10, // FISH/FIS/
-                25, // *DUBLEONS*/DUB/
-                25, // DEADLY MAMBA SNAKES/SNA/
-                9, // PARROT/PAR/
-                1, // BOTTLE OF RUM/BOT/
-                0, // RUG/RUG/
-                0, // RING OF KEYS/KEY/
-                0, // OPEN TREASURE CHEST/CHE/
-                0, // SET OF PLANS/PLA/
-                1, // RUG
-                15, // CLAW HAMMER/HAM/
-                0, // NAILS/NAI/
-                17, // PILE OF PRECUT LUMBER/LUM/
-                17, // TOOL SHED
-                16, // LOCKED DOOR
-                0, // OPEN DOOR WITH PIT BEYOND
-                0, // PIRATE SHIP
-                18, // ROCK WALL WITH NARROW CRACK IN IT
-                17, // NARROW CRACK IN THE ROCK
-                10, // SALT WATER
-                0, // SLEEPING PIRATE
-                0, // BOTTLE OF SALT WATER/BOT/
-                4, // PIECES OF BROKEN RUM BOTTLES
-                1, // NON-SKID SNEAKES/SNE/
-                0, // MAP/MAP/
-                15, // SHOVEL/SHO/
-                0, // MOULDY OLD BONES/BON/
-                6, // SAND/SAN/
-                0, // BOTTLES OF RUM/BOT/
-                0, // *RARE OLD PRICELESS STAMPS*/STA/
-                6, // LAGOON
-                24, // THE TIDE IS OUT
-                0, // THE TIDE IS COMING IN
-                15, // WATER WINGS/WIN/
-                0, // FLOTSAM AND JETSAM
-                23, // MONASTARY
-                0, // PLAIN WOODEN BOX/BOX/
-                0, // DEAD SQUIRREL
-                0, //
-                0, // 
+                1,  // 00 FLIGHT OF STAIRS
+                2,  // 01 OPEN WINDOW
+                2,  // 02 BOOKS IN A BOOKCASE
+                0,  // 03 LARGE LEATHER BOUND BOOK/BOO/
+                0,  // 04 BOOKCASE WITH A SECRET PASSAGE BEHIND IT
+                4,  // 05 PIRATE'S DUFFLE BAG/BAG/
+                1,  // 06 SIGN ON WALL -RETURN TREASURES HERE. SAY SCORE- SIGN BY STAIRS -ANTONYM OF LIGHT IS UNLIGHT-
+                0,  // 07 EMPTY BOTTLE/BOT/
+                4,  // 08 UNLIT TORCH/TOR/
+                0,  // 09 LIT TORCH/TOR/
+                0,  // 10 MATCHES/MAT/
+                6,  // 11 SMALL SHIP'S KEEL AND MAST
+                9,  // 12 WICKED LOOKING PIRATE
+                9,  // 13 TREASURE CHEST/CHE/
+                8,  // 14 MONGOOSE/MON/
+                24, // 15 RUSTY ANCHOR/ANC/
+                8,  // 16 GRASS SHACK
+                11, // 17 MEAN AND HUNGRY LOOKING CROCODILES
+                11, // 18 LOCKED DOOR
+                0,  // 19 OPEN DOOR WITH HALL BEYOND
+                17, // 20 PILE OF SAILS/SAI/
+                10, // 21 FISH/FIS/
+                25, // 22 *DUBLEONS*/DUB/
+                25, // 23 DEADLY MAMBA SNAKES/SNA/
+                9,  // 24 PARROT/PAR/
+                1,  // 25 BOTTLE OF RUM/BOT/
+                0,  // 26 RUG/RUG/
+                0,  // 27 RING OF KEYS/KEY/
+                0,  // 28 OPEN TREASURE CHEST/CHE/
+                0,  // 29 SET OF PLANS/PLA/
+                1,  // 30 RUG
+                15, // 31 CLAW HAMMER/HAM/
+                0,  // 32 NAILS/NAI/
+                17, // 33 PILE OF PRECUT LUMBER/LUM/
+                17, // 34 TOOL SHED
+                16, // 35 LOCKED DOOR
+                0,  // 36 OPEN DOOR WITH PIT BEYOND
+                0,  // 37 PIRATE SHIP
+                18, // 38 ROCK WALL WITH NARROW CRACK IN IT
+                17, // 39 NARROW CRACK IN THE ROCK
+                10, // 40 SALT WATER
+                0,  // 41 SLEEPING PIRATE
+                0,  // 42 BOTTLE OF SALT WATER/BOT/
+                4,  // 43 PIECES OF BROKEN RUM BOTTLES
+                1,  // 44 NON-SKID SNEAKES/SNE/
+                0,  // 45 MAP/MAP/
+                15, // 46 SHOVEL/SHO/
+                0,  // 47 MOULDY OLD BONES/BON/
+                6,  // 48 SAND/SAN/
+                0,  // 49 BOTTLES OF RUM/BOT/
+                0,  // 50 *RARE OLD PRICELESS STAMPS*/STA/
+                6,  // 51 LAGOON
+                24, // 52 THE TIDE IS OUT
+                0,  // 53 THE TIDE IS COMING IN
+                15, // 54 WATER WINGS/WIN/
+                0,  // 55 FLOTSAM AND JETSAM
+                23, // 56 MONASTARY
+                0,  // 57 PLAIN WOODEN BOX/BOX/
+                0,  // 58 DEAD SQUIRREL
+                0,  // 59
+                0,  // 60
             };
     }
 }

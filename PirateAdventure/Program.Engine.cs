@@ -1,4 +1,4 @@
-﻿// Program.Engine.cs - 02/17/2018
+﻿// Program.Engine.cs - 05/31/2018
 
 using System;
 
@@ -7,6 +7,155 @@ namespace PirateAdventure
     partial class Program
     {
         private static void RunEngine(int currVerb, int currNoun)
+        {
+            bool F_userCommand = false;
+            bool F1_conditionsMet = false;
+            bool F2_canDoCmd = true;
+            if (currVerb == 1 && currNoun < 7) // go <direction>
+            {
+                GoDirection_610(currNoun);
+                return;
+            }
+            for (int X_dataLine = 0; X_dataLine <= CL_commandCount; X_dataLine++)
+            {
+                if (gameOver)
+                {
+                    return;
+                }
+                int V_verb = CA[X_dataLine, 0] / 150;
+                if (currVerb == 0 && V_verb != 0)
+                {
+                    return;
+                }
+                if (currVerb != V_verb)
+                {
+                    continue;
+                }
+                int N_noun = CA[X_dataLine, 0] % 150;
+                if (currVerb == 0)
+                {
+                    if (sysRand.Next(100) > N_noun)
+                    {
+                        continue;
+                    }
+                    F_userCommand = false;
+                }
+                else
+                {
+                    if (N_noun != currNoun && N_noun != 0)
+                    {
+                        continue;
+                    }
+                    F_userCommand = true;
+                }
+                for (int Y_index = 1; Y_index <= 5; Y_index++)
+                {
+                    int W = CA[X_dataLine, Y_index];
+                    int LL_conditionData = W / 20;
+                    int K_conditionNum = W - (LL_conditionData * 20);
+                    F1_conditionsMet = true;
+                    switch (K_conditionNum)
+                    {
+                        case 0: // nothing
+                            F1_conditionsMet = true;
+                            break;
+                        case 1: // item carried
+                            F1_conditionsMet = (IA[LL_conditionData] == -1);
+                            break;
+                        case 2: // item in room
+                            F1_conditionsMet = (IA[LL_conditionData] == R_currRoom);
+                            break;
+                        case 3: // item carried or in room
+                            F1_conditionsMet = (IA[LL_conditionData] == R_currRoom || IA[LL_conditionData] == -1);
+                            break;
+                        case 4: // room matches
+                            F1_conditionsMet = (R_currRoom == LL_conditionData);
+                            break;
+                        case 5: // item not in room
+                            F1_conditionsMet = (IA[LL_conditionData] != R_currRoom);
+                            break;
+                        case 6: // item not carried
+                            F1_conditionsMet = (IA[LL_conditionData] != -1);
+                            break;
+                        case 7: // room doesn't match
+                            F1_conditionsMet = (R_currRoom != LL_conditionData);
+                            break;
+                        case 8: // flag is true
+                            F1_conditionsMet = (SF_systemFlags[LL_conditionData]);
+                            break;
+                        case 9: // flag is false
+                            F1_conditionsMet = (!SF_systemFlags[LL_conditionData]);
+                            break;
+                        case 10: // inventory not empty
+                            F1_conditionsMet = false;
+                            for (int Z = 0; Z <= IL_itemCount; Z++)
+                            {
+                                if (IA[LL_conditionData] == -1)
+                                {
+                                    F1_conditionsMet = true;
+                                    break;
+                                }
+                            }
+                            break;
+                        case 11: // inventory is empty
+                            F1_conditionsMet = true;
+                            for (int Z = 0; Z <= IL_itemCount; Z++)
+                            {
+                                if (IA[LL_conditionData] == -1)
+                                {
+                                    F1_conditionsMet = false;
+                                    break;
+                                }
+                            }
+                            break;
+                        case 12: // item not carried and not in room
+                            F1_conditionsMet = (IA[LL_conditionData] != -1 && IA[LL_conditionData] != R_currRoom);
+                            break;
+                        case 13: // item is somewhere
+                            F1_conditionsMet = (IA[LL_conditionData] != 0);
+                            break;
+                        case 14: // item is nowhere
+                            F1_conditionsMet = (IA[LL_conditionData] == 0);
+                            break;
+                        default:
+                            Console.WriteLine($"#ERROR# Unknown condition: {K_conditionNum} {LL_conditionData}");
+                            break;
+                    }
+                    if (!F1_conditionsMet)
+                    {
+                        break;
+                    }
+                } // NEXT Y
+                if (!F1_conditionsMet)
+                {
+                    continue; // NEXT X
+                }
+                // run actions
+                int IP_dataPointer = 0;
+                for (int Y_index = 6; Y_index <= 7; Y_index++)
+                {
+                    int actionValue = CA[X_dataLine, Y_index];
+                    int AC_action1 = actionValue / 150;
+                    int AC_action2 = actionValue % 150;
+                    RunAction_590(AC_action1, X_dataLine, ref IP_dataPointer);
+                    if (gameOver)
+                    {
+                        return;
+                    }
+                    RunAction_590(AC_action2, X_dataLine, ref IP_dataPointer);
+                    if (gameOver)
+                    {
+                        return;
+                    }
+                }
+                if (currVerb != 0)
+                {
+                    break;
+                }
+            }
+        }
+
+        private static void Old_RunEngine(int currVerb, int currNoun)
         {
             // 360 F2=-1
             //     :F=-1
@@ -53,12 +202,12 @@ namespace PirateAdventure
                     {
                         continue;
                     }
-                    // 390 {IF}N<>NV(1){AND}N<>0{THEN}{NEXT}X
-                    //     :{GOTO}990
-                    if (N_noun != currNoun && N_noun != 0)
-                    {
-                        continue;
-                    }
+                }
+                // 390 {IF}N<>NV(1){AND}N<>0{THEN}{NEXT}X
+                //     :{GOTO}990
+                if (N_noun != currNoun && N_noun != 0)
+                {
+                    continue;
                 }
                 // 400 F2=-1
                 //     :F=0
