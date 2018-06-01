@@ -10,7 +10,7 @@ namespace PirateAdventure
         {
             bool F_userCommand = false;
             bool F1_conditionsMet = false;
-            bool F2_canDoCmd = true;
+            bool F2_canDoCmd = false;
             if (currVerb == 1 && currNoun < 7) // go <direction>
             {
                 GoDirection_610(currNoun);
@@ -131,6 +131,7 @@ namespace PirateAdventure
                     continue; // NEXT X
                 }
                 // run actions
+                F2_canDoCmd = true;
                 int IP_dataPointer = 0;
                 for (int Y_index = 6; Y_index <= 7; Y_index++)
                 {
@@ -153,6 +154,13 @@ namespace PirateAdventure
                     break;
                 }
             }
+            if (F2_canDoCmd)
+            {
+                return;
+            }
+            bool F_cmdNotOK = false;
+            bool F3_flag = false;
+            RunGetDropCommands(currVerb, currNoun, F3_flag, out F_cmdNotOK, out F2_canDoCmd);
         }
 
         private static void Old_RunEngine(int currVerb, int currNoun)
@@ -398,7 +406,7 @@ namespace PirateAdventure
                 return;
             }
             // 1010 {GOSUB}1060
-            RunOtherCommands(currVerb, currNoun, F3_flag, out F_cmdNotOK, out F2_canDoCmd);
+            RunGetDropCommands(currVerb, currNoun, F3_flag, out F_cmdNotOK, out F2_canDoCmd);
             // 1020 {IF}F{PRINT}"I DON'T UNDERSTAND YOUR COMMAND"
             //     :{GOTO}1040
             if (F_cmdNotOK)
@@ -417,7 +425,7 @@ namespace PirateAdventure
             return;
         }
 
-        private static void RunOtherCommands(int currVerb, int currNoun, bool F3_flag, out bool F_cmdNotOK, out bool F2_canDoCmd)
+        private static void RunGetDropCommands(int currVerb, int currNoun, bool F3_flag, out bool F_cmdNotOK, out bool F2_canDoCmd)
         {
             F_cmdNotOK = false;
             F2_canDoCmd = true;
