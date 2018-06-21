@@ -1,4 +1,4 @@
-﻿// Testing.cs - 12/01/2017
+﻿// Testing.cs - 06/21/2018
 
 using System;
 
@@ -8,26 +8,27 @@ namespace PirateAdventure
     {
         public static void TestData()
         {
-            for (int X = 0; X < CL_commandCount; X++)
+            for (int X = 0; X < _commandCount; X++)
             {
-                int verb = CA[X, 0] / 150;
-                int noun = CA[X, 0] % 150;
+                Console.WriteLine($"{X}: {_commandArray[X, 0]}");
+                int verb = _commandArray[X, 0] / 150;
+                int noun = _commandArray[X, 0] % 150;
                 if (verb == 0)
                 {
                     Console.WriteLine($"{noun}%");
                 }
                 else if (noun == 0)
                 {
-                    Console.WriteLine($"{NVS[verb, 0]}");
+                    Console.WriteLine($"{_nounVerbList[verb, 0]}");
                 }
                 else
                 {
-                    Console.WriteLine($"{NVS[verb, 0]} {NVS[noun, 1]}");
+                    Console.WriteLine($"{_nounVerbList[verb, 0]} {_nounVerbList[noun, 1]}");
                 }
                 for (int w = 1; w <= 5; w++)
                 {
-                    int ll = CA[X, w] / 20;
-                    int k = CA[X, w] % 20;
+                    int ll = _commandArray[X, w] / 20;
+                    int k = _commandArray[X, w] % 20;
                     switch (k)
                     {
                         case 0:
@@ -83,8 +84,8 @@ namespace PirateAdventure
                 int IP = 0;
                 for (int y = 6; y <= 7; y++)
                 {
-                    int y1 = CA[X, y] / 150;
-                    int y2 = CA[X, y] % 150;
+                    int y1 = _commandArray[X, y] / 150;
+                    int y2 = _commandArray[X, y] % 150;
                     TestDoAction(y1, X, ref IP);
                     TestDoAction(y2, X, ref IP);
                 }
@@ -101,12 +102,12 @@ namespace PirateAdventure
             }
             if (value > 101)
             {
-                Console.WriteLine($"    > {MSS_messages[value - 50]}");
+                Console.WriteLine($"    > {_messages[value - 50]}");
                 return;
             }
             if (value < 52)
             {
-                Console.WriteLine($"    > {MSS_messages[value]}");
+                Console.WriteLine($"    > {_messages[value]}");
                 return;
             }
             int P = 0;
@@ -201,7 +202,7 @@ namespace PirateAdventure
             do
             {
                 IP++;
-                W = CA[X, IP];
+                W = _commandArray[X, IP];
                 P = W / 20;
                 M = W % 20;
             } while (M != 0);
@@ -210,7 +211,7 @@ namespace PirateAdventure
 
         public static string ItemDesc(int value)
         {
-            string result = IAS_itemDescriptions[value];
+            string result = _itemDescriptions[value];
             if (result.EndsWith("/"))
             {
                 result = result.Substring(0, result.IndexOf("/"));
@@ -220,7 +221,7 @@ namespace PirateAdventure
 
         public static string RoomDesc(int value)
         {
-            string result = RSS[value];
+            string result = _roomLongDesc[value];
             if (result.EndsWith("/"))
             {
                 result = result.Substring(result.IndexOf("/") + 1);

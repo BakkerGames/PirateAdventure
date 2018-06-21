@@ -1,25 +1,27 @@
-﻿// Data.cs - 05/21/2018
+﻿// Program.Data.cs - 06/21/2018
 
 namespace PirateAdventure
 {
     partial class Program
     {
-        private const int IL_itemCount = 60;
-        private const int CL_commandCount = 151;
-        private const int NL_wordCount = 59;
-        private const int RL_roomCount = 33;
-        private const int MX_maxCarry = 5;
-        private const int AR_startRoom = 1;
-        private const int TT_TotalTreasures = 2;
-        private const int LN_wordSize = 3;
-        private const int LT_lightTotal = 200;
-        private const int ML_messageCount = 71;
-        private const int TR_treasureRoom = 1;
-        private const int FC_flagCount = 16;
+        private const int _itemCount = 61;
+        private const int _commandCount = 152;
+        private const int _commandValueCount = 8;
+        private const int _wordCount = 60;
+        private const int _roomCount = 34;
+        private const int _exitDirections = 6;
+        private const int _maxCarry = 5;
+        private const int _startRoom = 1;
+        private const int _totalTreasures = 2;
+        private const int _wordSize = 3;
+        private const int _lightTotal = 200;
+        private const int _messageCount = 72;
+        private const int _treasureRoom = 1;
+        private const int _flagCount = 16;
 
-        private static bool[] SF_systemFlags = new bool[FC_flagCount + 1]; // DIM SF(15)
+        private static bool[] _systemFlags = new bool[_flagCount + 1];
 
-        private static int[,] CA = new int[CL_commandCount + 1, 8] // [CL,7]
+        private static int[,] _commandArray = new int[_commandCount, _commandValueCount]
             {
                 // random events
                 { 80, 422, 342, 420, 340, 0, 16559, 8850 },
@@ -177,7 +179,7 @@ namespace PirateAdventure
                 { 6300, 0, 0, 0, 0, 0, 450, 0 }
             };
 
-        private static string[,] NVS = new string[NL_wordCount + 1, 2] // NV$(NL,1)
+        private static string[,] _nounVerbList = new string[_wordCount, 2]
             {
                 { "AUT", "ANY" },    // 0
                 { "GO", "NORTH" },   // 1
@@ -241,7 +243,7 @@ namespace PirateAdventure
                 { "", "SNE" },       // 59
             };
 
-        private static int[,] RM = new int[RL_roomCount + 1, 6] // RM(RL,5)
+        private static int[,] _roomExitArray = new int[_roomCount, _exitDirections]
             {
                 { 0, 0, 0, 0, 0, 0 },  // 
                 { 0, 0, 0, 0, 0, 0 },  // APARTMENT IN LONDON
@@ -279,7 +281,7 @@ namespace PirateAdventure
                 { 0, 0, 0, 0, 0, 0 },  // *WELCOME TO NEVER NEVER LAND
             };
 
-        private static string[] RSS = new string[RL_roomCount + 1] // RS$(RL)
+        private static string[] _roomLongDesc = new string[_roomCount]
             {
                 "",
                 "APARTMENT IN LONDON/APARTMENT/",
@@ -317,7 +319,7 @@ namespace PirateAdventure
                 "*WELCOME TO NEVER NEVER LAND/NEVER NEVER LAND/"
             };
 
-        private static string[] MSS_messages = new string[ML_messageCount + 1] // MS$(ML)
+        private static string[] _messages = new string[_messageCount]
             {
                 "",
                 "THERE'S A STRANGE SOUND",
@@ -393,7 +395,7 @@ namespace PirateAdventure
                 "PIRATE FOLLOWS YOU ASHORE AS IF HE IS WAITING FOR SOMETHING."
             };
 
-        private static string[] IAS_itemDescriptions = new string[IL_itemCount + 1] // IA$(IL)
+        private static string[] _itemDescriptions = new string[_itemCount]
             {
                 "FLIGHT OF STAIRS",
                 "OPEN WINDOW",
@@ -458,9 +460,9 @@ namespace PirateAdventure
                 "",
             };
 
-        private static int[] IA = new int[IL_itemCount + 1]; // IA(IL)
+        private static int[] _itemLocation = new int[_itemCount];
 
-        private static int[] I2 = new int[IL_itemCount + 1] // I2(IL)
+        private static int[] _itemStartLocation = new int[_itemCount]
             {
                 1,  // 00 FLIGHT OF STAIRS
                 2,  // 01 OPEN WINDOW
@@ -524,5 +526,22 @@ namespace PirateAdventure
                 0,  // 59
                 0,  // 60
             };
+
+        private static string _introMessage =
+            "*** WELCOME TO PIRATE ADVENTURE ***\r\n" +
+            "\r\n" +
+            "UNLESS TOLD DIFFERENTLY YOU MUST FIND *TREASURES* AND RETURN THEM TO THEIR PROPER PLACE!\r\n" +
+            "\r\n" +
+            "ENTER ENGLISH COMMANDS THAT CONSIST OF A NOUN AND VERB. SOME EXAMPLES...\r\n" +
+            "\r\n" +
+            "TO FIND OUT WHAT YOU'RE CARRYING YOU MIGHT SAY: TAKE INVENTORY\r\n" +
+            "TO GO INTO A HOLE YOU MIGHT SAY: GO HOLE\r\n" +
+            "TO SAVE CURRENT GAME: SAVE GAME\r\n" +
+            "\r\n" +
+            "YOU WILL AT TIMES NEED SPECIAL ITEMS TO DO THINGS, BUT I'M SURE YOU'LL BE A GOOD ADVENTURER\r\n" +
+            "AND FIGURE THESE THINGS OUT.\r\n" +
+            "\r\n" +
+            "HAPPY ADVENTURING... PRESS ENTER TO START";
+
     }
 }

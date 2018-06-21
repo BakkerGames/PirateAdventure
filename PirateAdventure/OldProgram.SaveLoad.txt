@@ -2,7 +2,7 @@
 
 namespace PirateAdventure
 {
-    partial class Program
+    partial class OldProgram
     {
         public static void Save()
         {

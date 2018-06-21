@@ -4,7 +4,7 @@ using System;
 
 namespace PirateAdventure
 {
-    partial class Program
+    partial class OldProgram
     {
         private static void RunEngine(int currVerb, int currNoun)
         {
@@ -877,25 +877,31 @@ namespace PirateAdventure
             //     :{ELSE}{PRINT}"I CAN'T GO IN THAT DIRECTION"
             //     :{GOTO}1040
             int K_toRoom = RM[R_currRoom, noun - 1];
-            if (K_toRoom < 1 && L_isDark)
+            if (K_toRoom < 1)
             {
-                Console.WriteLine("I FELL DOWN AND BROKE MY NECK.");
-                K_toRoom = RL_roomCount;
-                DF_darkFlag = false;
-            }
-            else
-            {
-                Console.WriteLine("I CAN'T GO IN THAT DIRECTION");
-                return;
+                if (L_isDark)
+                {
+                    Console.WriteLine("I FELL DOWN AND BROKE MY NECK.");
+                    K_toRoom = RL_roomCount;
+                    DF_darkFlag = false;
+                }
+                else
+                {
+                    Console.WriteLine("I CAN'T GO IN THAT DIRECTION");
+                    return;
+                }
             }
 
             // 640 {IF}{NOT}L{CLS}
+            if (!L_isDark)
+            {
+                Console.Clear();
+            }
             // 650 R=K
             //     :{GOSUB}240
             //     :{GOTO}1040
-            Console.WriteLine();
             R_currRoom = K_toRoom;
-            Look();
+            //Look();
         }
 
         private static void GameIsOver()
