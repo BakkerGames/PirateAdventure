@@ -86,10 +86,10 @@
 --     :{IF}K{IF}IA(Z)=R{PRINT}". VISIBLE ITEMS HERE:"
 --     :K=0
 -- 270 {GOTO}300
--- 280 TP$=IA$(Z)
---     :{IF}{RIGHT$}(TP$,1)="/"{FOR}W={LEN}(TP$)-1{TO}1{STEP}-1
---     :{IF}{MID$}(TP$,W,1)="/"{THEN}TP$={LEFT$}(TP$,W-1){ELSE}{NEXT}W
--- 290 {RETURN}
+// 280 TP$=IA$(Z)
+//     :{IF}{RIGHT$}(TP$,1)="/"{FOR}W={LEN}(TP$)-1{TO}1{STEP}-1
+//     :{IF}{MID$}(TP$,W,1)="/"{THEN}TP$={LEFT$}(TP$,W-1){ELSE}{NEXT}W
+// 290 {RETURN}
 -- 300 {IF}IA(Z)<>R{THEN}320{ELSE}{GOSUB}280
 --     :{IF}POS(0)+{LEN}(TP$)+3>63{THEN}{PRINT}
 -- 310 {PRINT}TP$;".  ";
@@ -262,16 +262,16 @@
 //     :{PRINT}"ON A SCALE OF 0 TO 100 THAT RATES A";{CINT}(L/TT*100)
 //     :{IF}L=TT{THEN}{PRINT}"WELL DONE."
 //     :{GOTO}850{ELSE}960
--- 890 {PRINT}"I'M CARRYING:"
---     :K$="NOTHING"
---     :{FOR}Z=0{TO}IL
---     :{IF}IA(Z)<>-1{THEN}910{ELSE}{GOSUB}280
---     :{IF}{LEN}(TP$)+POS(0)>63{PRINT}
--- 900 {PRINT}TP$;".",;
---     :K$=""
--- 910 {NEXT}
---     :{PRINT}K$
---     :{GOTO}960
+// 890 {PRINT}"I'M CARRYING:"
+//     :K$="NOTHING"
+//     :{FOR}Z=0{TO}IL
+//     :{IF}IA(Z)<>-1{THEN}910{ELSE}{GOSUB}280
+//     :{IF}{LEN}(TP$)+POS(0)>63{PRINT}
+// 900 {PRINT}TP$;".",;
+//     :K$=""
+// 910 {NEXT}
+//     :{PRINT}K$
+//     :{GOTO}960
 // 920 P=0
 //     :{GOTO}800
 // 930 P=0

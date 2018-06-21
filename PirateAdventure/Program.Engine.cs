@@ -1,4 +1,4 @@
-﻿// Program.Engine.cs - 05/31/2018
+﻿// Program.Engine.cs - 06/20/2018
 
 using System;
 
@@ -740,7 +740,40 @@ namespace PirateAdventure
                     break;
                 case 15:
                     // show inventory //15=890
-                    Console.WriteLine("    : show inventory");
+                    // 890 {PRINT}"I'M CARRYING:"
+                    //     :K$="NOTHING"
+                    //     :{FOR}Z=0{TO}IL
+                    //     :{IF}IA(Z)<>-1{THEN}910{ELSE}{GOSUB}280
+                    //     :{IF}{LEN}(TP$)+POS(0)>63{PRINT}
+                    // 900 {PRINT}TP$;".",;
+                    //     :K$=""
+                    // 910 {NEXT}
+                    //     :{PRINT}K$
+                    //     :{GOTO}960
+                    // 280 TP$=IA$(Z)
+                    //     :{IF}{RIGHT$}(TP$,1)="/"{FOR}W={LEN}(TP$)-1{TO}1{STEP}-1
+                    //     :{IF}{MID$}(TP$,W,1)="/"{THEN}TP$={LEFT$}(TP$,W-1){ELSE}{NEXT}W
+                    // 290 {RETURN}
+                    Console.WriteLine("I'M CARRYING:");
+                    bool foundItems = false;
+                    for (int Z = 0; Z < IL_itemCount; Z++)
+                    {
+                        if (IA[Z] != -1)
+                        {
+                            continue;
+                        }
+                        foundItems = true;
+                        string tempItemName = IAS_itemDescriptions[Z];
+                        if (tempItemName.EndsWith("/"))
+                        {
+                            tempItemName = tempItemName.Substring(0, tempItemName.LastIndexOf("/", tempItemName.Length - 2));
+                        }
+                        Console.WriteLine(tempItemName);
+                    }
+                    if (!foundItems)
+                    {
+                        Console.WriteLine("NOTHING");
+                    }
                     break;
                 case 16:
                     // flag 0 true //16=920
