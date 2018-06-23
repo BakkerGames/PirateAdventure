@@ -1,28 +1,33 @@
-﻿// Program.cs - 06/21/2018
+﻿// Program.cs - 06/22/2018
 
 using System;
 
 namespace PirateAdventure
 {
-    partial class Program
+    public partial class Program
     {
         static void Main(string[] args)
         {
-            TestData();
-            return;
+            if (args.Length > 0)
+            {
+                if (args[0].Equals("/test", StringComparison.OrdinalIgnoreCase))
+                {
+                    TestData();
+                    return;
+                }
+            }
             try
             {
                 RunGame();
+                Console.WriteLine();
+                Console.WriteLine(_numberOfMovesMessage());
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
             Console.WriteLine();
-            string s = (numMoves == 1) ? "" : "S";
-            Console.WriteLine($"YOU FINISHED IN {numMoves} MOVE{s}.");
-            Console.WriteLine();
-            Console.Write("THANKS FOR PLAYING!!! PRESS ENTER...");
+            Console.Write(_endingMessage);
             Console.ReadLine();
         }
 
@@ -32,77 +37,137 @@ namespace PirateAdventure
             ShowIntroduction();
             while (!gameOver)
             {
-                GetCommand();
+                if (needToLook)
+                {
+                    Look();
+                    needToLook = false;
+                }
+                do
+                {
+                    GetCommand();
+                }
+                while (string.IsNullOrWhiteSpace(currCommandLine));
                 if (!ParseCommand())
                 {
-                    Console.WriteLine("I DON'T UNDERSTAND THAT!");
+                    Console.WriteLine(_cannotParseMessage);
                     continue;
                 }
-                RunCommand();
+                if (!RunCommand())
+                {
+                    Console.WriteLine(_cannotDoMessage);
+                    continue;
+                }
+                if (!countsAsMove)
+                {
+                    continue;
+                }
                 numMoves++;
-                if (!gameOver)
+                if (gameOver)
                 {
-                    RunBackground();
+                    break;
                 }
+                RunBackground();
             }
-        }
-
-        private static void GetCommand()
-        {
-            Console.WriteLine();
-            Console.Write("ENTER COMMAND> ");
-            currCommandLine = Console.ReadLine().Trim().ToUpper();
-        }
-
-        private static bool ParseCommand()
-        {
-            if (string.IsNullOrWhiteSpace(currCommandLine))
-            {
-                return false;
-            }
-            if (currCommandLine.Contains(" "))
-            {
-                int pos = currCommandLine.IndexOf(" ");
-                currVerb = currCommandLine.Substring(0, pos).Trim();
-                currNoun = currCommandLine.Substring(pos).Trim();
-                if (currNoun.Contains(" "))
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                currVerb = currCommandLine;
-                currNoun = "";
-            }
-            return true;
-        }
-
-        private static void RunCommand()
-        {
-            Console.WriteLine($"### Running command {currVerb} {currNoun}"); // todo
-            if (currVerb == "QUIT")
-            {
-                gameOver = true;
-                return;
-            }
-        }
-
-        private static void RunBackground()
-        {
-            //throw new NotImplementedException();
-        }
-
-        private static void Initialize()
-        {
-            gameOver = false;
-            numMoves = 0;
         }
 
         private static void ShowIntroduction()
         {
             Console.Write(_introMessage);
             Console.ReadLine();
+        }
+
+        private static void GetCommand()
+        {
+            Console.WriteLine();
+            Console.Write(_enterCommand);
+            currCommandLine = Console.ReadLine().Trim().ToUpper();
+        }
+
+        private static bool RunCommand()
+        {
+            countsAsMove = true;
+#if DEBUG
+            Console.WriteLine($"### Running command {currVerb} {currNoun} {currVerbNumber} {currNounNumber} {_verbNounList[currVerbNumber, 0]} {_verbNounList[currNounNumber, 1]}"); // todo
+            Console.WriteLine();
+            // todo ### handle quit in code, not here
+            if (currVerb == "QUI")
+            {
+                gameOver = true;
+                return true;
+            }
+#endif
+            bool foundMatch = false;
+            for (int i = 0; i < _commandCount; i++)
+            {
+                int verbPart = _commandArray[i, 0] / 150;
+                int nounPart = _commandArray[i, 0] % 150;
+                if (currVerbNumber == verbPart && currNounNumber == nounPart)
+                {
+                    foundMatch = true;
+#if DEBUG
+                    Console.WriteLine($"### matches command {i}"); // todo
+#endif
+                }
+            }
+            if (!foundMatch)
+            {
+                if (currVerbNumber == 1) // go
+                {
+                    if (currNounNumber >= 1 && currNounNumber <= _exitDirections)
+                    {
+                        if (_roomExitArray[currRoomNumber, currNounNumber] == 0)
+                        {
+                            // todo ### check for darkness
+                            Console.WriteLine(_cannotGoThatWayMessage);
+                            foundMatch = true;
+                        }
+                        else
+                        {
+                            currNounNumber = _roomExitArray[currRoomNumber, currNounNumber];
+                            foundMatch = true;
+                            needToLook = true;
+                        }
+                    }
+                }
+                else if (currVerbNumber == 10) // take
+                {
+                    Console.WriteLine("### take ###");
+                    foundMatch = true;
+                }
+                else if (currVerbNumber == 18) // drop
+                {
+                    Console.WriteLine("### drop ###");
+                    foundMatch = true;
+                }
+            }
+#if DEBUG
+            if (foundMatch) { Console.WriteLine(); }
+#endif
+            return foundMatch;
+        }
+
+        private static void RunBackground()
+        {
+            for (int i = 0; i < _commandCount; i++)
+            {
+                int verbPart = _commandArray[i, 0] / 150;
+                if (verbPart != 0)
+                {
+                    continue;
+                }
+                int nounPart = _commandArray[i, 0] % 150;
+                int randomPercent = sysRand.Next(100);
+                if (randomPercent >= nounPart)
+                {
+#if DEBUG
+                    Console.WriteLine($"### skip command   {i} {nounPart} {randomPercent}"); // todo
+#endif
+                    continue;
+                }
+#if DEBUG
+                Console.WriteLine($"### random command {i} {nounPart} {randomPercent}"); // todo
+#endif
+            }
         }
     }
 }

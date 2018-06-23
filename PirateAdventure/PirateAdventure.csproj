@@ -46,10 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Program.Commands.cs" />
     <Compile Include="Program.Data.cs" />
     <Content Include="OldProgram.Engine.txt" />
     <Content Include="OldProgram.txt" />
     <Compile Include="Program.cs" />
+    <Compile Include="Program.Parse.cs" />
     <Compile Include="Program.Variables.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="OldProgram.SaveLoad.txt" />
@@ -60,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Commands.txt" />
+    <Content Include="Resources\Commands2.txt" />
     <Content Include="Resources\PIRATE.TXT" />
     <Content Include="Resources\PIRATE_RAW.TXT" />
     <Content Include="Resources\PIRATE_TOKEN.TXT" />

@@ -19,11 +19,11 @@ namespace PirateAdventure
                 }
                 else if (noun == 0)
                 {
-                    Console.WriteLine($"{_nounVerbList[verb, 0]}");
+                    Console.WriteLine($"{_verbNounList[verb, 0]}");
                 }
                 else
                 {
-                    Console.WriteLine($"{_nounVerbList[verb, 0]} {_nounVerbList[noun, 1]}");
+                    Console.WriteLine($"{_verbNounList[verb, 0]} {_verbNounList[noun, 1]}");
                 }
                 for (int w = 1; w <= 5; w++)
                 {
