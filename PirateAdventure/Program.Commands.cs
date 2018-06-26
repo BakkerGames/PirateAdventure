@@ -1,4 +1,4 @@
-﻿// Program.Commands.cs - 06/22/2018
+﻿// Program.Commands.cs - 06/25/2018
 
 using System;
 
@@ -38,6 +38,7 @@ namespace PirateAdventure
                 {
                     if (!anyExits)
                     {
+                        Console.WriteLine();
                         Console.Write("OBVIOUS EXITS: ");
                         anyExits = true;
                     }
@@ -53,10 +54,20 @@ namespace PirateAdventure
                 {
                     if (!anythingInRoom)
                     {
+                        Console.WriteLine();
                         Console.WriteLine("YOU SEE:");
                         anythingInRoom = true;
                     }
-                    Console.WriteLine(_itemDescriptions[i]);
+                    Console.Write("   ");
+                    string tempDesc = _itemDescriptions[i];
+                    if (tempDesc.EndsWith("/"))
+                    {
+                        Console.WriteLine(tempDesc.Substring(0, tempDesc.IndexOf("/")));
+                    }
+                    else
+                    {
+                        Console.WriteLine(tempDesc);
+                    }
                 }
             }
             // done
@@ -71,8 +82,19 @@ namespace PirateAdventure
             {
                 if (_itemLocation[i] == -1)
                 {
-                    Console.WriteLine(_itemDescriptions[i]);
-                    haveAnything = true;
+                    if (!haveAnything)
+                    {
+                        Console.WriteLine("I'M CARRYING:");
+                        haveAnything = true;
+                    }
+                    if (_itemDescriptions[i].EndsWith("/"))
+                    {
+                        Console.WriteLine(_itemDescriptions[i].Substring(0, _itemDescriptions[i].IndexOf("/")));
+                    }
+                    else
+                    {
+                        Console.WriteLine(_itemDescriptions[i]);
+                    }
                 }
             }
             if (!haveAnything)

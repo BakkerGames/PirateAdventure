@@ -1,4 +1,4 @@
-﻿// Program.Variables.cs - 06/22/2018
+﻿// Program.Variables.cs - 06/25/2018
 
 using System;
 
@@ -17,6 +17,7 @@ namespace PirateAdventure
         private static int currRoomNumber = 1;
         private static bool needToLook = true;
         private static bool countsAsMove = false;
+        private static bool darkFlag = false;
 
         private static void Initialize()
         {
@@ -30,6 +31,7 @@ namespace PirateAdventure
             currRoomNumber = 1;
             needToLook = true;
             countsAsMove = false;
+            darkFlag = false;
             for (int i = 0; i < _itemCount; i++)
             {
                 _itemLocation[i] = _itemStartLocation[i];

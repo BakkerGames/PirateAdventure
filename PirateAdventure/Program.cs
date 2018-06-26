@@ -1,4 +1,4 @@
-﻿// Program.cs - 06/22/2018
+﻿// Program.cs - 06/25/2018
 
 using System;
 
@@ -19,7 +19,6 @@ namespace PirateAdventure
             try
             {
                 RunGame();
-                Console.WriteLine();
                 Console.WriteLine(_numberOfMovesMessage());
             }
             catch (Exception ex)
@@ -74,6 +73,7 @@ namespace PirateAdventure
         {
             Console.Write(_introMessage);
             Console.ReadLine();
+            Console.WriteLine();
         }
 
         private static void GetCommand()
@@ -97,16 +97,21 @@ namespace PirateAdventure
             }
 #endif
             bool foundMatch = false;
-            for (int i = 0; i < _commandCount; i++)
+            for (int commandNum = 0; commandNum < _commandCount; commandNum++)
             {
-                int verbPart = _commandArray[i, 0] / 150;
-                int nounPart = _commandArray[i, 0] % 150;
+                int verbPart = _commandArray[commandNum, 0] / 150;
+                int nounPart = _commandArray[commandNum, 0] % 150;
                 if (currVerbNumber == verbPart && currNounNumber == nounPart)
                 {
                     foundMatch = true;
 #if DEBUG
-                    Console.WriteLine($"### matches command {i}"); // todo
+                    Console.WriteLine($"### matches command {commandNum}"); // todo
 #endif
+                    if (!CheckConditions(commandNum))
+                    {
+                        continue;
+                    }
+                    RunActions(commandNum);
                 }
             }
             if (!foundMatch)
@@ -148,25 +153,30 @@ namespace PirateAdventure
 
         private static void RunBackground()
         {
-            for (int i = 0; i < _commandCount; i++)
+            for (int commandNum = 0; commandNum < _commandCount; commandNum++)
             {
-                int verbPart = _commandArray[i, 0] / 150;
+                int verbPart = _commandArray[commandNum, 0] / 150;
                 if (verbPart != 0)
                 {
                     continue;
                 }
-                int nounPart = _commandArray[i, 0] % 150;
+                int nounPart = _commandArray[commandNum, 0] % 150;
                 int randomPercent = sysRand.Next(100);
                 if (randomPercent >= nounPart)
                 {
 #if DEBUG
-                    Console.WriteLine($"### skip command   {i} {nounPart} {randomPercent}"); // todo
+                    Console.WriteLine($"### skip command   {commandNum} {nounPart} {randomPercent}"); // todo
 #endif
                     continue;
                 }
 #if DEBUG
-                Console.WriteLine($"### random command {i} {nounPart} {randomPercent}"); // todo
+                Console.WriteLine($"### random command {commandNum} {nounPart} {randomPercent}"); // todo
 #endif
+                if (!CheckConditions(commandNum))
+                {
+                    continue;
+                }
+                RunActions(commandNum);
             }
         }
     }

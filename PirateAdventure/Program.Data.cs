@@ -548,6 +548,7 @@ namespace PirateAdventure
         private static string _cannotParseMessage = "I DON'T UNDERSTAND THAT!";
         private static string _cannotDoMessage = "I CAN'T DO THAT!";
         private static string _cannotGoThatWayMessage = "I CAN'T GO THAT WAY";
+        private static string _inventoryFullMsg = "I'VE TOO MUCH TOO CARRY. TRY -TAKE INVENTORY-"'
 
         private static string _numberOfMovesMessage()
         {

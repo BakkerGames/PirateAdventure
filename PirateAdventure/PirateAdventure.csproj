@@ -51,6 +51,7 @@
     <Content Include="OldProgram.Engine.txt" />
     <Content Include="OldProgram.txt" />
     <Compile Include="Program.cs" />
+    <Compile Include="Program.Engine.cs" />
     <Compile Include="Program.Parse.cs" />
     <Compile Include="Program.Variables.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
