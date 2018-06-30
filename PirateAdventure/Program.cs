@@ -1,4 +1,4 @@
-﻿// Program.cs - 06/25/2018
+﻿// Program.cs - 06/30/2018
 
 using System;
 
@@ -14,6 +14,10 @@ namespace PirateAdventure
                 {
                     TestData();
                     return;
+                }
+                if (args[0].Equals("/debug", StringComparison.OrdinalIgnoreCase))
+                {
+                    debugFullMessages = true;
                 }
             }
             try
@@ -36,6 +40,11 @@ namespace PirateAdventure
             ShowIntroduction();
             while (!gameOver)
             {
+                RunBackground();
+                if (gameOver)
+                {
+                    break;
+                }
                 if (needToLook)
                 {
                     Look();
@@ -46,6 +55,7 @@ namespace PirateAdventure
                     GetCommand();
                 }
                 while (string.IsNullOrWhiteSpace(currCommandLine));
+                Console.WriteLine(); // blank line after entering
                 if (!ParseCommand())
                 {
                     Console.WriteLine(_cannotParseMessage);
@@ -61,11 +71,10 @@ namespace PirateAdventure
                     continue;
                 }
                 numMoves++;
-                if (gameOver)
+                if (darkFlag)
                 {
-                    break;
+                    lightRemaining--;
                 }
-                RunBackground();
             }
         }
 
@@ -87,8 +96,11 @@ namespace PirateAdventure
         {
             countsAsMove = true;
 #if DEBUG
-            Console.WriteLine($"### Running command {currVerb} {currNoun} {currVerbNumber} {currNounNumber} {_verbNounList[currVerbNumber, 0]} {_verbNounList[currNounNumber, 1]}"); // todo
-            Console.WriteLine();
+            if (debugFullMessages)
+            {
+                Console.WriteLine($"### Running command {currVerb} {currNoun} {currVerbNumber} {currNounNumber} {_verbNounList[currVerbNumber, 0]} {_verbNounList[currNounNumber, 1]}"); // todo
+                Console.WriteLine();
+            }
             // todo ### handle quit in code, not here
             if (currVerb == "QUI")
             {
@@ -105,13 +117,17 @@ namespace PirateAdventure
                 {
                     foundMatch = true;
 #if DEBUG
-                    Console.WriteLine($"### matches command {commandNum}"); // todo
+                    if (debugFullMessages)
+                    {
+                        Console.WriteLine($"### matches command {commandNum}"); // todo
+                    }
 #endif
                     if (!CheckConditions(commandNum))
                     {
                         continue;
                     }
                     RunActions(commandNum);
+                    break; // only run one command
                 }
             }
             if (!foundMatch)
@@ -120,7 +136,7 @@ namespace PirateAdventure
                 {
                     if (currNounNumber >= 1 && currNounNumber <= _exitDirections)
                     {
-                        if (_roomExitArray[currRoomNumber, currNounNumber] == 0)
+                        if (_roomExitArray[currRoomNumber, currNounNumber - 1] == 0)
                         {
                             // todo ### check for darkness
                             Console.WriteLine(_cannotGoThatWayMessage);
@@ -128,7 +144,7 @@ namespace PirateAdventure
                         }
                         else
                         {
-                            currNounNumber = _roomExitArray[currRoomNumber, currNounNumber];
+                            currRoomNumber = _roomExitArray[currRoomNumber, currNounNumber - 1];
                             foundMatch = true;
                             needToLook = true;
                         }
@@ -136,18 +152,62 @@ namespace PirateAdventure
                 }
                 else if (currVerbNumber == 10) // take
                 {
-                    Console.WriteLine("### take ###");
+                    int inventoryCount = 0;
+                    int foundItem = -1;
+                    for (int itemNum = 0; itemNum < _itemCount; itemNum++)
+                    {
+                        if (_itemLocation[itemNum] == -1)
+                        {
+                            inventoryCount++;
+                        }
+                        else if (_itemLocation[itemNum] == currRoomNumber)
+                        {
+                            if (_itemDescriptions[itemNum].EndsWith($"/{_verbNounList[currNounNumber, 1]}/"))
+                            {
+                                foundItem = itemNum;
+                            }
+                        }
+                    }
+                    if (foundItem < 0)
+                    {
+                        Console.WriteLine("I DON'T SEE IT HERE");
+                    }
+                    else if (inventoryCount >= _maxCarry) // inventory full
+                    {
+                        Console.WriteLine(_inventoryFullMsg);
+                    }
+                    else
+                    {
+                        _itemLocation[foundItem] = -1; // put in inventory
+                        Console.WriteLine("TAKEN");
+                    }
                     foundMatch = true;
                 }
                 else if (currVerbNumber == 18) // drop
                 {
-                    Console.WriteLine("### drop ###");
+                    int foundItem = -1;
+                    for (int itemNum = 0; itemNum < _itemCount; itemNum++)
+                    {
+                        if (_itemLocation[itemNum] == -1)
+                        {
+                            if (_itemDescriptions[itemNum].EndsWith($"/{_verbNounList[currNounNumber, 1]}/"))
+                            {
+                                foundItem = itemNum;
+                            }
+                        }
+                    }
+                    if (foundItem < 0)
+                    {
+                        Console.WriteLine("YOU AREN'T CARRYING THAT");
+                    }
+                    else
+                    {
+                        _itemLocation[foundItem] = currRoomNumber; // put in current room
+                        Console.WriteLine("DROPPED");
+                    }
                     foundMatch = true;
                 }
             }
-#if DEBUG
-            if (foundMatch) { Console.WriteLine(); }
-#endif
             return foundMatch;
         }
 
@@ -165,12 +225,18 @@ namespace PirateAdventure
                 if (randomPercent >= nounPart)
                 {
 #if DEBUG
-                    Console.WriteLine($"### skip command   {commandNum} {nounPart} {randomPercent}"); // todo
+                    if (debugFullMessages)
+                    {
+                        Console.WriteLine($"### skip command   {commandNum} {nounPart} {randomPercent}"); // todo
+                    }
 #endif
                     continue;
                 }
 #if DEBUG
-                Console.WriteLine($"### random command {commandNum} {nounPart} {randomPercent}"); // todo
+                if (debugFullMessages)
+                {
+                    Console.WriteLine($"### random command {commandNum} {nounPart} {randomPercent}"); // todo
+                }
 #endif
                 if (!CheckConditions(commandNum))
                 {

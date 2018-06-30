@@ -18,6 +18,8 @@ namespace PirateAdventure
         private static bool needToLook = true;
         private static bool countsAsMove = false;
         private static bool darkFlag = false;
+        private static int lightRemaining = _lightTotal;
+        private static bool debugFullMessages = false;
 
         private static void Initialize()
         {
@@ -32,6 +34,7 @@ namespace PirateAdventure
             needToLook = true;
             countsAsMove = false;
             darkFlag = false;
+            lightRemaining = _lightTotal;
             for (int i = 0; i < _itemCount; i++)
             {
                 _itemLocation[i] = _itemStartLocation[i];

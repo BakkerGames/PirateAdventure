@@ -1,4 +1,4 @@
-﻿// Testing.cs - 06/21/2018
+﻿// Testing.cs - 06/30/2018
 
 using System;
 
@@ -130,7 +130,6 @@ namespace PirateAdventure
                     Console.WriteLine($"    : teleport to {RoomDesc(P)}");
                     break;
                 case 4: // item to nowhere
-                case 8: // item to nowhere
                     P = TestGetDataValue(X, ref IP);
                     Console.WriteLine($"    : send {ItemDesc(P)} to nowhere");
                     break;
@@ -143,6 +142,10 @@ namespace PirateAdventure
                 case 7: // turn on flag
                     P = TestGetDataValue(X, ref IP);
                     Console.WriteLine($"    : set flag {P} true");
+                    break;
+                case 8: // item to nowhere
+                    P = TestGetDataValue(X, ref IP);
+                    Console.WriteLine($"    : send {ItemDesc(P)} to nowhere");
                     break;
                 case 9: // turn off flag
                     P = TestGetDataValue(X, ref IP);
@@ -175,7 +178,7 @@ namespace PirateAdventure
                     Console.WriteLine("    : set flag 0 false");
                     break;
                 case 18: // torch recharged
-                    Console.WriteLine("    : torch is recharged and sent nowhere");
+                    Console.WriteLine("    : torch is recharged and put in inventory");
                     break;
                 case 19: // clear screen
                     Console.WriteLine("    : clear screen");

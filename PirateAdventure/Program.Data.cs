@@ -1,4 +1,4 @@
-﻿// Program.Data.cs - 06/22/2018
+﻿// Program.Data.cs - 06/30/2018
 
 namespace PirateAdventure
 {
@@ -161,7 +161,8 @@ namespace PirateAdventure
                 { 1532, 302, 208, 300, 0, 0, 7800, 0 },           // 133
                 { 1532, 302, 209, 0, 0, 0, 2813, 0 },             // 134
                 { 1532, 305, 0, 0, 0, 0, 10518, 7564 },           // 135
-                { 8411, 841, 840, 140, 0, 0, 8922, 0 },           // 136
+                // { 8411, 841, 840, 140, 0, 0, 8922, 0 },        // 136 - Wrong!
+                { 8411, 841, 840, 140, 0, 0, 8902, 4950 },        // 136 - Corrected
                 { 165, 1122, 500, 0, 0, 0, 8170, 9600 },          // 137
                 { 1392, 0, 0, 0, 0, 0, 6000, 0 },                 // 138
                 { 6300, 284, 0, 0, 0, 0, 16350, 0 },              // 139
@@ -277,7 +278,7 @@ namespace PirateAdventure
                 { 0, 0, 0, 0, 0, 0 },  // 
                 { 0, 0, 0, 0, 0, 0 },  // 
                 { 0, 0, 0, 0, 0, 0 },  // 
-                { 0, 0, 0, 0, 0, 0 },  // .
+                { 0, 0, 0, 0, 0, 0 },  //
                 { 0, 0, 0, 0, 0, 0 },  // *WELCOME TO NEVER NEVER LAND
             };
 
@@ -397,67 +398,67 @@ namespace PirateAdventure
 
         private static string[] _itemDescriptions = new string[_itemCount]
             {
-                "FLIGHT OF STAIRS",
-                "OPEN WINDOW",
-                "BOOKS IN A BOOKCASE",
-                "LARGE LEATHER BOUND BOOK/BOO/",
-                "BOOKCASE WITH A SECRET PASSAGE BEHIND IT",
-                "PIRATE'S DUFFLE BAG/BAG/",
-                "SIGN ON WALL -RETURN TREASURES HERE. SAY SCORE- SIGN BY STAIRS -ANTONYM OF LIGHT IS UNLIGHT-",
-                "EMPTY BOTTLE/BOT/",
-                "UNLIT TORCH/TOR/",
-                "LIT TORCH/TOR/",
-                "MATCHES/MAT/",
-                "SMALL SHIP'S KEEL AND MAST",
-                "WICKED LOOKING PIRATE",
-                "TREASURE CHEST/CHE/",
-                "MONGOOSE/MON/",
-                "RUSTY ANCHOR/ANC/",
-                "GRASS SHACK",
-                "MEAN AND HUNGRY LOOKING CROCODILES",
-                "LOCKED DOOR",
-                "OPEN DOOR WITH HALL BEYOND",
-                "PILE OF SAILS/SAI/",
-                "FISH/FIS/",
-                "*DUBLEONS*/DUB/",
-                "DEADLY MAMBA SNAKES/SNA/",
-                "PARROT/PAR/",
-                "BOTTLE OF RUM/BOT/",
-                "RUG/RUG/",
-                "RING OF KEYS/KEY/",
-                "OPEN TREASURE CHEST/CHE/",
-                "SET OF PLANS/PLA/",
-                "RUG",
-                "CLAW HAMMER/HAM/",
-                "NAILS/NAI/",
-                "PILE OF PRECUT LUMBER/LUM/",
-                "TOOL SHED",
-                "LOCKED DOOR",
-                "OPEN DOOR WITH PIT BEYOND",
-                "PIRATE SHIP",
-                "ROCK WALL WITH NARROW CRACK IN IT",
-                "NARROW CRACK IN THE ROCK",
-                "SALT WATER",
-                "SLEEPING PIRATE",
-                "BOTTLE OF SALT WATER/BOT/",
-                "PIECES OF BROKEN RUM BOTTLES",
-                "NON-SKID SNEAKERS/SNE/",
-                "MAP/MAP/",
-                "SHOVEL/SHO/",
-                "MOULDY OLD BONES/BON/",
-                "SAND/SAN/",
-                "BOTTLES OF RUM/BOT/",
-                "*RARE OLD PRICELESS STAMPS*/STA/",
-                "LAGOON",
-                "THE TIDE IS OUT",
-                "THE TIDE IS COMING IN",
-                "WATER WINGS/WIN/",
-                "FLOTSAM AND JETSAM",
-                "MONASTARY",
-                "PLAIN WOODEN BOX/BOX/",
-                "DEAD SQUIRREL",
-                "",
-                "",
+                /* 00 */ "FLIGHT OF STAIRS",
+                /* 01 */ "OPEN WINDOW",
+                /* 02 */ "BOOKS IN A BOOKCASE",
+                /* 03 */ "LARGE LEATHER BOUND BOOK/BOO/",
+                /* 04 */ "BOOKCASE WITH A SECRET PASSAGE BEHIND IT",
+                /* 05 */ "PIRATE'S DUFFLE BAG/BAG/",
+                /* 06 */ "SIGN ON WALL -RETURN TREASURES HERE. SAY SCORE- SIGN BY STAIRS -ANTONYM OF LIGHT IS UNLIGHT-",
+                /* 07 */ "EMPTY BOTTLE/BOT/",
+                /* 08 */ "UNLIT TORCH/TOR/",
+                /* 09 */ "LIT TORCH/TOR/",
+                /* 10 */ "MATCHES/MAT/",
+                /* 11 */ "SMALL SHIP'S KEEL AND MAST",
+                /* 12 */ "WICKED LOOKING PIRATE",
+                /* 13 */ "TREASURE CHEST/CHE/",
+                /* 14 */ "MONGOOSE/MON/",
+                /* 15 */ "RUSTY ANCHOR/ANC/",
+                /* 16 */ "GRASS SHACK",
+                /* 17 */ "MEAN AND HUNGRY LOOKING CROCODILES",
+                /* 18 */ "LOCKED DOOR",
+                /* 19 */ "OPEN DOOR WITH HALL BEYOND",
+                /* 20 */ "PILE OF SAILS/SAI/",
+                /* 21 */ "FISH/FIS/",
+                /* 22 */ "*DUBLEONS*/DUB/",
+                /* 23 */ "DEADLY MAMBA SNAKES/SNA/",
+                /* 24 */ "PARROT/PAR/",
+                /* 25 */ "BOTTLE OF RUM/BOT/",
+                /* 26 */ "RUG/RUG/",
+                /* 27 */ "RING OF KEYS/KEY/",
+                /* 28 */ "OPEN TREASURE CHEST/CHE/",
+                /* 29 */ "SET OF PLANS/PLA/",
+                /* 30 */ "RUG",
+                /* 31 */ "CLAW HAMMER/HAM/",
+                /* 32 */ "NAILS/NAI/",
+                /* 33 */ "PILE OF PRECUT LUMBER/LUM/",
+                /* 34 */ "TOOL SHED",
+                /* 35 */ "LOCKED DOOR",
+                /* 36 */ "OPEN DOOR WITH PIT BEYOND",
+                /* 37 */ "PIRATE SHIP",
+                /* 38 */ "ROCK WALL WITH NARROW CRACK IN IT",
+                /* 39 */ "NARROW CRACK IN THE ROCK",
+                /* 40 */ "SALT WATER",
+                /* 41 */ "SLEEPING PIRATE",
+                /* 42 */ "BOTTLE OF SALT WATER/BOT/",
+                /* 43 */ "PIECES OF BROKEN RUM BOTTLES",
+                /* 44 */ "NON-SKID SNEAKERS/SNE/",
+                /* 45 */ "MAP/MAP/",
+                /* 46 */ "SHOVEL/SHO/",
+                /* 47 */ "MOULDY OLD BONES/BON/",
+                /* 48 */ "SAND/SAN/",
+                /* 49 */ "BOTTLES OF RUM/BOT/",
+                /* 50 */ "*RARE OLD PRICELESS STAMPS*/STA/",
+                /* 51 */ "LAGOON",
+                /* 52 */ "THE TIDE IS OUT",
+                /* 53 */ "THE TIDE IS COMING IN",
+                /* 54 */ "WATER WINGS/WIN/",
+                /* 55 */ "FLOTSAM AND JETSAM",
+                /* 56 */ "MONASTARY",
+                /* 57 */ "PLAIN WOODEN BOX/BOX/",
+                /* 58 */ "DEAD SQUIRREL",
+                /* 59 */ "",
+                /* 60 */ "",
             };
 
         private static int[] _itemLocation = new int[_itemCount];
@@ -548,7 +549,7 @@ namespace PirateAdventure
         private static string _cannotParseMessage = "I DON'T UNDERSTAND THAT!";
         private static string _cannotDoMessage = "I CAN'T DO THAT!";
         private static string _cannotGoThatWayMessage = "I CAN'T GO THAT WAY";
-        private static string _inventoryFullMsg = "I'VE TOO MUCH TOO CARRY. TRY -TAKE INVENTORY-"'
+        private static string _inventoryFullMsg = "I'VE TOO MUCH TOO CARRY. TRY -TAKE INVENTORY-";
 
         private static string _numberOfMovesMessage()
         {

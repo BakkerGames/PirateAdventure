@@ -1,4 +1,4 @@
-﻿// Program.Engine.cs - 06/25/2018
+﻿// Program.Engine.cs - 06/30/2018
 
 using System;
 
@@ -15,7 +15,13 @@ namespace PirateAdventure
                 int conditionData = tempValue / 20;
                 int conditionNum = tempValue - (conditionData * 20);
 #if DEBUG
-                Console.Write($"### check condition {commandNum} {indexNum} {conditionNum} {conditionData}"); // todo
+                if (debugFullMessages)
+                {
+                    if (conditionNum != 0)
+                    {
+                        Console.Write($"### check condition {commandNum} {indexNum} {conditionNum} {conditionData}"); // todo
+                    }
+                }
 #endif
                 result = true;
                 switch (conditionNum)
@@ -86,7 +92,13 @@ namespace PirateAdventure
                         break;
                 }
 #if DEBUG
-                Console.WriteLine($" - {result}"); // todo
+                if (debugFullMessages)
+                {
+                    if (conditionNum != 0)
+                    {
+                        Console.WriteLine($" - {result}"); // todo
+                    }
+                }
 #endif
                 if (!result)
                 {
@@ -94,7 +106,10 @@ namespace PirateAdventure
                 }
             }
 #if DEBUG
-            Console.WriteLine($"### overall result {result}"); // todo
+            if (debugFullMessages)
+            {
+                Console.WriteLine($"### overall result {result}"); // todo
+            }
 #endif
             return result;
         }
@@ -147,7 +162,7 @@ namespace PirateAdventure
                 case 1:
                     // take
                     int inventoryCount = 0;
-                    for (int itemNum = 0; itemNum <= _itemCount; itemNum++)
+                    for (int itemNum = 0; itemNum < _itemCount; itemNum++)
                     {
                         if (_itemLocation[itemNum] == -1)
                         {
@@ -163,10 +178,7 @@ namespace PirateAdventure
                     _itemLocation[dataValue] = -1;
                     break;
                 case 2:
-                    // drop to current room //2=700
-                    // 700 {GOSUB}1050
-                    //     :_itemLocation(P)=R
-                    //     :{GOTO}960
+                    // drop to current room
                     dataValue = GetDataValue(commandNum, ref dataPointer);
                     _itemLocation[dataValue] = currRoomNumber;
                     break;
@@ -206,7 +218,7 @@ namespace PirateAdventure
                 case 10:
                     // dead
                     Console.WriteLine("I'M DEAD...");
-                    currRoomNumber = _roomCount;
+                    currRoomNumber = _roomCount - 1; // never-never land
                     darkFlag = false;
                     Look();
                     break;
@@ -244,71 +256,42 @@ namespace PirateAdventure
                     gameOver = true;
                     break;
                 case 15:
-                    // show inventory //15=890
-                    // 890 {PRINT}"I'M CARRYING:"
-                    //     :K$="NOTHING"
-                    //     :{FOR}Z=0{TO}IL
-                    //     :{IF}_itemLocation(Z)<>-1{THEN}910{ELSE}{GOSUB}280
-                    //     :{IF}{LEN}(TP$)+POS(0)>63{PRINT}
-                    // 900 {PRINT}TP$;".",;
-                    //     :K$=""
-                    // 910 {NEXT}
-                    //     :{PRINT}K$
-                    //     :{GOTO}960
-                    // 280 TP$=_itemLocation$(Z)
-                    //     :{IF}{RIGHT$}(TP$,1)="/"{FOR}W={LEN}(TP$)-1{TO}1{STEP}-1
-                    //     :{IF}{MID$}(TP$,W,1)="/"{THEN}TP$={LEFT$}(TP$,W-1){ELSE}{NEXT}W
-                    // 290 {RETURN}
+                    // show inventory
                     ShowInventory();
                     break;
                 case 16:
-                    // flag 0 true //16=920
-                    // 920 P=0
-                    //     :{GOTO}800
-                    // 800 SF=SF {OR}{CINT}(.5+2^P)
-                    //     :{GOTO}960
+                    // flag 0 true
                     _systemFlags[0] = true;
                     break;
                 case 17:
-                    // flag 0 false //17=930
-                    // 930 P=0
-                    //     :{GOTO}820
-                    // 820 SF=SF{AND}{NOT}{CINT}(.5+2^P)
-                    //     :{GOTO}960
+                    // flag 0 false
                     _systemFlags[0] = false;
                     break;
                 case 18:
-                    //18=940
+                    // torch is recharged and put in inventory
+                    lightRemaining = _lightTotal;
+                    _itemLocation[9] = -1;
                     break;
                 case 19:
-                    // clear screen //19=950
-                    Console.WriteLine();
+                    // clear screen
+                    // do nothing for now
                     break;
                 case 20:
-                    // save game //20=710
+                    // save game
                     Console.WriteLine("    : save game");
                     break;
                 case 21:
-                    // swap two items //21=750
-                    // 750 {GOSUB}1050
-                    //     :L=P
-                    //     :{GOSUB}1050
-                    //     :Z=_itemLocation(P)
-                    //     :_itemLocation(P)=_itemLocation(L)
-                    //     :_itemLocation(L)=Z
-                    //     :{GOTO}960
+                    // swap two items
                     dataValue = GetDataValue(commandNum, ref dataPointer);
                     dataValue2 = GetDataValue(commandNum, ref dataPointer);
-                    int P2 = _itemLocation[dataValue];
+                    int tempLoc = _itemLocation[dataValue];
                     _itemLocation[dataValue] = _itemLocation[dataValue2];
-                    _itemLocation[dataValue2] = P2;
+                    _itemLocation[dataValue2] = tempLoc;
                     break;
                 default:
                     Console.WriteLine($"#ERROR# Unknown action: {actionNum - 51}");
                     break;
             }
-            // 960 {NEXT}Y
-
         }
 
         private static int GetDataValue(int commandNum, ref int dataPointer)

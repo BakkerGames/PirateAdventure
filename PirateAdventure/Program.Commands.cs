@@ -1,4 +1,4 @@
-﻿// Program.Commands.cs - 06/25/2018
+﻿// Program.Commands.cs - 06/30/2018
 
 using System;
 
@@ -42,9 +42,16 @@ namespace PirateAdventure
                         Console.Write("OBVIOUS EXITS: ");
                         anyExits = true;
                     }
-                    Console.Write(" ");
-                    Console.Write(_verbNounList[i, 1]);
+                    else
+                    {
+                        Console.Write(", ");
+                    }
+                    Console.Write(_verbNounList[i + 1, 1]);
                 }
+            }
+            if (anyExits)
+            {
+                Console.WriteLine();
             }
             // items seen
             bool anythingInRoom = false;
@@ -87,6 +94,7 @@ namespace PirateAdventure
                         Console.WriteLine("I'M CARRYING:");
                         haveAnything = true;
                     }
+                    Console.Write("   ");
                     if (_itemDescriptions[i].EndsWith("/"))
                     {
                         Console.WriteLine(_itemDescriptions[i].Substring(0, _itemDescriptions[i].IndexOf("/")));
