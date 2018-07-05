@@ -138,11 +138,6 @@ namespace PirateAdventure
 
         private static void RunOneAction(int actionNum, int commandNum, ref int dataPointer)
         {
-            if (actionNum > 101)
-            {
-                Console.WriteLine(_messages[actionNum - 50]);
-                return;
-            }
             if (actionNum == 0)
             {
                 return;
@@ -150,6 +145,11 @@ namespace PirateAdventure
             if (actionNum < 52)
             {
                 Console.WriteLine(_messages[actionNum]);
+                return;
+            }
+            if (actionNum > 101)
+            {
+                Console.WriteLine(_messages[actionNum - 50]);
                 return;
             }
             int dataValue = 0;

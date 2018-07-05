@@ -289,6 +289,7 @@ GET CHE
     if TREASURE_CHEST in room
     if WICKED_LOOKING_PIRATE not in room
     : take TREASURE_CHEST
+    > TAKEN
 
 42: 5888
 OPE CHE
@@ -993,3 +994,4 @@ DIG
 151: 6300
 HEL
     > NOTHING HAPPENS
+

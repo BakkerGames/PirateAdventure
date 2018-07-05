@@ -48,14 +48,11 @@
   <ItemGroup>
     <Compile Include="Program.Commands.cs" />
     <Compile Include="Program.Data.cs" />
-    <Content Include="OldProgram.Engine.txt" />
-    <Content Include="OldProgram.txt" />
     <Compile Include="Program.cs" />
     <Compile Include="Program.Engine.cs" />
     <Compile Include="Program.Parse.cs" />
     <Compile Include="Program.Variables.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="OldProgram.SaveLoad.txt" />
     <Compile Include="Testing.cs" />
   </ItemGroup>
   <ItemGroup>

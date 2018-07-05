@@ -1,4 +1,4 @@
-﻿// Program.cs - 06/30/2018
+﻿// Program.cs - 07/04/2018
 
 using System;
 
@@ -100,12 +100,6 @@ namespace PirateAdventure
             {
                 Console.WriteLine($"### Running command {currVerb} {currNoun} {currVerbNumber} {currNounNumber} {_verbNounList[currVerbNumber, 0]} {_verbNounList[currNounNumber, 1]}"); // todo
                 Console.WriteLine();
-            }
-            // todo ### handle quit in code, not here
-            if (currVerb == "QUI")
-            {
-                gameOver = true;
-                return true;
             }
 #endif
             bool foundMatch = false;
