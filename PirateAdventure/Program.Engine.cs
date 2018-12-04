@@ -58,7 +58,7 @@ namespace PirateAdventure
                         break;
                     case 10: // inventory not empty
                         result = false;
-                        for (int i = 0; i <= _itemCount; i++)
+                        for (int i = 0; i < _itemCount; i++)
                         {
                             if (_itemLocation[conditionData] == -1)
                             {
@@ -69,7 +69,7 @@ namespace PirateAdventure
                         break;
                     case 11: // inventory is empty
                         result = true;
-                        for (int i = 0; i <= _itemCount; i++)
+                        for (int i = 0; i < _itemCount; i++)
                         {
                             if (_itemLocation[conditionData] == -1)
                             {
