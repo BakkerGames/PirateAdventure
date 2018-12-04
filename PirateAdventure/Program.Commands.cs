@@ -1,4 +1,4 @@
-﻿// Program.Commands.cs - 12/04/2018 a
+﻿// Program.Commands.cs - 12/04/2018
 
 using System;
 

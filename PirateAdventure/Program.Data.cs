@@ -1,4 +1,4 @@
-﻿// Program.Data.cs - 12/04/2018 a
+﻿// Program.Data.cs - 12/04/2018
 
 namespace PirateAdventure
 {
