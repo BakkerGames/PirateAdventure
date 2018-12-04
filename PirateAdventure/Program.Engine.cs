@@ -239,7 +239,7 @@ namespace PirateAdventure
                 case 14:
                     // check treasures
                     int treasureCount = 0;
-                    for (int Z = 0; Z <= _itemCount; Z++)
+                    for (int Z = 0; Z < _itemCount; Z++)
                     {
                         if (_itemLocation[Z] == _treasureRoom && _itemDescriptions[Z].StartsWith("*"))
                         {
