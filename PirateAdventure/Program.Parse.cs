@@ -51,6 +51,10 @@ namespace PirateAdventure
                 {
                     temp1 = temp1.Substring(1);
                 }
+                if (temp0.Length > _wordSize) // trim longer verbs
+                {
+                    temp0 = temp0.Substring(0, _wordSize);
+                }
                 if (temp1.Length > _wordSize) // trim longer nouns
                 {
                     temp1 = temp1.Substring(0, _wordSize);
