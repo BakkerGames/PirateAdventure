@@ -1,4 +1,4 @@
-﻿// Program.Data.cs - 07/04/2018
+﻿// Program.Data.cs - 12/04/2018
 
 namespace PirateAdventure
 {
@@ -18,6 +18,8 @@ namespace PirateAdventure
         private const int _messageCount = 73;
         private const int _treasureRoom = 1;
         private const int _flagCount = 16;
+
+        private const int _litTorchItem = 9;
 
         private static bool[] _systemFlags = new bool[_flagCount + 1];
 
@@ -241,6 +243,70 @@ namespace PirateAdventure
                 { "JUM", "BON" },    // 55
                 { "EMP", "HOL" },    // 56
                 { "WEI", "SAN" },    // 57
+                { "", "BOX" },       // 58
+                { "", "SNE" },       // 59
+            };
+
+        private static string[,] _verbNounListFullWord = new string[_wordCount, 2]
+            {
+                { "", "" },          // 0
+                { "GO", "NORTH" },   // 1
+                { "*CLIMB", "SOUTH" }, // 2
+                { "*WALK", "EAST" },  // 3
+                { "*RUN", "WEST" },  // 4
+                { "*ENTER", "UP" },    // 5
+                { "*PACE", "DOWN" },  // 6
+                { "*FOLLOW", "STAIRS" },   // 7
+                { "SAY", "PASSAGEWAY" },    // 8
+                { "SAIL", "HALL" },    // 9
+                { "GET", "BOOK" },    // 10
+                { "*TAKE", "BOTTLE" },   // 11
+                { "*CATCH", "*RUM" },  // 12
+                { "*PICK", "WINDOW" },   // 13
+                { "*REMOVE", "GAME" },   // 14
+                { "*WEAR", "MONASTARY" },   // 15
+                { "*PULL", "PIRATE" },   // 16
+                { "FLY", "AROUND" },    // 17
+                { "DROP", "BAG" },    // 18
+                { "*RELEASE", "*DUFFLE" },  // 19
+                { "*THROW", "TORCH" },   // 20
+                { "*LEAVE", "OFF" },   // 21
+                { "*GIVE", "MATCHES" },   // 22
+                { "DRINK", "YOHO" },    // 23
+                { "*EAT", "30" },    // 24
+                { "INVENTORY", "LUMBER" },    // 25
+                { "SAIL", "RUG" },    // 26
+                { "LOOK", "KEY" },    // 27
+                { "*SHOW", "INVENTORY" },   // 28
+                { "WAIT", "DUBLOONS" },    // 29
+                { "READ", "SAIL" },    // 30
+                { "", "FISH" },       // 31
+                { "YOHO", "ANCHOR" },    // 32
+                { "SCORE", "SHACK" },    // 33
+                { "SAVE", "PLANS" },    // 34
+                { "KILL", "CAVE" },    // 35
+                { "*ATTACK", "PATH" },   // 36
+                { "LIGHT", "DOOR" },    // 37
+                { "", "CHEST" },       // 38
+                { "OPEN", "PARROT" },    // 39
+                { "*SMASH", "HAMMER" },   // 40
+                { "UNLOCK", "NAILS" },    // 41
+                { "HELP", "BOAT" },    // 42
+                { "AWAKE", "*SHIP" },   // 43
+                { "*BUNCH", "SHED" },   // 44
+                { "", "CRACK" },       // 45
+                { "QUIT", "WATER" },    // 46
+                { "BUILD", "*SALT" },   // 47
+                { "*MAKE", "LAGOON" },   // 48
+                { "WAKE", "*TIDE" },   // 49
+                { "SET", "PIT" },    // 50
+                { "CAST", "SHORE" },    // 51
+                { "DIG", "*BEACH" },   // 52
+                { "BURY", "MAP" },    // 53
+                { "FIND", "PACE" },    // 54
+                { "JUMP", "BONE" },    // 55
+                { "EMPTY", "HOLE" },    // 56
+                { "WEIGH", "SAND" },    // 57
                 { "", "BOX" },       // 58
                 { "", "SNE" },       // 59
             };

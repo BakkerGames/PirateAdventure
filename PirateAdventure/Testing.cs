@@ -1,4 +1,4 @@
-﻿// Testing.cs - 06/30/2018
+﻿// Testing.cs - 12/04/2018
 
 using System;
 
@@ -10,7 +10,12 @@ namespace PirateAdventure
         {
             for (int X = 0; X < _commandCount; X++)
             {
-                Console.WriteLine($"{X}: {_commandArray[X, 0]}");
+                Console.Write($"{X}:");
+                for (int i = 0; i < _commandValueCount; i++)
+                {
+                    Console.Write($" {_commandArray[X, i]}");
+                }
+                Console.WriteLine();
                 int verb = _commandArray[X, 0] / 150;
                 int noun = _commandArray[X, 0] % 150;
                 if (verb == 0)
@@ -19,11 +24,11 @@ namespace PirateAdventure
                 }
                 else if (noun == 0)
                 {
-                    Console.WriteLine($"{_verbNounList[verb, 0]}");
+                    Console.WriteLine($"{_verbNounListFullWord[verb, 0]}");
                 }
                 else
                 {
-                    Console.WriteLine($"{_verbNounList[verb, 0]} {_verbNounList[noun, 1]}");
+                    Console.WriteLine($"{_verbNounListFullWord[verb, 0]} {_verbNounListFullWord[noun, 1]}");
                 }
                 for (int w = 1; w <= 5; w++)
                 {

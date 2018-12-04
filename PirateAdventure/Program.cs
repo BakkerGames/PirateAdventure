@@ -1,4 +1,4 @@
-﻿// Program.cs - 07/04/2018
+﻿// Program.cs - 12/04/2018
 
 using System;
 
@@ -98,7 +98,7 @@ namespace PirateAdventure
 #if DEBUG
             if (debugFullMessages)
             {
-                Console.WriteLine($"### Running command {currVerb} {currNoun} {currVerbNumber} {currNounNumber} {_verbNounList[currVerbNumber, 0]} {_verbNounList[currNounNumber, 1]}"); // todo
+                Console.WriteLine($"### Running command {currVerb} {currNoun} {currVerbNumber} {currNounNumber} {_verbNounList[currVerbNumber, 0]} {_verbNounList[currNounNumber, 1]}");
                 Console.WriteLine();
             }
 #endif
@@ -113,7 +113,7 @@ namespace PirateAdventure
 #if DEBUG
                     if (debugFullMessages)
                     {
-                        Console.WriteLine($"### matches command {commandNum}"); // todo
+                        Console.WriteLine($"### matches command {commandNum}");
                     }
 #endif
                     if (!CheckConditions(commandNum))
@@ -130,11 +130,25 @@ namespace PirateAdventure
                 {
                     if (currNounNumber >= 1 && currNounNumber <= _exitDirections)
                     {
+                        if (darkFlag && _itemLocation[_litTorchItem] != currRoomNumber && _itemLocation[_litTorchItem] != -1)
+                        {
+                            Console.WriteLine("DANGEROUS TO MOVE IN THE DARK!");
+                        }
                         if (_roomExitArray[currRoomNumber, currNounNumber - 1] == 0)
                         {
-                            // todo ### check for darkness
-                            Console.WriteLine(_cannotGoThatWayMessage);
-                            foundMatch = true;
+                            if (darkFlag && _itemLocation[_litTorchItem] != currRoomNumber && _itemLocation[_litTorchItem] != -1)
+                            {
+                                Console.WriteLine("I FELL DOWN AND BROKE MY NECK.");
+                                currRoomNumber = _roomCount - 1; // never-never land
+                                darkFlag = false;
+                                needToLook = true;
+                                foundMatch = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine(_cannotGoThatWayMessage);
+                                foundMatch = true;
+                            }
                         }
                         else
                         {
@@ -221,7 +235,7 @@ namespace PirateAdventure
 #if DEBUG
                     if (debugFullMessages)
                     {
-                        Console.WriteLine($"### skip command   {commandNum} {nounPart} {randomPercent}"); // todo
+                        Console.WriteLine($"### skip command   {commandNum} {nounPart} {randomPercent}");
                     }
 #endif
                     continue;
@@ -229,7 +243,7 @@ namespace PirateAdventure
 #if DEBUG
                 if (debugFullMessages)
                 {
-                    Console.WriteLine($"### random command {commandNum} {nounPart} {randomPercent}"); // todo
+                    Console.WriteLine($"### random command {commandNum} {nounPart} {randomPercent}");
                 }
 #endif
                 if (!CheckConditions(commandNum))

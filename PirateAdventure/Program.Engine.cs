@@ -1,4 +1,4 @@
-﻿// Program.Engine.cs - 06/30/2018
+﻿// Program.Engine.cs - 12/04/2018
 
 using System;
 
@@ -19,7 +19,7 @@ namespace PirateAdventure
                 {
                     if (conditionNum != 0)
                     {
-                        Console.Write($"### check condition {commandNum} {indexNum} {conditionNum} {conditionData}"); // todo
+                        Console.Write($"### check condition {commandNum} {indexNum} {conditionNum} {conditionData}");
                     }
                 }
 #endif
@@ -96,7 +96,7 @@ namespace PirateAdventure
                 {
                     if (conditionNum != 0)
                     {
-                        Console.WriteLine($" - {result}"); // todo
+                        Console.WriteLine($" - {result}");
                     }
                 }
 #endif
@@ -108,7 +108,7 @@ namespace PirateAdventure
 #if DEBUG
             if (debugFullMessages)
             {
-                Console.WriteLine($"### overall result {result}"); // todo
+                Console.WriteLine($"### overall result {result}");
             }
 #endif
             return result;

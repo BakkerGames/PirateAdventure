@@ -1,4 +1,4 @@
-0: 80
+0: 80 422 342 420 340 0 16559 8850
 80%
     if FISH in room
     if MEAN_AND_HUNGRY_LOOKING_CROCODILES in room
@@ -6,7 +6,7 @@
     : send FISH to nowhere
     : send MEAN_AND_HUNGRY_LOOKING_CROCODILES to nowhere
 
-1: 80
+1: 80 462 482 460 0 0 15712 1705
 80%
     if DEADLY_MAMBA_SNAKES in room
     if PARROT in room
@@ -15,7 +15,7 @@
     > PARROT ATTACKS SNAKES AND DRIVES THEM OFF
     : send DEADLY_MAMBA_SNAKES to nowhere
 
-2: 100
+2: 100 521 552 540 229 220 203 8700
 100%
     if RUG carried
     if RING_OF_KEYS not carried or in room
@@ -24,25 +24,25 @@
     : drop RING_OF_KEYS
     : set flag 11 true
 
-3: 3
+3: 3 483 0 0 0 0 15712 0
 3%
     if PARROT carried or in room
     > THE PARROT CRYS
     > -PIECES OF EIGHT-
 
-4: 100
+4: 100 284 0 0 0 0 8550 0
 100%
     if room = FOOT_OF_HILL
     : turn off dark
 
-5: 100
+5: 100 28 663 403 40 0 8700 0
 100%
     if flag 1 true
     if PILE_OF_PRECUT_LUMBER carried or in room
     if PILE_OF_SAILS carried or in room
     : set flag 2 true
 
-6: 100
+6: 100 48 20 660 740 220 9055 10902
 100%
     if flag 2 true
     : set flag 1 false
@@ -50,19 +50,19 @@
     : swap items PIRATE_SHIP and SMALL_SHIP'S_KEEL_AND_MAST
     > CONGRATULATIONS !!! BUT YOUR ADVENTURE IS NOT OVER YET...
 
-7: 100
+7: 100 28 20 0 0 0 3810 0
 100%
     if flag 1 true
     > NO. SOMETHING IS MISSING!
     : set flag 1 false
 
-8: 100
+8: 100 8 700 720 0 0 10868 0
 100%
     if flag 0 true
     : swap items LOCKED_DOOR and OPEN_DOOR_WITH_PIT_BEYOND
     : set flag 0 false
 
-9: 100
+9: 100 48 40 640 400 300 9055 8305
 100%
     if flag 2 true
     : set flag 2 false
@@ -70,20 +70,20 @@
     : send PILE_OF_SAILS to nowhere
     : send RUSTY_ANCHOR to nowhere
 
-10: 25
+10: 25 664 0 0 0 0 4263 0
 25%
     if room = NEVER_NEVER_LAND
     > SINCE NOTHING IS HAPPENING
     : game over
 
-11: 40
+11: 40 104 886 0 0 0 4411 0
 40%
     if room = LEDGE_OF_TALL_BUILDING
     if NON-SKID_SNEAKERS not carried
     > I SLIPPED AND FELL...
     : dead
 
-12: 80
+12: 80 242 502 820 80 240 9321 10109
 80%
     if WICKED_LOOKING_PIRATE in room
     if BOTTLE_OF_RUM in room
@@ -92,27 +92,27 @@
     : set flag 0 true
     : send WICKED_LOOKING_PIRATE to nowhere
 
-13: 100
+13: 100 8 140 80 500 0 10262 8850
 100%
     if flag 0 true
     : set flag 0 false
     : EMPTY_BOTTLE goes to MUSTY_ATTIC
     : send BOTTLE_OF_RUM to nowhere
 
-14: 35
+14: 35 421 846 420 200 0 5162 0
 35%
     if FISH carried
     if BOTTLE_OF_SALT_WATER not carried
     > TOO DRY. FISH VANISH.
     : FISH goes to OCEAN
 
-15: 100
+15: 100 129 120 0 0 0 6508 0
 100%
     if flag 6 false
     > * WELCOME TO -PIRATES ADVENTURE- BY SCOTT & ALEXIS ADAMS *
     : set flag 6 true
 
-16: 50
+16: 50 242 982 820 440 240 9321 8850
 50%
     if WICKED_LOOKING_PIRATE in room
     if BOTTLES_OF_RUM in room
@@ -120,21 +120,21 @@
     > PIRATE GRABS RUM AND SCUTTLES OFF CHORTLING
     : send WICKED_LOOKING_PIRATE to nowhere
 
-17: 35
+17: 35 483 69 0 0 0 15705 0
 35%
     if PARROT carried or in room
     if flag 3 false
     > THE PARROT CRYS
     > -CHECK THE BAG MATEY-
 
-18: 10
+18: 10 483 249 0 0 0 15706 0
 10%
     if PARROT carried or in room
     if flag 12 false
     > THE PARROT CRYS
     > -CHECK THE CHEST MATEY-
 
-19: 50
+19: 50 484 1073 1086 0 0 17661 9150
 50%
     if room = LAGOON
     if THE_TIDE_IS_COMING_IN somewhere
@@ -143,28 +143,28 @@
     > I'M UNDERWATER. I CAN'T SWIM. BLUB BLUB...
     : dead
 
-20: 50
+20: 50 204 1086 0 0 0 16711 0
 50%
     if room = OCEAN
     if WATER_WINGS not carried
     > I'M UNDERWATER. I CAN'T SWIM. BLUB BLUB...
     : dead
 
-21: 10
+21: 10 209 1040 1060 300 1100 10872 10050
 10%
     if flag 10 false
     : swap items THE_TIDE_IS_OUT and THE_TIDE_IS_COMING_IN
     : swap items RUSTY_ANCHOR and FLOTSAM_AND_JETSAM
     : set flag 0 true
 
-22: 10
+22: 10 208 1040 1060 89 0 10867 0
 10%
     if flag 10 true
     if flag 4 false
     : swap items THE_TIDE_IS_OUT and THE_TIDE_IS_COMING_IN
     : set flag 0 true
 
-23: 85
+23: 85 483 8 0 0 0 15719 10200
 85%
     if PARROT carried or in room
     if flag 0 true
@@ -172,48 +172,48 @@
     > -TIDES A CHANGING MATEY-
     : set flag 0 false
 
-24: 100
+24: 100 8 0 0 0 0 10200 0
 100%
     if flag 0 true
     : set flag 0 false
 
-25: 100
+25: 100 104 0 0 0 0 8550 0
 100%
     if room = LEDGE_OF_TALL_BUILDING
     : turn off dark
 
-26: 80
+26: 80 462 282 280 1160 0 1422 0
 80%
     if DEADLY_MAMBA_SNAKES in room
     if MONGOOSE in room
     > I WAS WRONG. I GUESS ITS NOT A MONGOOSE CAUSE THE SNAKES BIT IT.
     : swap items MONGOOSE and DEAD_SQUIRREL
 
-27: 158
-GO PAS
+27: 158 82 60 0 0 0 8170 9600
+GO PASSAGEWAY
     if BOOKCASE_WITH_A_SECRET_PASSAGE_BEHIND_IT in room
     : teleport to SECRET_PASSAGEWAY
     : clear screen
     : look
 
-28: 4510
-REA BOO
+28: 4510 61 0 0 0 0 300 0
+READ BOOK
     if LARGE_LEATHER_BOUND_BOOK carried
     > THE NAME OF THE BOOK IS -TREASURE ISLAND- THERE'S A WORD ENGRAVED IN THE FLYLEAF -YOHO- AND A MESSAGE -LONG JOHN SILVER LEFT 2 TREASURES ON TREASURE ISLAND!-
 
-29: 163
-GO WIN
+29: 163 22 100 0 0 0 8170 9600
+GO WINDOW
     if OPEN_WINDOW in room
     : teleport to LEDGE_OF_TALL_BUILDING
     : clear screen
     : look
 
-30: 8100
-FIN
+30: 8100 0 0 0 0 0 16200 0
+FIND
     > OPEN THE BOOK!
 
-31: 4800
-YOH
+31: 4800 104 120 61 0 0 10507 8164
+YOHO
     if room = LEDGE_OF_TALL_BUILDING
     if LARGE_LEATHER_BOUND_BOOK carried
     : clear screen
@@ -221,8 +221,8 @@ YOH
     : teleport to SANDY_BEACH
     : look
 
-32: 4800
-YOH
+32: 4800 107 100 61 89 0 10507 8164
+YOHO
     if room not LEDGE_OF_TALL_BUILDING
     if LARGE_LEATHER_BOUND_BOOK carried
     if flag 4 false
@@ -231,14 +231,14 @@ YOH
     : teleport to LEDGE_OF_TALL_BUILDING
     : look
 
-33: 4063
-LOO WIN
+33: 4063 22 0 0 0 0 647 0
+LOOK WINDOW
     if OPEN_WINDOW in room
     > THERE'S SOMETHING THERE ALRIGHT. MAYBE I SHOULD...
     > GO THERE?
 
-34: 5570
-LIG TOR
+34: 5570 161 203 160 180 0 10870 1264
+LIGHT TORCH
     if UNLIT_TORCH carried
     if MATCHES carried or in room
     : swap items UNLIT_TORCH and LIT_TORCH
@@ -246,65 +246,65 @@ LIG TOR
     > TORCH IS LIT
     : look
 
-35: 6170
-UNL TOR
+35: 6170 181 180 160 0 0 8302 0
+UNLOCK TORCH
     if LIT_TORCH carried
     : send LIT_TORCH to nowhere
     : take UNLIT_TORCH
 
-36: 6300
-HEL
+36: 6300 104 0 0 0 0 900 0
+HELP
     if room = LEDGE_OF_TALL_BUILDING
     > YOU MAY NEED MAGIC HERE
 
-37: 1529
-GET DUB
+37: 1529 442 465 440 0 0 7800 0
+GET DUBLOONS
     if DUBLEONS in room
     if DEADLY_MAMBA_SNAKES not in room
     : take DUBLEONS
 
-38: 1529
-GET DUB
+38: 1529 442 462 0 0 0 760 9150
+GET DUBLOONS
     if DUBLEONS in room
     if DEADLY_MAMBA_SNAKES in room
     > THAT'S NOT VERY SAFE
     > I'M SNAKE BIT
     : dead
 
-39: 183
-GO SHA
+39: 183 322 180 0 0 0 8170 9600
+GO SHACK
     if GRASS_SHACK in room
     : teleport to GRASS_SHACK
     : clear screen
     : look
 
-40: 1538
-GET CHE
+40: 1538 262 242 0 0 0 1800 0
+GET CHEST
     if TREASURE_CHEST in room
     if WICKED_LOOKING_PIRATE in room
     > PIRATE WON'T LET ME
 
-41: 1538
-GET CHE
+41: 1538 262 245 260 0 0 7922 0
+GET CHEST
     if TREASURE_CHEST in room
     if WICKED_LOOKING_PIRATE not in room
     : take TREASURE_CHEST
     > TAKEN
 
-42: 5888
-OPE CHE
+42: 5888 262 242 0 0 0 1800 0
+OPEN CHEST
     if TREASURE_CHEST in room
     if WICKED_LOOKING_PIRATE in room
     > PIRATE WON'T LET ME
 
-43: 5888
-OPE CHE
+43: 5888 262 245 0 0 0 1950 0
+OPEN CHEST
     if TREASURE_CHEST in room
     if WICKED_LOOKING_PIRATE not in room
     > ITS LOCKED
 
-44: 6188
-UNL CHE
+44: 6188 262 245 541 260 560 2155 7950
+UNLOCK CHEST
     if TREASURE_CHEST in room
     if WICKED_LOOKING_PIRATE not in room
     if RING_OF_KEYS carried
@@ -312,24 +312,24 @@ UNL CHE
     : send TREASURE_CHEST to nowhere
     : drop OPEN_TREASURE_CHEST
 
-45: 5888
-OPE CHE
+45: 5888 261 0 0 0 0 2400 0
+OPEN CHEST
     if TREASURE_CHEST carried
     > NOT WHILE I'M CARRYING IT
 
-46: 4088
-LOO CHE
+46: 4088 561 0 0 0 0 2400 0
+LOOK CHEST
     if OPEN_TREASURE_CHEST carried
     > NOT WHILE I'M CARRYING IT
 
-47: 4088
-LOO CHE
+47: 4088 263 0 0 0 0 2713 0
+LOOK CHEST
     if TREASURE_CHEST carried or in room
     > SORRY I CAN'T
     > ITS LOCKED
 
-48: 4088
-LOO CHE
+48: 4088 562 580 109 100 249 2303 8700
+LOOK CHEST
     if OPEN_TREASURE_CHEST in room
     if flag 5 false
     if flag 12 false
@@ -337,8 +337,8 @@ LOO CHE
     : drop SET_OF_PLANS
     : set flag 5 true
 
-49: 4088
-LOO CHE
+49: 4088 249 562 108 900 240 6203 8700
+LOOK CHEST
     if flag 12 false
     if OPEN_TREASURE_CHEST in room
     if flag 5 true
@@ -346,56 +346,56 @@ LOO CHE
     : drop MAP
     : set flag 12 true
 
-50: 4088
-LOO CHE
+50: 4088 248 562 0 0 0 6600 0
+LOOK CHEST
     if flag 12 true
     if OPEN_TREASURE_CHEST in room
     > ITS EMPTY
 
-51: 4068
-LOO BAG
+51: 4068 103 69 0 0 0 646 0
+LOOK BAG
     if PIRATE'S_DUFFLE_BAG carried or in room
     if flag 3 false
     > THERE'S SOMETHING THERE ALRIGHT. MAYBE I SHOULD...
     > OPEN IT?
 
-52: 4068
-LOO BAG
+52: 4068 103 68 0 0 0 6600 0
+LOOK BAG
     if PIRATE'S_DUFFLE_BAG carried or in room
     if flag 3 true
     > ITS EMPTY
 
-53: 5887
-OPE DOO
+53: 5887 342 0 0 0 0 2550 0
+OPEN DOOR
     if MEAN_AND_HUNGRY_LOOKING_CROCODILES in room
     > CROCS STOP ME
 
-54: 5887
-OPE DOO
+54: 5887 362 0 0 0 0 2713 0
+OPEN DOOR
     if LOCKED_DOOR in room
     > SORRY I CAN'T
     > ITS LOCKED
 
-55: 5887
-OPE DOO
+55: 5887 382 0 0 0 0 2100 0
+OPEN DOOR
     if OPEN_DOOR_WITH_HALL_BEYOND in room
     > ITS OPEN
 
-56: 159
-GO HAL
+56: 159 382 320 0 0 0 8170 9600
+GO HALL
     if OPEN_DOOR_WITH_HALL_BEYOND in room
     : teleport to LONG_HALLWAY
     : clear screen
     : look
 
-57: 6187
-UNL DOO
+57: 6187 342 362 0 0 0 2550 0
+UNLOCK DOOR
     if MEAN_AND_HUNGRY_LOOKING_CROCODILES in room
     if LOCKED_DOOR in room
     > CROCS STOP ME
 
-58: 6187
-UNL DOO
+58: 6187 345 362 541 360 380 8303 10050
+UNLOCK DOOR
     if MEAN_AND_HUNGRY_LOOKING_CROCODILES not in room
     if LOCKED_DOOR in room
     if RING_OF_KEYS carried
@@ -403,265 +403,265 @@ UNL DOO
     : drop OPEN_DOOR_WITH_HALL_BEYOND
     : set flag 0 true
 
-59: 3461
-DRI BOT
+59: 3461 503 0 0 0 0 172 0
+DRINK BOTTLE
     if BOTTLE_OF_RUM carried or in room
     > THERE'S A STRANGE SOUND
     > ...I THINK ITS ME. HEE HEE.
 
-60: 3750
-INV
+60: 3750 0 0 0 0 0 9900 0
+INVENTORY
     : show inventory
 
-61: 1528
-GET INV
+61: 1528 0 0 0 0 0 9900 0
+GET INVENTORY
     : show inventory
 
-62: 4108
-LOO BOX
+62: 4108 1143 1012 0 0 0 646 0
+LOOK BOX
     if PLAIN_WOODEN_BOX carried or in room
     if RARE_OLD_PRICELESS_STAMPS not carried or in room
     > THERE'S SOMETHING THERE ALRIGHT. MAYBE I SHOULD...
     > OPEN IT?
 
-63: 6450
-AWA
+63: 6450 0 0 0 0 0 2853 0
+AWAKE
     > WRONG GAME YOU SILLY GOOSE!
     > NOTHING HAPPENS
 
-64: 4510
-REA BOO
+64: 4510 66 0 0 0 0 2720 0
+READ BOOK
     if LARGE_LEATHER_BOUND_BOOK not carried
     > SORRY I CAN'T
     > I DON'T HAVE IT
 
-65: 4950
-SCO
+65: 4950 0 0 0 0 0 9750 0
+SCORE
     : check treasures
 
-66: 5114
-SAV GAM
+66: 5114 0 0 0 0 0 10650 0
+SAVE GAME
     : save game
 
-67: 7092
-BUI BOA
+67: 7092 592 0 0 0 0 2745 0
+BUILD BOAT
     if SET_OF_PLANS not carried or in room
     > SORRY I CAN'T
     > I'VE NO PLANS!
 
-68: 185
-GO CAV
+68: 185 284 140 0 0 0 8156 10564
+GO CAVE
     if room = FOOT_OF_HILL
     : teleport to MAZE_OF_CAVES
     : turn on dark
     : clear screen
     : look
 
-69: 4098
-LOO LAG
+69: 4098 1054 0 0 0 0 647 17550
+LOOK LAGOON
     if THE_TIDE_IS_OUT nowhere
     > THERE'S SOMETHING THERE ALRIGHT. MAYBE I SHOULD...
     > GO THERE?
     > THE TIDE IS COMING IN
 
-70: 4098
-LOO LAG
+70: 4098 1053 0 0 0 0 647 17400
+LOOK LAGOON
     if THE_TIDE_IS_OUT somewhere
     > THERE'S SOMETHING THERE ALRIGHT. MAYBE I SHOULD...
     > GO THERE?
     > THE TIDE IS OUT
 
-71: 4083
-LOO SHA
+71: 4083 322 0 0 0 0 647 0
+LOOK SHACK
     if GRASS_SHACK in room
     > THERE'S SOMETHING THERE ALRIGHT. MAYBE I SHOULD...
     > GO THERE?
 
-72: 4095
-LOO CRA
+72: 4095 762 0 0 0 0 647 0
+LOOK CRACK
     if ROCK_WALL_WITH_NARROW_CRACK_IN_IT in room
     > THERE'S SOMETHING THERE ALRIGHT. MAYBE I SHOULD...
     > GO THERE?
 
-73: 195
-GO CRA
+73: 195 782 921 0 0 0 2727 0
+GO CRACK
     if NARROW_CRACK_IN_THE_ROCK in room
     if SHOVEL carried
     > SORRY I CAN'T
     > SOMETHING WON'T FIT
 
-74: 195
-GO CRA
+74: 195 762 261 0 0 0 2727 0
+GO CRACK
     if ROCK_WALL_WITH_NARROW_CRACK_IN_IT in room
     if TREASURE_CHEST carried
     > SORRY I CAN'T
     > SOMETHING WON'T FIT
 
-75: 6900
-QUI
+75: 6900 0 0 0 0 0 9450 0
+QUIT
     : game over
 
-76: 1526
+76: 1526 602 0 0 0 0 2723 0
 GET RUG
     if RUG in room
     > SORRY I CAN'T
     > ITS NAILED TO THE FLOOR!
 
-77: 1541
-GET NAI
+77: 1541 621 602 640 520 600 7853 8250
+GET NAILS
     if CLAW_HAMMER carried
     if RUG in room
     : take NAILS
     : drop RUG
     : send RUG to nowhere
 
-78: 195
-GO CRA
+78: 195 782 661 0 0 0 2727 0
+GO CRACK
     if NARROW_CRACK_IN_THE_ROCK in room
     if PILE_OF_PRECUT_LUMBER carried
     > SORRY I CAN'T
     > SOMETHING WON'T FIT
 
-79: 7092
-BUI BOA
+79: 7092 623 583 303 643 20 8700 0
+BUILD BOAT
     if CLAW_HAMMER carried or in room
     if SET_OF_PLANS carried or in room
     if RUSTY_ANCHOR carried or in room
     if NAILS carried or in room
     : set flag 1 true
 
-80: 7092
-BUI BOA
+80: 7092 0 0 0 0 0 3750 0
+BUILD BOAT
     > NO. SOMETHING IS MISSING!
 
-81: 200
+81: 200 722 220 0 0 0 10554 9600
 GO PIT
     if OPEN_DOOR_WITH_PIT_BEYOND in room
     : clear screen
     : teleport to PIT
     : look
 
-82: 195
-GO CRA
+82: 195 762 61 0 0 0 2727 0
+GO CRACK
     if ROCK_WALL_WITH_NARROW_CRACK_IN_IT in room
     if LARGE_LEATHER_BOUND_BOOK carried
     > SORRY I CAN'T
     > SOMETHING WON'T FIT
 
-83: 4050
-LOO
+83: 4050 0 0 0 0 0 10564 0
+LOOK
     : clear screen
     : look
 
-84: 1526
+84: 1526 523 520 0 0 0 7800 0
 GET RUG
     if RUG carried or in room
     : take RUG
 
-85: 195
-GO CRA
+85: 195 762 340 0 0 0 8126 8464
+GO CRACK
     if ROCK_WALL_WITH_NARROW_CRACK_IN_IT in room
     : teleport to LARGE_CAVERN
     > IT WAS A TIGHT SQUEEZE!
     : turn on dark
     : look
 
-86: 195
-GO CRA
+86: 195 782 360 0 0 0 8157 10564
+GO CRACK
     if NARROW_CRACK_IN_THE_ROCK in room
     : teleport to TOP_OF_HILL
     : turn off dark
     : clear screen
     : look
 
-87: 7530
-SET SAI
+87: 7530 404 242 1053 89 0 17250 0
+SET SAIL
     if room = ON_PIRATE_SHIP
     if WICKED_LOOKING_PIRATE in room
     if THE_TIDE_IS_OUT somewhere
     if flag 4 false
     > PIRATE SAYS -AYE MATEY WE BE WAITING FOR THE TIDE TO COME IN-
 
-88: 4800
-YOH
+88: 4800 0 0 0 0 0 450 0
+YOHO
     > NOTHING HAPPENS
 
-89: 5868
-OPE BAG
+89: 5868 103 200 69 60 0 4553 8700
+OPEN BAG
     if PIRATE'S_DUFFLE_BAG carried or in room
     if flag 3 false
     > SOMETHING FALLS OUT
     : drop MATCHES
     : set flag 3 true
 
-90: 5868
-OPE BAG
+90: 5868 68 0 0 0 0 494 0
+OPEN BAG
     if flag 3 true
     > NOTHING HAPPENS
     > ITS EMPTY
 
-91: 1546
-GET WAT
+91: 1546 146 0 0 0 0 4800 0
+GET WATER
     if EMPTY_BOTTLE not carried
     > I'VE NO CONTAINER
 
-92: 1546
-GET WAT
+92: 1546 802 141 140 840 0 8302 0
+GET WATER
     if SALT_WATER in room
     if EMPTY_BOTTLE carried
     : send EMPTY_BOTTLE to nowhere
     : take BOTTLE_OF_SALT_WATER
 
-93: 2746
-DRO WAT
+93: 2746 841 840 140 0 0 8302 4950
+DROP WATER
     if BOTTLE_OF_SALT_WATER carried
     : send BOTTLE_OF_SALT_WATER to nowhere
     : take EMPTY_BOTTLE
     > IT SOAKS INTO THE GROUND
 
-94: 3496
-DRI WAT
+94: 3496 802 0 0 0 0 811 0
+DRINK WATER
     if SALT_WATER in room
     > THAT'S NOT VERY SAFE
     : dead
 
-95: 3496
-DRI WAT
+95: 3496 841 840 140 0 0 811 8302
+DRINK WATER
     if BOTTLE_OF_SALT_WATER carried
     > THAT'S NOT VERY SAFE
     : dead
     : send BOTTLE_OF_SALT_WATER to nowhere
     : take EMPTY_BOTTLE
 
-96: 7366
-WAK PIR
+96: 7366 822 820 240 400 0 5305 9300
+WAKE PIRATE
     if SLEEPING_PIRATE in room
     > PIRATE AWAKENS. SAYS -AYE MATEY WE BE CASTING OFF SOON- HE THEN VANISHES
     : send SLEEPING_PIRATE to nowhere
     : WICKED_LOOKING_PIRATE goes to ON_PIRATE_SHIP
 
-97: 5861
-OPE BOT
+97: 5861 503 0 0 0 0 2100 0
+OPEN BOTTLE
     if BOTTLE_OF_RUM carried or in room
     > ITS OPEN
 
-98: 8411
-EMP BOT
+98: 8411 501 500 140 0 0 5459 7833
+EMPTY BOTTLE
     if BOTTLE_OF_RUM carried
     > WHAT A WASTE...
     : send BOTTLE_OF_RUM to nowhere
     : take EMPTY_BOTTLE
     > IT SOAKS INTO THE GROUND
 
-99: 192
-GO BOA
+99: 192 742 400 0 0 0 8170 9600
+GO BOAT
     if PIRATE_SHIP in room
     : teleport to ON_PIRATE_SHIP
     : clear screen
     : look
 
-100: 201
-GO SHO
+100: 201 404 88 420 240 242 8170 8071
+GO SHORE
     if room = ON_PIRATE_SHIP
     if flag 4 true
     if WICKED_LOOKING_PIRATE in room
@@ -670,115 +670,115 @@ GO SHO
     : drop WICKED_LOOKING_PIRATE
     > PIRATE FOLLOWS YOU ASHORE AS IF HE IS WAITING FOR SOMETHING.
 
-101: 201
-GO SHO
+101: 201 404 89 120 0 0 8170 9600
+GO SHORE
     if room = ON_PIRATE_SHIP
     if flag 4 false
     : teleport to SANDY_BEACH
     : clear screen
     : look
 
-102: 7530
-SET SAI
+102: 7530 404 245 0 0 0 2737 0
+SET SAIL
     if room = ON_PIRATE_SHIP
     if WICKED_LOOKING_PIRATE not in room
     > SORRY I CAN'T
     > I'VE NO CREW
 
-103: 7530
-SET SAI
+103: 7530 404 912 0 0 0 2738 0
+SET SAIL
     if room = ON_PIRATE_SHIP
     if MAP not carried or in room
     > SORRY I CAN'T
     > PIRATE SAYS -AYE MATEY WE BE NEEDING A MAP FIRST-
 
-104: 7530
-SET SAI
+104: 7530 404 89 80 740 420 5908 9300
+SET SAIL
     if room = ON_PIRATE_SHIP
     if flag 4 false
     > AFTER A MONTH AT SEA WE SET ANCHOR OFF OF A SANDY BEACH. ALL ASHORE WHO'S GOING ASHORE...
     : set flag 4 true
     : PIRATE_SHIP goes to BEACH_AT_TREASURE_ISLAND
 
-105: 7530
-SET SAI
+105: 7530 404 88 80 740 120 5910 9300
+SET SAIL
     if room = ON_PIRATE_SHIP
     if flag 4 true
     > AFTER A MONTH AT SEA WE SET ANCHOR OFF OF A SANDY BEACH. ALL ASHORE WHO'S GOING ASHORE...
     : set flag 4 false
     : PIRATE_SHIP goes to SANDY_BEACH
 
-106: 7671
-CAS OFF
+106: 7671 0 0 0 0 0 6000 0
+CAST OFF
     > TRY -WEIGH ANCHOR-
 
-107: 4553
-REA MAP
+107: 4553 903 0 0 0 0 6300 0
+READ MAP
     if MAP carried or in room
     > ITS A MAP TO TREASURE ISLAND. AT THE BOTTOM IT SAYS -30 PACES AND THEN DIG!-
 
-108: 1350
-SAI
+108: 1350 0 0 0 0 0 6000 0
+SAIL
     > TRY -WEIGH ANCHOR-
 
-109: 1510
-GET BOO
+109: 1510 62 60 0 0 0 7800 0
+GET BOOK
     if LARGE_LEATHER_BOUND_BOOK in room
     : take LARGE_LEATHER_BOUND_BOOK
 
-110: 5860
-OPE BOO
+110: 5860 63 0 0 0 0 18000 0
+OPEN BOOK
     if LARGE_LEATHER_BOUND_BOOK carried or in room
     > NOTE HERE -I BE LIKING PARROTS. THEY BE SMART MATEY-
 
-111: 201
-GO SHO
+111: 201 404 88 420 0 0 8170 9600
+GO SHORE
     if room = ON_PIRATE_SHIP
     if flag 4 true
     : teleport to BEACH_AT_TREASURE_ISLAND
     : clear screen
     : look
 
-112: 186
-GO PAT
+112: 186 284 360 0 0 0 8170 9600
+GO PATH
     if room = FOOT_OF_HILL
     : teleport to TOP_OF_HILL
     : clear screen
     : look
 
-113: 1539
-GET PAR
+113: 1539 482 242 0 0 0 1800 0
+GET PARROT
     if PARROT in room
     if WICKED_LOOKING_PIRATE in room
     > PIRATE WON'T LET ME
 
-114: 1539
-GET PAR
+114: 1539 482 480 0 0 0 7904 16800
+GET PARROT
     if PARROT in room
     : take PARROT
     > THE PARROT CRYS
     > -PIECES OF EIGHT-
 
-115: 194
-GO SHE
+115: 194 682 300 0 0 0 8170 9600
+GO SHED
     if TOOL_SHED in room
     : teleport to TOOL_SHED
     : clear screen
     : look
 
-116: 174
+116: 174 149 464 140 0 0 8751 0
 GO 30
     if flag 7 false
     if room = LARGE_BARREN_FIELD
     : set flag 7 true
     > OK I WALKED OFF 30 PACES.
 
-117: 174
+117: 174 160 0 0 0 0 8751 0
 GO 30
     : set flag 8 true
     > OK I WALKED OFF 30 PACES.
 
-118: 7800
+118: 7800 444 940 921 952 0 10548 8014
 DIG
     if room = GRAVEYARD
     if SHOVEL carried
@@ -788,13 +788,13 @@ DIG
     : drop MOULDY_OLD_BONES
     : look
 
-119: 7800
+119: 7800 124 921 0 0 0 7350 0
 DIG
     if room = SANDY_BEACH
     if SHOVEL carried
     > I DIDN'T FIND ANYTHING
 
-120: 7800
+120: 7800 424 992 980 921 0 10553 7264
 DIG
     if room = BEACH_AT_TREASURE_ISLAND
     if BOTTLES_OF_RUM not carried or in room
@@ -804,14 +804,14 @@ DIG
     > I FOUND SOMETHING!
     : look
 
-121: 8250
-JUM
+121: 8250 104 0 0 0 0 10505 9600
+JUMP
     if room = LEDGE_OF_TALL_BUILDING
     : clear screen
     > THAT'S NOT VERY SAFE
     : look
 
-122: 7800
+122: 7800 464 148 1140 921 1152 10553 7264
 DIG
     if room = LARGE_BARREN_FIELD
     if flag 7 true
@@ -822,176 +822,176 @@ DIG
     > I FOUND SOMETHING!
     : look
 
-123: 1541
-GET NAI
+123: 1541 643 640 0 0 0 7800 0
+GET NAILS
     if NAILS carried or in room
     : take NAILS
 
-124: 163
-GO WIN
+124: 163 104 40 0 0 0 8170 9600
+GO WINDOW
     if room = LEDGE_OF_TALL_BUILDING
     : teleport to ALCOVE
     : clear screen
     : look
 
-125: 6300
-HEL
+125: 6300 44 0 0 0 0 15450 0
+HELP
     if room = ALCOVE
     > READING EXPANDS THE MIND
 
-126: 4534
-REA PLA
+126: 4534 583 0 0 0 0 4650 0
+READ PLANS
     if SET_OF_PLANS carried or in room
     > THEY'RE PLANS TO BUILD JOLLY ROGER (A PIRATE SHIP!). YOU'LL NEED HAMMER NAILS LUMBER ANCHOR SAILS AND KEEL.
 
-127: 6187
-UNL DOO
+127: 6187 702 541 0 0 0 2713 16050
+UNLOCK DOOR
     if LOCKED_DOOR in room
     if RING_OF_KEYS carried
     > SORRY I CAN'T
     > ITS LOCKED
     > FROM THE OTHER SIDE!
 
-128: 5887
-OPE DOO
+128: 5887 702 0 0 0 0 2713 0
+OPEN DOOR
     if LOCKED_DOOR in room
     > SORRY I CAN'T
     > ITS LOCKED
 
-129: 5887
-OPE DOO
+129: 5887 0 722 0 0 0 2100 0
+OPEN DOOR
     if OPEN_DOOR_WITH_PIT_BEYOND in room
     > ITS OPEN
 
-130: 198
-GO LAG
+130: 198 1022 480 0 0 0 8170 9600
+GO LAGOON
     if LAGOON in room
     : teleport to LAGOON
     : clear screen
     : look
 
-131: 157
-GO STA
+131: 157 2 24 40 0 0 8170 9600
+GO STAIRS
     if FLIGHT_OF_STAIRS in room
     if room = APARTMENT
     : teleport to ALCOVE
     : clear screen
     : look
 
-132: 1510
-GET BOO
+132: 1510 44 60 40 80 85 7801 10800
+GET BOOK
     if room = ALCOVE
     if BOOKCASE_WITH_A_SECRET_PASSAGE_BEHIND_IT not in room
     : take LARGE_LEATHER_BOUND_BOOK
     > THERE'S A STRANGE SOUND
     : swap items BOOKS_IN_A_BOOKCASE and BOOKCASE_WITH_A_SECRET_PASSAGE_BEHIND_IT
 
-133: 1532
-GET ANC
+133: 1532 302 208 300 0 0 7800 0
+GET ANCHOR
     if RUSTY_ANCHOR in room
     if flag 10 true
     : take RUSTY_ANCHOR
 
-134: 1532
-GET ANC
+134: 1532 302 209 0 0 0 2813 0
+GET ANCHOR
     if RUSTY_ANCHOR in room
     if flag 10 false
     > SORRY I CAN'T
     > ITS STUCK IN THE SAND
 
-135: 1532
-GET ANC
+135: 1532 305 0 0 0 0 10518 7564
+GET ANCHOR
     if RUSTY_ANCHOR not in room
     : clear screen
     > SORRY I CAN'T
     > I DON'T SEE IT HERE
     : look
 
-136: 8411
-EMP BOT
+136: 8411 841 840 140 0 0 8902 4950
+EMPTY BOTTLE
     if BOTTLE_OF_SALT_WATER carried
     : send BOTTLE_OF_SALT_WATER to nowhere
     : take EMPTY_BOTTLE
     > IT SOAKS INTO THE GROUND
 
-137: 165
-GO MON
+137: 165 1122 500 0 0 0 8170 9600
+GO MONASTARY
     if MONASTARY in room
     : teleport to MONASTARY
     : clear screen
     : look
 
-138: 1392
-SAI BOA
+138: 1392 0 0 0 0 0 6000 0
+SAIL BOAT
     > TRY -WEIGH ANCHOR-
 
-139: 6300
-HEL
+139: 6300 284 0 0 0 0 16350 0
+HELP
     if room = FOOT_OF_HILL
     > THERE'S MULTIPLE EXITS HERE!
 
-140: 8582
-WEI ANC
+140: 8582 0 0 0 0 0 17700 0
+WEIGH ANCHOR
     > ABOUT 20 POUNDS. TRY -SET SAIL-
 
-141: 7800
+141: 7800 921 209 302 200 0 8700 0
 DIG
     if SHOVEL carried
     if flag 10 false
     if RUSTY_ANCHOR in room
     : set flag 10 true
 
-142: 7950
-BUR
+142: 7950 0 0 0 0 0 2700 0
+BURY
     > SORRY I CAN'T
 
-143: 5908
-OPE BOX
+143: 5908 621 1143 1000 0 0 4553 0
+OPEN BOX
     if CLAW_HAMMER carried
     if PLAIN_WOODEN_BOX carried or in room
     > SOMETHING FALLS OUT
     : drop RARE_OLD_PRICELESS_STAMPS
 
-144: 5266
-KIL PIR
+144: 5266 0 0 0 0 0 1800 0
+KILL PIRATE
     > PIRATE WON'T LET ME
 
-145: 6300
-HEL
+145: 6300 224 0 0 0 0 17517 17850
+HELP
     if room = PIT
     > THE TIDE IS OUT
     > THE TIDE IS COMING IN
     > -TIDES A CHANGING MATEY-
 
-146: 1200
+146: 1200 0 0 0 0 0 17100 0
 SAY
     > USE 1 WORD
 
-147: 6300
-HEL
+147: 6300 124 0 0 0 0 16350 0
+HELP
     if room = SANDY_BEACH
     > THERE'S MULTIPLE EXITS HERE!
 
-148: 4350
-WAI
+148: 4350 208 1040 1060 0 0 10919 0
+WAIT
     if flag 10 true
     : swap items THE_TIDE_IS_OUT and THE_TIDE_IS_COMING_IN
     > -TIDES A CHANGING MATEY-
 
-149: 6300
-HEL
+149: 6300 184 242 0 0 0 3600 0
+HELP
     if room = GRASS_SHACK
     if WICKED_LOOKING_PIRATE in room
     > -MAGIC WORD- HO AND A... (WORK ON IT. YOU'LL GET IT)
 
-150: 7800
+150: 7800 921 160 140 0 0 7410 9000
 DIG
     if SHOVEL carried
     > I DIDN'T FIND ANYTHING
     : set flag 8 false
     : set flag 7 false
 
-151: 6300
-HEL
+151: 6300 0 0 0 0 0 450 0
+HELP
     > NOTHING HAPPENS
 
