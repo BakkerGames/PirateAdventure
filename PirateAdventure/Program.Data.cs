@@ -1,4 +1,4 @@
-﻿// Program.Data.cs - 12/04/2018
+﻿// Program.Data.cs - 12/06/2018
 
 namespace PirateAdventure
 {
@@ -137,7 +137,8 @@ namespace PirateAdventure
                 { 7671, 0, 0, 0, 0, 0, 6000, 0 },                 // 106
                 { 4553, 903, 0, 0, 0, 0, 6300, 0 },               // 107
                 { 1350, 0, 0, 0, 0, 0, 6000, 0 },                 // 108
-                { 1510, 62, 60, 0, 0, 0, 7800, 0 },               // 109
+                // { 1510, 62, 60, 0, 0, 0, 7800, 0 },            // 109 - wrong
+                { 1510, 62, 60, 0, 0, 0, 7922, 0 },               // 109 - corrected
                 { 5860, 63, 0, 0, 0, 0, 18000, 0 },               // 110
                 { 201, 404, 88, 420, 0, 0, 8170, 9600 },          // 111
                 { 186, 284, 360, 0, 0, 0, 8170, 9600 },           // 112
@@ -185,130 +186,66 @@ namespace PirateAdventure
 
         private static string[,] _verbNounList = new string[_wordCount, 2]
             {
-                { "", "" },          // 0
-                { "GO", "NORTH" },   // 1
-                { "*CLI", "SOUTH" }, // 2
-                { "*WAL", "EAST" },  // 3
-                { "*RUN", "WEST" },  // 4
-                { "*ENT", "UP" },    // 5
-                { "*PAC", "DOWN" },  // 6
-                { "*FOL", "STA" },   // 7
-                { "SAY", "PAS" },    // 8
-                { "SAI", "HAL" },    // 9
-                { "GET", "BOO" },    // 10
-                { "*TAK", "BOT" },   // 11
-                { "*CAT", "*RUM" },  // 12
-                { "*PIC", "WIN" },   // 13
-                { "*REM", "GAM" },   // 14
-                { "*WEA", "MON" },   // 15
-                { "*PUL", "PIR" },   // 16
-                { "FLY", "ARO" },    // 17
-                { "DRO", "BAG" },    // 18
-                { "*REL", "*DUF" },  // 19
-                { "*THR", "TOR" },   // 20
-                { "*LEA", "OFF" },   // 21
-                { "*GIV", "MAT" },   // 22
-                { "DRI", "YOH" },    // 23
-                { "*EAT", "30" },    // 24
-                { "INV", "LUM" },    // 25
-                { "SAI", "RUG" },    // 26
-                { "LOO", "KEY" },    // 27
-                { "*SHO", "INV" },   // 28
-                { "WAI", "DUB" },    // 29
-                { "REA", "SAI" },    // 30
-                { "", "FIS" },       // 31
-                { "YOH", "ANC" },    // 32
-                { "SCO", "SHA" },    // 33
-                { "SAV", "PLA" },    // 34
-                { "KIL", "CAV" },    // 35
-                { "*ATT", "PAT" },   // 36
-                { "LIG", "DOO" },    // 37
-                { "", "CHE" },       // 38
-                { "OPE", "PAR" },    // 39
-                { "*SMA", "HAM" },   // 40
-                { "UNL", "NAI" },    // 41
-                { "HEL", "BOA" },    // 42
-                { "AWA", "*SHI" },   // 43
-                { "*BUN", "SHE" },   // 44
-                { "", "CRA" },       // 45
-                { "QUI", "WAT" },    // 46
-                { "BUI", "*SAL" },   // 47
-                { "*MAK", "LAG" },   // 48
-                { "WAK", "*TID" },   // 49
-                { "SET", "PIT" },    // 50
-                { "CAS", "SHO" },    // 51
-                { "DIG", "*BEA" },   // 52
-                { "BUR", "MAP" },    // 53
-                { "FIN", "PAC" },    // 54
-                { "JUM", "BON" },    // 55
-                { "EMP", "HOL" },    // 56
-                { "WEI", "SAN" },    // 57
-                { "", "BOX" },       // 58
-                { "", "SNE" },       // 59
-            };
-
-        private static string[,] _verbNounListFullWord = new string[_wordCount, 2]
-            {
-                { "", "" },          // 0
-                { "GO", "NORTH" },   // 1
-                { "*CLIMB", "SOUTH" }, // 2
-                { "*WALK", "EAST" },  // 3
-                { "*RUN", "WEST" },  // 4
-                { "*ENTER", "UP" },    // 5
-                { "*PACE", "DOWN" },  // 6
+                { "", "" },                // 0
+                { "GO", "NORTH" },         // 1
+                { "*CLIMB", "SOUTH" },     // 2
+                { "*WALK", "EAST" },       // 3
+                { "*RUN", "WEST" },        // 4
+                { "*ENTER", "UP" },        // 5
+                { "*PACE", "DOWN" },       // 6
                 { "*FOLLOW", "STAIRS" },   // 7
-                { "SAY", "PASSAGEWAY" },    // 8
-                { "SAIL", "HALL" },    // 9
-                { "GET", "BOOK" },    // 10
-                { "*TAKE", "BOTTLE" },   // 11
-                { "*CATCH", "*RUM" },  // 12
-                { "*PICK", "WINDOW" },   // 13
-                { "*REMOVE", "GAME" },   // 14
-                { "*WEAR", "MONASTARY" },   // 15
-                { "*PULL", "PIRATE" },   // 16
-                { "FLY", "AROUND" },    // 17
-                { "DROP", "BAG" },    // 18
-                { "*RELEASE", "*DUFFLE" },  // 19
-                { "*THROW", "TORCH" },   // 20
-                { "*LEAVE", "OFF" },   // 21
-                { "*GIVE", "MATCHES" },   // 22
-                { "DRINK", "YOHO" },    // 23
-                { "*EAT", "30" },    // 24
-                { "INVENTORY", "LUMBER" },    // 25
-                { "SAIL", "RUG" },    // 26
-                { "LOOK", "KEY" },    // 27
-                { "*SHOW", "INVENTORY" },   // 28
+                { "SAY", "PASSAGEWAY" },   // 8
+                { "SAIL", "HALL" },        // 9
+                { "GET", "BOOK" },         // 10
+                { "*TAKE", "BOTTLE" },     // 11
+                { "*CATCH", "*RUM" },      // 12
+                { "*PICK", "WINDOW" },     // 13
+                { "*REMOVE", "GAME" },     // 14
+                { "*WEAR", "MONASTARY" },  // 15
+                { "*PULL", "PIRATE" },     // 16
+                { "FLY", "AROUND" },       // 17
+                { "DROP", "BAG" },         // 18
+                { "*RELEASE", "*DUFFLE" }, // 19
+                { "*THROW", "TORCH" },     // 20
+                { "*LEAVE", "OFF" },       // 21
+                { "*GIVE", "MATCHES" },    // 22
+                { "DRINK", "YOHO" },       // 23
+                { "*EAT", "30" },          // 24
+                { "INVENTORY", "LUMBER" }, // 25
+                { "SAIL", "RUG" },         // 26
+                { "LOOK", "KEY" },         // 27
+                { "*SHOW", "INVENTORY" },  // 28
                 { "WAIT", "DUBLOONS" },    // 29
-                { "READ", "SAIL" },    // 30
-                { "", "FISH" },       // 31
-                { "YOHO", "ANCHOR" },    // 32
-                { "SCORE", "SHACK" },    // 33
-                { "SAVE", "PLANS" },    // 34
-                { "KILL", "CAVE" },    // 35
-                { "*ATTACK", "PATH" },   // 36
-                { "LIGHT", "DOOR" },    // 37
-                { "", "CHEST" },       // 38
-                { "OPEN", "PARROT" },    // 39
-                { "*SMASH", "HAMMER" },   // 40
-                { "UNLOCK", "NAILS" },    // 41
-                { "HELP", "BOAT" },    // 42
-                { "AWAKE", "*SHIP" },   // 43
-                { "*BUNCH", "SHED" },   // 44
-                { "", "CRACK" },       // 45
-                { "QUIT", "WATER" },    // 46
-                { "BUILD", "*SALT" },   // 47
-                { "*MAKE", "LAGOON" },   // 48
-                { "WAKE", "*TIDE" },   // 49
-                { "SET", "PIT" },    // 50
-                { "CAST", "SHORE" },    // 51
-                { "DIG", "*BEACH" },   // 52
-                { "BURY", "MAP" },    // 53
-                { "FIND", "PACE" },    // 54
-                { "JUMP", "BONE" },    // 55
-                { "EMPTY", "HOLE" },    // 56
-                { "WEIGH", "SAND" },    // 57
-                { "", "BOX" },       // 58
-                { "", "SNE" },       // 59
+                { "READ", "SAIL" },        // 30
+                { "", "FISH" },            // 31
+                { "YOHO", "ANCHOR" },      // 32
+                { "SCORE", "SHACK" },      // 33
+                { "SAVE", "PLANS" },       // 34
+                { "KILL", "CAVE" },        // 35
+                { "*ATTACK", "PATH" },     // 36
+                { "LIGHT", "DOOR" },       // 37
+                { "", "CHEST" },           // 38
+                { "OPEN", "PARROT" },      // 39
+                { "*SMASH", "HAMMER" },    // 40
+                { "UNLOCK", "NAILS" },     // 41
+                { "HELP", "BOAT" },        // 42
+                { "AWA", "*SHIP" },        // 43 - not sure what verb AWA is
+                { "*BUN", "SHED" },        // 44 - not sure what verb BUN is
+                { "", "CRACK" },           // 45
+                { "QUIT", "WATER" },       // 46
+                { "BUILD", "*SALT" },      // 47
+                { "*MAKE", "LAGOON" },     // 48
+                { "WAKE", "*TIDE" },       // 49
+                { "SET", "PIT" },          // 50
+                { "CAST", "SHORE" },       // 51
+                { "DIG", "*BEACH" },       // 52
+                { "BURY", "MAP" },         // 53
+                { "FIND", "PACE" },        // 54
+                { "JUMP", "BONE" },        // 55
+                { "EMPTY", "HOLE" },       // 56
+                { "WEIGH", "SAND" },       // 57
+                { "", "BOX" },             // 58
+                { "", "SNEAKERS" },        // 59
             };
 
         private static int[,] _roomExitArray = new int[_roomCount, _exitDirections]

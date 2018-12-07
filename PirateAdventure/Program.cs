@@ -1,4 +1,4 @@
-﻿// Program.cs - 12/04/2018
+﻿// Program.cs - 12/06/2018
 
 using System;
 
@@ -103,6 +103,7 @@ namespace PirateAdventure
             }
 #endif
             bool foundMatch = false;
+            bool canRunActions = false;
             for (int commandNum = 0; commandNum < _commandCount; commandNum++)
             {
                 int verbPart = _commandArray[commandNum, 0] / 150;
@@ -120,11 +121,12 @@ namespace PirateAdventure
                     {
                         continue;
                     }
+                    canRunActions = true;
                     RunActions(commandNum);
                     break; // only run one command
                 }
             }
-            if (!foundMatch)
+            if (!foundMatch || !canRunActions)
             {
                 if (currVerbNumber == 1) // go
                 {
@@ -170,7 +172,16 @@ namespace PirateAdventure
                         }
                         else if (_itemLocation[itemNum] == currRoomNumber)
                         {
-                            if (_itemDescriptions[itemNum].EndsWith($"/{_verbNounList[currNounNumber, 1]}/"))
+                            string itemName = _verbNounList[currNounNumber, 1];
+                            if (itemName.StartsWith("*"))
+                            {
+                                itemName = itemName.Substring(1);
+                            }
+                            if (itemName.Length > _wordSize) // trim longer nouns
+                            {
+                                itemName = itemName.Substring(0, _wordSize);
+                            }
+                            if (_itemDescriptions[itemNum].EndsWith($"/{itemName}/"))
                             {
                                 foundItem = itemNum;
                             }
@@ -198,7 +209,16 @@ namespace PirateAdventure
                     {
                         if (_itemLocation[itemNum] == -1)
                         {
-                            if (_itemDescriptions[itemNum].EndsWith($"/{_verbNounList[currNounNumber, 1]}/"))
+                            string itemName = _verbNounList[currNounNumber, 1];
+                            if (itemName.StartsWith("*"))
+                            {
+                                itemName = itemName.Substring(1);
+                            }
+                            if (itemName.Length > _wordSize) // trim longer nouns
+                            {
+                                itemName = itemName.Substring(0, _wordSize);
+                            }
+                            if (_itemDescriptions[itemNum].EndsWith($"/{itemName}/"))
                             {
                                 foundItem = itemNum;
                             }
