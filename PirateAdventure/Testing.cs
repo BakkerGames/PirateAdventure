@@ -1,4 +1,4 @@
-﻿// Testing.cs - 12/04/2018
+﻿// Testing.cs - 12/06/2018
 
 using System;
 
@@ -10,10 +10,23 @@ namespace PirateAdventure
         {
             for (int X = 0; X < _commandCount; X++)
             {
-                Console.Write($"{X}:");
+                Console.Write($"{X.ToString("000")}:");
                 for (int i = 0; i < _commandValueCount; i++)
                 {
                     Console.Write($" {_commandArray[X, i]}");
+                }
+                Console.WriteLine();
+                Console.Write("    ");
+                for (int i = 0; i < _commandValueCount; i++)
+                {
+                    if (i < 1 || i > 5)
+                    {
+                        Console.Write($" {_commandArray[X, i] / 150}/{_commandArray[X, i] % 150}");
+                    }
+                    else
+                    {
+                        Console.Write($" {_commandArray[X, i] / 20}/{_commandArray[X, i] % 20}");
+                    }
                 }
                 Console.WriteLine();
                 int verb = _commandArray[X, 0] / 150;
