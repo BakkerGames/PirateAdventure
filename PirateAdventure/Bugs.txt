@@ -1,0 +1,86 @@
+ENTER COMMAND> take rug
+
+I'VE TOO MUCH TOO CARRY. TRY -TAKE INVENTORY-
+TAKEN
+
+-------------------------
+
+YOU SEE:
+   LOCKED DOOR
+
+ENTER COMMAND> unlock door
+
+
+ENTER COMMAND>
+
+--------------------------
+
+ENTER COMMAND> go shack
+
+
+ENTER COMMAND>
+
+--------------------------
+
+ENTER COMMAND> unlight torch
+
+
+ENTER COMMAND>
+
+---------------------------
+
+ENTER COMMAND> dig
+
+
+ENTER COMMAND> look
+
+I'M IN A SHALLOW LAGOON. TO THE NORTH IS THE OCEAN
+
+OBVIOUS EXITS: NORTH, SOUTH, EAST, WEST
+
+YOU SEE:
+   RUSTY ANCHOR
+   THE TIDE IS OUT
+
+ENTER COMMAND> take anchor
+
+
+ENTER COMMAND> 
+
+----------------------------
+
+ENTER COMMAND> take parrot
+
+THE PARROT CRYS
+-PIECES OF EIGHT-
+THE PARROT CRYS
+-PIECES OF EIGHT-
+
+ENTER COMMAND>
+
+----------------------------
+
+ENTER COMMAND> open box
+
+
+ENTER COMMAND> look box
+
+THERE'S SOMETHING THERE ALRIGHT. MAYBE I SHOULD...
+OPEN IT?
+
+ENTER COMMAND>
+
+-------------------------
+
+ENTER COMMAND> save game
+
+    : save game
+
+ENTER COMMAND>
+
+---------------------------------------
+
+lightRemaining is never used?
+
+---------------------------------------
+

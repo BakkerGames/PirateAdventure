@@ -1,4 +1,4 @@
-﻿// Program.Variables.cs - 12/04/2018
+﻿// Program.Variables.cs - 12/14/2018
 
 using System;
 
@@ -30,7 +30,7 @@ namespace PirateAdventure
             currNoun = "";
             currVerbNumber = 0;
             currNounNumber = 0;
-            currRoomNumber = 1;
+            currRoomNumber = _startRoom;
             needToLook = true;
             countsAsMove = false;
             darkFlag = false;
