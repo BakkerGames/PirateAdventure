@@ -1,4 +1,4 @@
-﻿// Testing.cs - 12/06/2018
+﻿// Testing.cs - 12/14/2018
 
 using System;
 
@@ -41,7 +41,14 @@ namespace PirateAdventure
                 }
                 else
                 {
-                    Console.WriteLine($"{_verbNounList[verb, 0]} {_verbNounList[noun, 1]}");
+                    if (verb == 41 && noun == 20)
+                    {
+                        Console.WriteLine("UNLIGHT TORCH"); // unlock and unlight are both the verb "UNL", need special handling
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{_verbNounList[verb, 0]} {_verbNounList[noun, 1]}");
+                    }
                 }
                 for (int w = 1; w <= 5; w++)
                 {
@@ -196,7 +203,7 @@ namespace PirateAdventure
                     Console.WriteLine("    : set flag 0 false");
                     break;
                 case 18: // torch recharged
-                    Console.WriteLine("    : torch is recharged and put in inventory");
+                    Console.WriteLine("    : torch recharged");
                     break;
                 case 19: // clear screen
                     Console.WriteLine("    : clear screen");

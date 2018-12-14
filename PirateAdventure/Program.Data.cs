@@ -19,6 +19,8 @@ namespace PirateAdventure
         private const int _treasureRoom = 1;
         private const int _flagCount = 16;
 
+        // special item numbers for use in code
+        private const int _unlitTorchItem = 8;
         private const int _litTorchItem = 9;
 
         private static bool[] _systemFlags = new bool[_flagCount + 1];
@@ -42,7 +44,7 @@ namespace PirateAdventure
                 { 100, 8, 140, 80, 500, 0, 10262, 8850 },         // 13
                 { 35, 421, 846, 420, 200, 0, 5162, 0 },           // 14
                 { 100, 129, 120, 0, 0, 0, 6508, 0 },              // 15
-                { 50, 242, 982, 820, 440, 240, 9321, 8850 },      // 16 - should send BOTTLES_OF_RUM to nowhere, but can't
+                { 50, 242, 982, 820, 440, 240, 9321, 8850 },      // 16 - should send BOTTLE_OF_RUM to nowhere, but command is full
                 { 35, 483, 69, 0, 0, 0, 15705, 0 },               // 17
                 { 10, 483, 249, 0, 0, 0, 15706, 0 },              // 18
                 { 50, 484, 1073, 1086, 0, 0, 17661, 9150 },       // 19
@@ -114,8 +116,8 @@ namespace PirateAdventure
                 { 200, 722, 220, 0, 0, 0, 10554, 9600 },          // 81
                 { 195, 762, 61, 0, 0, 0, 2727, 0 },               // 82
                 { 4050, 0, 0, 0, 0, 0, 10564, 0 },                // 83
-                // { 1526, 523, 520, 0, 0, 0, 7800, 0 },          // 84 - wrong
-                { 1526, 523, 520, 0, 0, 0, 7922, 0 },             // 84 - fixed
+                // { 1526, 523, 520, 0, 0, 0, 7800, 0 },          // 84 - wrong, unnecessary
+                { 0, 0, 0, 0, 0, 0, 0, 0 },                       // 84 - fixed
                 { 195, 762, 340, 0, 0, 0, 8126, 8464 },           // 85
                 { 195, 782, 360, 0, 0, 0, 8157, 10564 },          // 86
                 { 7530, 404, 242, 1053, 89, 0, 17250, 0 },        // 87
@@ -231,7 +233,7 @@ namespace PirateAdventure
                 { "", "CHEST" },           // 38
                 { "OPEN", "PARROT" },      // 39
                 { "*SMASH", "HAMMER" },    // 40
-                { "UNLOCK", "NAILS" },     // 41
+                { "UNLOCK", "NAILS" },     // 41 - also verb UNLIGHT
                 { "HELP", "BOAT" },        // 42
                 { "AWA", "*SHIP" },        // 43 - not sure what verb AWA is
                 { "*BUN", "SHED" },        // 44 - not sure what verb BUN is
@@ -456,7 +458,7 @@ namespace PirateAdventure
                 /* 46 */ "SHOVEL/SHO/",
                 /* 47 */ "MOULDY OLD BONES/BON/",
                 /* 48 */ "SAND/SAN/",
-                /* 49 */ "BOTTLES OF RUM/BOT/",
+                /* 49 */ "BOTTLE OF RUM/BOT/",
                 /* 50 */ "*RARE OLD PRICELESS STAMPS*/STA/",
                 /* 51 */ "LAGOON",
                 /* 52 */ "THE TIDE IS OUT",
@@ -523,7 +525,7 @@ namespace PirateAdventure
                 15, // 46 SHOVEL/SHO/
                 0,  // 47 MOULDY OLD BONES/BON/
                 6,  // 48 SAND/SAN/
-                0,  // 49 BOTTLES OF RUM/BOT/
+                0,  // 49 BOTTLE OF RUM/BOT/
                 0,  // 50 *RARE OLD PRICELESS STAMPS*/STA/
                 6,  // 51 LAGOON
                 24, // 52 THE TIDE IS OUT

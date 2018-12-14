@@ -60,10 +60,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Commands.txt" />
-    <Content Include="Resources\PIRATE.TXT" />
     <Content Include="Resources\PIRATE_RAW.TXT" />
     <Content Include="Resources\PIRATE_TOKEN.TXT" />
-    <Content Include="Resources\PIRATE_TOKEN_CMT.TXT" />
     <Content Include="Resources\PIRATE_TOKEN_LINES.TXT" />
     <Content Include="Resources\ScansText\SCAN02.TXT" />
     <Content Include="Resources\ScansText\SCAN03.TXT" />

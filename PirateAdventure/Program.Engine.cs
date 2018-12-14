@@ -1,4 +1,4 @@
-﻿// Program.Engine.cs - 12/04/2018
+﻿// Program.Engine.cs - 12/14/2018
 
 using System;
 
@@ -268,13 +268,14 @@ namespace PirateAdventure
                     _systemFlags[0] = false;
                     break;
                 case 18:
-                    // torch is recharged and put in inventory
+                    // torch recharged
+                    // ### never used ###
                     lightRemaining = _lightTotal;
-                    _itemLocation[9] = -1;
+                    _itemLocation[_litTorchItem] = -1;
                     break;
                 case 19:
                     // clear screen
-                    // do nothing for now
+                    // ### do nothing for now ###
                     break;
                 case 20:
                     // save game

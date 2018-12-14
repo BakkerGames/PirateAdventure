@@ -1,4 +1,4 @@
-﻿// Program.cs - 12/06/2018
+﻿// Program.cs - 12/14/2018
 
 using System;
 
@@ -71,9 +71,19 @@ namespace PirateAdventure
                     continue;
                 }
                 numMoves++;
-                if (darkFlag)
+                // check if torch is burning out
+                if (_itemLocation[_litTorchItem] != 0)
                 {
                     lightRemaining--;
+                    if (lightRemaining <= 0)
+                    {
+                        Console.WriteLine("LIGHT HAS RUN OUT");
+                        _itemLocation[_litTorchItem] = 0; // torch to nowhere
+                    }
+                    else if (lightRemaining < 25)
+                    {
+                        Console.WriteLine($"LIGHT RUNS OUT IN {lightRemaining} TURNS!");
+                    }
                 }
             }
         }

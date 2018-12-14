@@ -283,7 +283,7 @@ LIGHT TORCH
 
 035: 6170 181 180 160 0 0 8302 0
      41/20 9/1 9/0 8/0 0/0 0/0 55/52 0/0
-UNLOCK TORCH
+UNLIGHT TORCH
     if LIT_TORCH carried
     : send LIT_TORCH to nowhere
     : take UNLIT_TORCH
@@ -639,12 +639,9 @@ LOOK
     : clear screen
     : look
 
-084: 1526 523 520 0 0 0 7922 0
-     10/26 26/3 26/0 0/0 0/0 0/0 52/122 0/0
-GET RUG
-    if RUG carried or in room
-    : take RUG
-    > TAKEN
+084: 0 0 0 0 0 0 0 0
+     0/0 0/0 0/0 0/0 0/0 0/0 0/0 0/0
+0%
 
 085: 195 762 340 0 0 0 8126 8464
      1/45 38/2 17/0 0/0 0/0 0/0 54/26 56/64
