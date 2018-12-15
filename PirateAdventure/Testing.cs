@@ -244,7 +244,16 @@ namespace PirateAdventure
             {
                 result = result.Substring(0, result.IndexOf("/"));
             }
-            return result.Replace(" ", "_").Replace("*", "");
+            result = result.Replace(" ", "_").Replace("*", "");
+            // add {value} to items with same descriptions
+            switch (value)
+            {
+                case 25: // bottle of rum
+                case 49: // bottle of rum
+                    result += $"_{value}";
+                    break;
+            }
+            return result;
         }
 
         public static string RoomDesc(int value)

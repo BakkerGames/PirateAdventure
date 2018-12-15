@@ -27,7 +27,7 @@ namespace PirateAdventure
 
         private static int[,] _commandArray = new int[_commandCount, _commandValueCount]
             {
-                // random events
+                // background events
                 { 80, 422, 342, 420, 340, 0, 16559, 8850 },       // 0
                 { 80, 462, 482, 460, 0, 0, 15712, 1705 },         // 1
                 { 100, 521, 552, 540, 229, 220, 203, 8700 },      // 2
@@ -43,8 +43,10 @@ namespace PirateAdventure
                 { 80, 242, 502, 820, 80, 240, 9321, 10109 },      // 12
                 { 100, 8, 140, 80, 500, 0, 10262, 8850 },         // 13
                 { 35, 421, 846, 420, 200, 0, 5162, 0 },           // 14
-                { 100, 129, 120, 0, 0, 0, 6508, 0 },              // 15
-                { 50, 242, 982, 820, 440, 240, 9321, 8850 },      // 16 - should send BOTTLE_OF_RUM to nowhere, but command is full
+                // { 100, 129, 120, 0, 0, 0, 6508, 0 },           // 15 - had to remove intro message for proper rum handling
+                // { 50, 242, 982, 820, 440, 240, 9321, 8850 },   // 16 - needed more rum handling
+                { 50, 242, 982, 820, 440, 240, 9321, 10109 },     // 15
+                { 100, 8, 980, 0, 0, 0, 10259, 0 },               // 16
                 { 35, 483, 69, 0, 0, 0, 15705, 0 },               // 17
                 { 10, 483, 249, 0, 0, 0, 15706, 0 },              // 18
                 { 50, 484, 1073, 1086, 0, 0, 17661, 9150 },       // 19
@@ -256,40 +258,40 @@ namespace PirateAdventure
 
         private static int[,] _roomExitArray = new int[_roomCount, _exitDirections]
             {
-                { 0, 0, 0, 0, 0, 0 },  // 
-                { 0, 0, 0, 0, 0, 0 },  // APARTMENT IN LONDON
-                { 0, 0, 0, 0, 0, 1 },  // ALCOVE
-                { 0, 0, 4, 2, 0, 0 },  // SECRET PASSAGEWAY
-                { 0, 0, 0, 3, 0, 0 },  // MUSTY ATTIC
-                { 0, 0, 0, 0, 0, 0 },  // * I'M OUTSIDE AN OPEN WINDOW ON A LEDGE ON THE SIDE OF AVERY TALL BUILDING
-                { 0, 0, 8, 0, 0, 0 },  // SANDY BEACH ON A TROPICAL ISLE
-                { 0, 12, 13, 14, 0, 11 },  // MAZE OF CAVES
-                { 0, 0, 14, 6, 0, 0 },  // MEADOW
-                { 0, 0, 0, 8, 0, 0 },  // GRASS SHACK
-                { 10, 24, 10, 10, 0, 0 },  // *I'M IN THE OCEAN
-                { 0, 0, 0, 0, 7, 0 },  // PIT
-                { 7, 0, 14, 13, 0, 0 },  // MAZE OF CAVES
-                { 7, 14, 12, 19, 0, 0 },  // MAZE OF CAVES
-                { 0, 0, 0, 8, 0, 0 },  // *I'M AT THE FOOT OF A CAVE RIDDEN HILL.A PATH LEADS TO THE TOP
-                { 17, 0, 0, 0, 0, 0 },  // TOOL SHED
-                { 0, 0, 17, 0, 0, 0 },  // LONG HALLWAY
-                { 0, 0, 0, 16, 0, 0 },  // LARGE CAVERN
-                { 0, 0, 0, 0, 0, 14 },  // *I'M ON TOP OF A HILL. BELOW IS PIRATES ISLAND. ACROSS THE SEA OFF IN THE DISTANCE I SEE *TREASURE* ISLAND
-                { 0, 14, 14, 13, 0, 0 },  // MAZE OF CAVES
-                { 0, 0, 0, 0, 0, 0 },  // *I'M ABOARD PIRATE SHIP ANCHORED OFF SHORE
-                { 0, 22, 0, 0, 0, 0 },  // * I'M ON THE BEACH AT TREASURE ISLAND
-                { 21, 0, 23, 0, 0, 0 },  // SPOOKY OLD GRAVEYARD FILLED WITH PILESOF EMPTY AND BROKEN RUM BOTTLES
-                { 0, 0, 0, 22, 0, 0 },  // LARGE BARREN FIELD
-                { 10, 6, 6, 6, 0, 0 },  // SHALLOW LAGOON. TO THE NORTH IS THE OCEAN
-                { 0, 0, 0, 23, 0, 0 },  // SACKED AND DESERTED MONASTARY
-                { 0, 0, 0, 0, 0, 0 },  // 
-                { 0, 0, 0, 0, 0, 0 },  // 
-                { 0, 0, 0, 0, 0, 0 },  // 
-                { 0, 0, 0, 0, 0, 0 },  // 
-                { 0, 0, 0, 0, 0, 0 },  // 
-                { 0, 0, 0, 0, 0, 0 },  // 
-                { 0, 0, 0, 0, 0, 0 },  //
-                { 0, 0, 0, 0, 0, 0 },  // *WELCOME TO NEVER NEVER LAND
+                { 0, 0, 0, 0, 0, 0 },      // 00 NOWHERE
+                { 0, 0, 0, 0, 0, 0 },      // 01 APARTMENT IN LONDON
+                { 0, 0, 0, 0, 0, 1 },      // 02 ALCOVE
+                { 0, 0, 4, 2, 0, 0 },      // 03 SECRET PASSAGEWAY
+                { 0, 0, 0, 3, 0, 0 },      // 04 MUSTY ATTIC
+                { 0, 0, 0, 0, 0, 0 },      // 05 *I'M OUTSIDE AN OPEN WINDOW ON A LEDGE ON THE SIDE OF AVERY TALL BUILDING
+                { 0, 0, 8, 0, 0, 0 },      // 06 SANDY BEACH ON A TROPICAL ISLE
+                { 0, 12, 13, 14, 0, 11 },  // 07 MAZE OF CAVES
+                { 0, 0, 14, 6, 0, 0 },     // 08 MEADOW
+                { 0, 0, 0, 8, 0, 0 },      // 09 GRASS SHACK
+                { 10, 24, 10, 10, 0, 0 },  // 10 *I'M IN THE OCEAN
+                { 0, 0, 0, 0, 7, 0 },      // 11 PIT
+                { 7, 0, 14, 13, 0, 0 },    // 12 MAZE OF CAVES
+                { 7, 14, 12, 19, 0, 0 },   // 13 MAZE OF CAVES
+                { 0, 0, 0, 8, 0, 0 },      // 14 *I'M AT THE FOOT OF A CAVE RIDDEN HILL.A PATH LEADS TO THE TOP
+                { 17, 0, 0, 0, 0, 0 },     // 15 TOOL SHED
+                { 0, 0, 17, 0, 0, 0 },     // 16 LONG HALLWAY
+                { 0, 0, 0, 16, 0, 0 },     // 17 LARGE CAVERN
+                { 0, 0, 0, 0, 0, 14 },     // 18 *I'M ON TOP OF A HILL. BELOW IS PIRATES ISLAND. ACROSS THE SEA OFF IN THE DISTANCE I SEE *TREASURE* ISLAND
+                { 0, 14, 14, 13, 0, 0 },   // 19 MAZE OF CAVES
+                { 0, 0, 0, 0, 0, 0 },      // 20 *I'M ABOARD PIRATE SHIP ANCHORED OFF SHORE
+                { 0, 22, 0, 0, 0, 0 },     // 21 *I'M ON THE BEACH AT TREASURE ISLAND
+                { 21, 0, 23, 0, 0, 0 },    // 22 SPOOKY OLD GRAVEYARD FILLED WITH PILESOF EMPTY AND BROKEN RUM BOTTLES
+                { 0, 0, 0, 22, 0, 0 },     // 23 LARGE BARREN FIELD
+                { 10, 6, 6, 6, 0, 0 },     // 24 SHALLOW LAGOON. TO THE NORTH IS THE OCEAN
+                { 0, 0, 0, 23, 0, 0 },     // 25 SACKED AND DESERTED MONASTARY
+                { 0, 0, 0, 0, 0, 0 },      // 26
+                { 0, 0, 0, 0, 0, 0 },      // 27
+                { 0, 0, 0, 0, 0, 0 },      // 28
+                { 0, 0, 0, 0, 0, 0 },      // 29
+                { 0, 0, 0, 0, 0, 0 },      // 30
+                { 0, 0, 0, 0, 0, 0 },      // 31
+                { 0, 0, 0, 0, 0, 0 },      // 32
+                { 0, 0, 0, 0, 0, 0 },      // 33 *WELCOME TO NEVER NEVER LAND
             };
 
         private static string[] _roomLongDesc = new string[_roomCount]

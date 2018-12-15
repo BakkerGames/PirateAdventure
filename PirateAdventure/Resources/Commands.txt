@@ -99,7 +99,7 @@
      0/80 12/2 25/2 41/0 4/0 12/0 62/21 67/59
 80%
     if WICKED_LOOKING_PIRATE in room
-    if BOTTLE_OF_RUM in room
+    if BOTTLE_OF_RUM_25 in room
     : SLEEPING_PIRATE goes to MUSTY_ATTIC
     > PIRATE GRABS RUM AND SCUTTLES OFF CHORTLING
     : set flag 0 true
@@ -111,7 +111,7 @@
     if flag 0 true
     : set flag 0 false
     : EMPTY_BOTTLE goes to MUSTY_ATTIC
-    : send BOTTLE_OF_RUM to nowhere
+    : send BOTTLE_OF_RUM_25 to nowhere
 
 014: 35 421 846 420 200 0 5162 0
      0/35 21/1 42/6 21/0 10/0 0/0 34/62 0/0
@@ -121,21 +121,22 @@
     > TOO DRY. FISH VANISH.
     : FISH goes to OCEAN
 
-015: 100 129 120 0 0 0 6508 0
-     0/100 6/9 6/0 0/0 0/0 0/0 43/58 0/0
-100%
-    if flag 6 false
-    > * WELCOME TO -PIRATES ADVENTURE- BY SCOTT & ALEXIS ADAMS *
-    : set flag 6 true
-
-016: 50 242 982 820 440 240 9321 8850
-     0/50 12/2 49/2 41/0 22/0 12/0 62/21 59/0
+015: 50 242 982 820 440 240 9321 10109
+     0/50 12/2 49/2 41/0 22/0 12/0 62/21 67/59
 50%
     if WICKED_LOOKING_PIRATE in room
-    if BOTTLES_OF_RUM in room
+    if BOTTLE_OF_RUM_49 in room
     : SLEEPING_PIRATE goes to GRAVEYARD
     > PIRATE GRABS RUM AND SCUTTLES OFF CHORTLING
+    : set flag 0 true
     : send WICKED_LOOKING_PIRATE to nowhere
+
+016: 100 8 980 0 0 0 10259 0
+     0/100 0/8 49/0 0/0 0/0 0/0 68/59 0/0
+100%
+    if flag 0 true
+    : set flag 0 false
+    : send BOTTLE_OF_RUM_49 to nowhere
 
 017: 35 483 69 0 0 0 15705 0
      0/35 24/3 3/9 0/0 0/0 0/0 104/105 0/0
@@ -466,7 +467,7 @@ UNLOCK DOOR
 059: 3461 503 0 0 0 0 172 0
      23/11 25/3 0/0 0/0 0/0 0/0 1/22 0/0
 DRINK BOTTLE
-    if BOTTLE_OF_RUM carried or in room
+    if BOTTLE_OF_RUM_25 carried or in room
     > THERE'S A STRANGE SOUND
     > ...I THINK ITS ME. HEE HEE.
 
@@ -741,15 +742,15 @@ WAKE PIRATE
 097: 5861 503 0 0 0 0 2100 0
      39/11 25/3 0/0 0/0 0/0 0/0 14/0 0/0
 OPEN BOTTLE
-    if BOTTLE_OF_RUM carried or in room
+    if BOTTLE_OF_RUM_25 carried or in room
     > ITS OPEN
 
 098: 8411 501 500 140 0 0 5459 7833
      56/11 25/1 25/0 7/0 0/0 0/0 36/59 52/33
 EMPTY BOTTLE
-    if BOTTLE_OF_RUM carried
+    if BOTTLE_OF_RUM_25 carried
     > WHAT A WASTE...
-    : send BOTTLE_OF_RUM to nowhere
+    : send BOTTLE_OF_RUM_25 to nowhere
     : take EMPTY_BOTTLE
     > IT SOAKS INTO THE GROUND
 
@@ -920,10 +921,10 @@ DIG
      52/0 21/4 49/12 49/0 46/1 0/0 70/53 48/64
 DIG
     if room = BEACH_AT_TREASURE_ISLAND
-    if BOTTLES_OF_RUM not carried or in room
+    if BOTTLE_OF_RUM_49 not carried or in room
     if SHOVEL carried
     : clear screen
-    : drop BOTTLES_OF_RUM
+    : drop BOTTLE_OF_RUM_49
     > I FOUND SOMETHING!
     : look
 
