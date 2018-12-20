@@ -1,5 +1,13 @@
 ﻿// Program.SaveLoad.cs - 12/20/2018
 
+// Note: This Save/Load has checksum logic which relies on ordering of key/value pairs
+// in a JObject. When a JObject is converted to a string and back, if the order of the
+// key/value pairs is not the same, the checksum will fail. Also, if removing the checksum
+// value changes the order of the rest of the JObject, the checksum will fail. If this
+// is a possibility, the checksum logic will need to be altered. Since the JSON definition
+// of a JObject is that it is an unordered list, then some implementations may not preserve
+// the order.
+
 using Common.JSON;
 using System;
 using System.IO;
