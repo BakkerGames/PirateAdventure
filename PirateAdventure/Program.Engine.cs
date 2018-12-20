@@ -279,7 +279,10 @@ namespace PirateAdventure
                     break;
                 case 20:
                     // save game
-                    Console.WriteLine("    : save game");
+                    SaveGameData();
+                    Console.WriteLine("SAVED");
+                    gameOver = true;
+                    gameSaved = true;
                     break;
                 case 21:
                     // swap two items

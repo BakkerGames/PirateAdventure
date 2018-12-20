@@ -6,14 +6,14 @@ namespace PirateAdventure
 {
     public partial class Program
     {
-        static void Main(string[] args)
+        public static int Main(string[] args)
         {
             if (args.Length > 0)
             {
                 if (args[0].Equals("/test", StringComparison.OrdinalIgnoreCase))
                 {
                     TestData();
-                    return;
+                    return 0;
                 }
                 if (args[0].Equals("/debug", StringComparison.OrdinalIgnoreCase))
                 {
@@ -22,21 +22,30 @@ namespace PirateAdventure
             }
             try
             {
+                if (!LoadGameData())
+                {
+                    Initialize();
+                }
                 RunGame();
-                Console.WriteLine(_numberOfMovesMessage());
+                if (!gameSaved)
+                {
+                    Console.WriteLine(_numberOfMovesMessage());
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                Console.ReadLine();
+                return 1;
             }
             Console.WriteLine();
             Console.Write(_endingMessage);
             Console.ReadLine();
+            return 0;
         }
 
         private static void RunGame()
         {
-            Initialize();
             ShowIntroduction();
             while (!gameOver)
             {

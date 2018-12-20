@@ -1,9 +1,12 @@
-﻿// Program.Data.cs - 12/14/2018
+﻿// Program.Data.cs - 12/20/2018
 
 namespace PirateAdventure
 {
     partial class Program
     {
+        private const string _gameName = "PirateAdventure";
+        private const int _version = 20181220;
+
         private const int _itemCount = 61;
         private const int _commandCount = 152;
         private const int _commandValueCount = 8;

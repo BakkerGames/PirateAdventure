@@ -1,4 +1,4 @@
-﻿// Program.Variables.cs - 12/14/2018
+﻿// Program.Variables.cs - 12/20/2018
 
 using System;
 
@@ -8,6 +8,7 @@ namespace PirateAdventure
     {
         private static Random sysRand = new Random();
         private static bool gameOver = false;
+        private static bool gameSaved = false;
         private static int numMoves = 0;
         private static string currCommandLine = "";
         private static string currVerb = "";
@@ -38,6 +39,10 @@ namespace PirateAdventure
             for (int i = 0; i < _itemCount; i++)
             {
                 _itemLocation[i] = _itemStartLocation[i];
+            }
+            for (int i = 0; i< _flagCount; i++)
+            {
+                _systemFlags[i] = false;
             }
         }
     }
