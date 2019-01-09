@@ -1,13 +1,17 @@
 ﻿// Testing.cs - 01/09/2019
 
 using System;
+using System.IO;
+using System.Text;
 
 namespace PirateAdventure
 {
     partial class Program
     {
         private static string CommandOutputFilename = "D:\\Projects\\PirateAdventure\\PirateAdventure\\Resources\\Commands.txt";
-        
+
+        private static StringBuilder commandCodeText = new StringBuilder();
+
         public static void TestData()
         {
             for (int X = 0; X < _commandCount; X++)
@@ -118,12 +122,20 @@ namespace PirateAdventure
                 }
                 TestingWriteLine();
             }
+            try
+            {
+                File.WriteAllText(CommandOutputFilename, commandCodeText.ToString());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error while outputing: {ex.Message}");
+            }
             Console.ReadLine();
         }
 
         private static void TestingWriteLine()
         {
-            TestingWrite("\n");
+            TestingWrite("\r\n");
         }
 
         private static void TestingWriteLine(string value)
@@ -134,6 +146,7 @@ namespace PirateAdventure
 
         private static void TestingWrite(string value)
         {
+            commandCodeText.Append(value);
             Console.Write(value);
         }
 
@@ -145,12 +158,12 @@ namespace PirateAdventure
             }
             if (value > 101)
             {
-                Console.WriteLine($"    > {_messages[value - 50]}");
+                TestingWriteLine($"    > {_messages[value - 50]}");
                 return;
             }
             if (value < 52)
             {
-                Console.WriteLine($"    > {_messages[value]}");
+                TestingWriteLine($"    > {_messages[value]}");
                 return;
             }
             int P = 0;
@@ -162,80 +175,80 @@ namespace PirateAdventure
                     break;
                 case 1: // take
                     P = TestGetDataValue(X, ref IP);
-                    Console.WriteLine($"    : take {ItemDesc(P)}");
+                    TestingWriteLine($"    : take {ItemDesc(P)}");
                     break;
                 case 2: // drop
                     P = TestGetDataValue(X, ref IP);
-                    Console.WriteLine($"    : drop {ItemDesc(P)}");
+                    TestingWriteLine($"    : drop {ItemDesc(P)}");
                     break;
                 case 3: // teleport
                     P = TestGetDataValue(X, ref IP);
-                    Console.WriteLine($"    : teleport to {RoomDesc(P)}");
+                    TestingWriteLine($"    : teleport to {RoomDesc(P)}");
                     break;
                 case 4: // item to nowhere
                     P = TestGetDataValue(X, ref IP);
-                    Console.WriteLine($"    : send {ItemDesc(P)} to nowhere");
+                    TestingWriteLine($"    : send {ItemDesc(P)} to nowhere");
                     break;
                 case 5: // turn on dark
-                    Console.WriteLine($"    : turn on dark");
+                    TestingWriteLine($"    : turn on dark");
                     break;
                 case 6: // turn off dark
-                    Console.WriteLine($"    : turn off dark");
+                    TestingWriteLine($"    : turn off dark");
                     break;
                 case 7: // turn on flag
                     P = TestGetDataValue(X, ref IP);
-                    Console.WriteLine($"    : set flag {P} true");
+                    TestingWriteLine($"    : set flag {P} true");
                     break;
                 case 8: // item to nowhere
                     P = TestGetDataValue(X, ref IP);
-                    Console.WriteLine($"    : send {ItemDesc(P)} to nowhere");
+                    TestingWriteLine($"    : send {ItemDesc(P)} to nowhere");
                     break;
                 case 9: // turn off flag
                     P = TestGetDataValue(X, ref IP);
-                    Console.WriteLine($"    : set flag {P} false");
+                    TestingWriteLine($"    : set flag {P} false");
                     break;
                 case 10: // dead
-                    Console.WriteLine("    : dead");
+                    TestingWriteLine("    : dead");
                     break;
                 case 11: // item goes to room
                     P = TestGetDataValue(X, ref IP);
                     P1 = TestGetDataValue(X, ref IP);
-                    Console.WriteLine($"    : {ItemDesc(P)} goes to {RoomDesc(P1)}");
+                    TestingWriteLine($"    : {ItemDesc(P)} goes to {RoomDesc(P1)}");
                     break;
                 case 12: // game over
-                    Console.WriteLine("    : game over");
+                    TestingWriteLine("    : game over");
                     break;
                 case 13: // look
-                    Console.WriteLine("    : look");
+                    TestingWriteLine("    : look");
                     break;
                 case 14: // check treasures
-                    Console.WriteLine("    : check treasures");
+                    TestingWriteLine("    : check treasures");
                     break;
                 case 15: // show inventory
-                    Console.WriteLine("    : show inventory");
+                    TestingWriteLine("    : show inventory");
                     break;
                 case 16: // flag 0 true
-                    Console.WriteLine("    : set flag 0 true");
+                    TestingWriteLine("    : set flag 0 true");
                     break;
                 case 17: // flag 0 false
-                    Console.WriteLine("    : set flag 0 false");
+                    TestingWriteLine("    : set flag 0 false");
                     break;
                 case 18: // torch recharged
-                    Console.WriteLine("    : torch recharged");
+                    TestingWriteLine("    : torch recharged");
                     break;
                 case 19: // clear screen
-                    Console.WriteLine("    : clear screen");
+                    TestingWriteLine("    : clear screen");
                     break;
                 case 20: // save game
-                    Console.WriteLine("    : save game");
+                    TestingWriteLine("    : save game");
                     break;
                 case 21: // swap two items
                     P = TestGetDataValue(X, ref IP);
                     P1 = TestGetDataValue(X, ref IP);
-                    Console.WriteLine($"    : swap items {ItemDesc(P)} and {ItemDesc(P1)}");
+                    TestingWriteLine($"    : swap items {ItemDesc(P)} and {ItemDesc(P1)}");
                     break;
                 default:
-                    Console.WriteLine($"    : #{value - 51}#");
+                    TestingWriteLine($"    : #{value - 51}#");
                     break;
             }
         }
