@@ -8,7 +8,7 @@ namespace PirateAdventure
         private const int _version = 20190109;
 
         private const int _itemCount = 61;
-        private const int _commandCount = 152;
+        private const int _commandCount = 153;
         private const int _commandValueCount = 8;
         private const int _wordCount = 60;
         private const int _roomCount = 34;
@@ -18,7 +18,7 @@ namespace PirateAdventure
         private const int _totalTreasures = 2;
         private const int _wordSize = 3;
         private const int _lightTotal = 200;
-        private const int _messageCount = 74;
+        private const int _messageCount = 75;
         private const int _treasureRoom = 1;
         private const int _flagCount = 16;
         private const int _itemNowhere = 0;
@@ -215,7 +215,8 @@ namespace PirateAdventure
                 { 4350, 208, 1040, 1060, 0, 0, 10919, 0 },        // 148
                 { 6300, 184, 242, 0, 0, 0, 3600, 0 },             // 149
                 { 7800, 921, 160, 140, 0, 0, 7410, 9000 },        // 150
-                { 6300, 0, 0, 0, 0, 0, 450, 0 }                   // 151
+                { 6300, 0, 0, 0, 0, 0, 450, 0 },                  // 151
+                { 4350, 0, 0, 0, 0, 0, 18600, 0 },                // 152 - new command
             };
 
         private static string[,] _verbNounList = new string[_wordCount, 2]
@@ -355,7 +356,7 @@ namespace PirateAdventure
                 "",
                 "",
                 ".",
-                "*WELCOME TO NEVER NEVER LAND/NEVER NEVER LAND/"
+                "*WELCOME TO NEVER NEVER LAND/NEVER NEVER LAND/",
             };
 
         private static string[] _messages = new string[_messageCount]
@@ -433,7 +434,8 @@ namespace PirateAdventure
                 /* 70 */ "NOTE HERE -I BE LIKING PARROTS. THEY BE SMART MATEY-",
                 /* 71 */ "PIRATE FOLLOWS YOU ASHORE AS IF HE IS WAITING FOR SOMETHING.",
                 /* 72 */ "TAKEN",
-                /* 73 */ "THE ANCHOR COMES LOOSE"
+                /* 73 */ "THE ANCHOR COMES LOOSE",
+                /* 74 */ "TIME PASSES...",
             };
 
         private static string[] _itemDescriptions = new string[_itemCount]
