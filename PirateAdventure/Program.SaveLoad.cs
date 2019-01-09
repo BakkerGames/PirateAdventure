@@ -1,4 +1,4 @@
-﻿// Program.SaveLoad.cs - 12/20/2018
+﻿// Program.SaveLoad.cs - 01/09/2019
 
 // Note: This Save/Load has checksum logic which relies on ordering of key/value pairs
 // in a JObject. When a JObject is converted to a string and back, if the order of the
@@ -50,6 +50,10 @@ namespace PirateAdventure
 
         private static bool LoadGameData()
         {
+            if (runScript)
+            {
+                return false;
+            }
             if (!Directory.Exists(savePath))
             {
                 return false;
