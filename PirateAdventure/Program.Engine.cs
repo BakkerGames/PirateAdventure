@@ -1,4 +1,4 @@
-﻿// Program.Engine.cs - 12/14/2018
+﻿// Program.Engine.cs - 01/08/2019
 
 using System;
 
@@ -30,13 +30,13 @@ namespace PirateAdventure
                         result = true;
                         break;
                     case 1: // item carried
-                        result = (_itemLocation[conditionData] == -1);
+                        result = (_itemLocation[conditionData] == _itemInventory);
                         break;
                     case 2: // item in room
                         result = (_itemLocation[conditionData] == currRoomNumber);
                         break;
                     case 3: // item carried or in room
-                        result = (_itemLocation[conditionData] == currRoomNumber || _itemLocation[conditionData] == -1);
+                        result = (_itemLocation[conditionData] == currRoomNumber || _itemLocation[conditionData] == _itemInventory);
                         break;
                     case 4: // room matches
                         result = (currRoomNumber == conditionData);
@@ -45,7 +45,7 @@ namespace PirateAdventure
                         result = (_itemLocation[conditionData] != currRoomNumber);
                         break;
                     case 6: // item not carried
-                        result = (_itemLocation[conditionData] != -1);
+                        result = (_itemLocation[conditionData] != _itemInventory);
                         break;
                     case 7: // room doesn't match
                         result = (currRoomNumber != conditionData);
@@ -60,7 +60,7 @@ namespace PirateAdventure
                         result = false;
                         for (int i = 0; i < _itemCount; i++)
                         {
-                            if (_itemLocation[conditionData] == -1)
+                            if (_itemLocation[conditionData] == _itemInventory)
                             {
                                 result = true;
                                 break;
@@ -71,7 +71,7 @@ namespace PirateAdventure
                         result = true;
                         for (int i = 0; i < _itemCount; i++)
                         {
-                            if (_itemLocation[conditionData] == -1)
+                            if (_itemLocation[conditionData] == _itemInventory)
                             {
                                 result = false;
                                 break;
@@ -79,13 +79,13 @@ namespace PirateAdventure
                         }
                         break;
                     case 12: // item not carried and not in room
-                        result = (_itemLocation[conditionData] != -1 && _itemLocation[conditionData] != currRoomNumber);
+                        result = (_itemLocation[conditionData] != _itemInventory && _itemLocation[conditionData] != currRoomNumber);
                         break;
                     case 13: // item is somewhere
-                        result = (_itemLocation[conditionData] != 0);
+                        result = (_itemLocation[conditionData] != _itemNowhere);
                         break;
                     case 14: // item is nowhere
-                        result = (_itemLocation[conditionData] == 0);
+                        result = (_itemLocation[conditionData] == _itemNowhere);
                         break;
                     default:
                         Console.WriteLine($"#ERROR# Unknown condition: {conditionNum} {conditionData}");
@@ -164,7 +164,7 @@ namespace PirateAdventure
                     int inventoryCount = 0;
                     for (int itemNum = 0; itemNum < _itemCount; itemNum++)
                     {
-                        if (_itemLocation[itemNum] == -1)
+                        if (_itemLocation[itemNum] == _itemInventory)
                         {
                             inventoryCount++;
                         }
@@ -175,7 +175,7 @@ namespace PirateAdventure
                         return;
                     }
                     dataValue = GetDataValue(commandNum, ref dataPointer);
-                    _itemLocation[dataValue] = -1;
+                    _itemLocation[dataValue] = _itemInventory;
                     break;
                 case 2:
                     // drop to current room
@@ -190,7 +190,7 @@ namespace PirateAdventure
                 case 4:
                     // item to nowhere
                     dataValue = GetDataValue(commandNum, ref dataPointer);
-                    _itemLocation[dataValue] = 0;
+                    _itemLocation[dataValue] = _itemNowhere;
                     break;
                 case 5:
                     // turn on dark flag
@@ -208,7 +208,7 @@ namespace PirateAdventure
                 case 8:
                     // item to nowhere
                     dataValue = GetDataValue(commandNum, ref dataPointer);
-                    _itemLocation[dataValue] = 0;
+                    _itemLocation[dataValue] = _itemNowhere;
                     break;
                 case 9:
                     // turn off flag
@@ -271,7 +271,7 @@ namespace PirateAdventure
                     // torch recharged
                     // ### never used ###
                     lightRemaining = _lightTotal;
-                    _itemLocation[_litTorchItem] = -1;
+                    _itemLocation[_litTorchItem] = _itemInventory;
                     break;
                 case 19:
                     // clear screen

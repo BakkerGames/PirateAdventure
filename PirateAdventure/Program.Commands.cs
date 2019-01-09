@@ -1,4 +1,4 @@
-﻿// Program.Commands.cs - 12/04/2018
+﻿// Program.Commands.cs - 01/08/2019
 
 using System;
 
@@ -87,7 +87,7 @@ namespace PirateAdventure
             bool haveAnything = false;
             for (int i = 0; i < _itemCount; i++)
             {
-                if (_itemLocation[i] == -1)
+                if (_itemLocation[i] == _itemInventory)
                 {
                     if (!haveAnything)
                     {

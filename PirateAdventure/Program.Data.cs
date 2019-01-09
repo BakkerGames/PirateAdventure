@@ -1,4 +1,4 @@
-﻿// Program.Data.cs - 12/20/2018
+﻿// Program.Data.cs - 01/08/2019
 
 namespace PirateAdventure
 {
@@ -21,6 +21,8 @@ namespace PirateAdventure
         private const int _messageCount = 73;
         private const int _treasureRoom = 1;
         private const int _flagCount = 16;
+        private const int _itemNowhere = 0;
+        private const int _itemInventory = -1;
 
         // special item numbers for use in code
         private const int _unlitTorchItem = 8;
