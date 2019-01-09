@@ -29,6 +29,25 @@ namespace PirateAdventure
         private const int _litTorchItem = 9;
 
         private static bool[] _systemFlags = new bool[_flagCount + 1];
+        /*
+         System flags:
+         0 = temp flag for command sequences
+         1 = build boat sequence 1
+         2 = build boat sequence 2 succeeded
+         3 = matches found
+         4 = at treasure island
+         5 = set of plans found
+         6 =
+         7 = walked 30 paces in barren field
+         8 = walked 30 paces anywhere else
+         9 =
+         10 = dug up rusty anchor
+         11 = rug dropped keys
+         12 = map found
+         13 =
+         14 =
+         15 =
+         */
 
         private static int[,] _commandArray = new int[_commandCount, _commandValueCount]
             {
