@@ -1,11 +1,11 @@
-﻿// Program.Data.cs - 01/08/2019
+﻿// Program.Data.cs - 01/09/2019
 
 namespace PirateAdventure
 {
     partial class Program
     {
         private const string _gameName = "PirateAdventure";
-        private const int _version = 20181220;
+        private const int _version = 20190109;
 
         private const int _itemCount = 61;
         private const int _commandCount = 152;
@@ -18,7 +18,7 @@ namespace PirateAdventure
         private const int _totalTreasures = 2;
         private const int _wordSize = 3;
         private const int _lightTotal = 200;
-        private const int _messageCount = 73;
+        private const int _messageCount = 74;
         private const int _treasureRoom = 1;
         private const int _flagCount = 16;
         private const int _itemNowhere = 0;
@@ -194,7 +194,8 @@ namespace PirateAdventure
                 { 198, 1022, 480, 0, 0, 0, 8170, 9600 },          // 130
                 { 157, 2, 24, 40, 0, 0, 8170, 9600 },             // 131
                 { 1510, 44, 60, 40, 80, 85, 7801, 10800 },        // 132
-                { 1532, 302, 208, 300, 0, 0, 7800, 0 },           // 133
+                // { 1532, 302, 208, 300, 0, 0, 7800, 0 },        // 133 - wrong
+                { 1532, 302, 208, 300, 0, 0, 7922, 0 },           // 133 - fixed
                 { 1532, 302, 209, 0, 0, 0, 2813, 0 },             // 134
                 { 1532, 305, 0, 0, 0, 0, 10518, 7564 },           // 135
                 // { 8411, 841, 840, 140, 0, 0, 8922, 0 },        // 136 - wrong
@@ -203,7 +204,8 @@ namespace PirateAdventure
                 { 1392, 0, 0, 0, 0, 0, 6000, 0 },                 // 138
                 { 6300, 284, 0, 0, 0, 0, 16350, 0 },              // 139
                 { 8582, 0, 0, 0, 0, 0, 17700, 0 },                // 140
-                { 7800, 921, 209, 302, 200, 0, 8700, 0 },         // 141
+                // { 7800, 921, 209, 302, 200, 0, 8700, 0 },      // 141 - wrong
+                { 7800, 921, 209, 302, 200, 0, 8823, 0 },         // 141 - fixed
                 { 7950, 0, 0, 0, 0, 0, 2700, 0 },                 // 142
                 { 5908, 621, 1143, 1000, 0, 0, 4553, 0 },         // 143
                 { 5266, 0, 0, 0, 0, 0, 1800, 0 },                 // 144
@@ -430,7 +432,8 @@ namespace PirateAdventure
                 /* 69 */ "-TIDES A CHANGING MATEY-",
                 /* 70 */ "NOTE HERE -I BE LIKING PARROTS. THEY BE SMART MATEY-",
                 /* 71 */ "PIRATE FOLLOWS YOU ASHORE AS IF HE IS WAITING FOR SOMETHING.",
-                /* 72 */ "TAKEN"
+                /* 72 */ "TAKEN",
+                /* 73 */ "THE ANCHOR COMES LOOSE"
             };
 
         private static string[] _itemDescriptions = new string[_itemCount]
