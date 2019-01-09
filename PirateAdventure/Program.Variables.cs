@@ -1,4 +1,4 @@
-﻿// Program.Variables.cs - 12/20/2018
+﻿// Program.Variables.cs - 01/08/2019
 
 using System;
 
@@ -21,6 +21,7 @@ namespace PirateAdventure
         private static bool darkFlag = false;
         private static int lightRemaining = _lightTotal;
         private static bool debugFullMessages = false;
+        private static bool runScript = false;
 
         private static void Initialize()
         {

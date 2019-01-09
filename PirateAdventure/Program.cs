@@ -1,4 +1,4 @@
-﻿// Program.cs - 12/14/2018
+﻿// Program.cs - 01/08/2019
 
 using System;
 
@@ -18,6 +18,10 @@ namespace PirateAdventure
                 if (args[0].Equals("/debug", StringComparison.OrdinalIgnoreCase))
                 {
                     debugFullMessages = true;
+                }
+                if (args[0].Equals("/script", StringComparison.OrdinalIgnoreCase))
+                {
+                    runScript = true;
                 }
             }
             try
@@ -81,13 +85,13 @@ namespace PirateAdventure
                 }
                 numMoves++;
                 // check if torch is burning out
-                if (_itemLocation[_litTorchItem] != 0)
+                if (_itemLocation[_litTorchItem] != _itemNowhere)
                 {
                     lightRemaining--;
                     if (lightRemaining <= 0)
                     {
                         Console.WriteLine("LIGHT HAS RUN OUT");
-                        _itemLocation[_litTorchItem] = 0; // torch to nowhere
+                        _itemLocation[_litTorchItem] = _itemNowhere; // torch to nowhere
                     }
                     else if (lightRemaining < 25)
                     {
@@ -108,7 +112,16 @@ namespace PirateAdventure
         {
             Console.WriteLine();
             Console.Write(_enterCommand);
-            currCommandLine = Console.ReadLine().Trim().ToUpper();
+            if (runScript && scriptLineNum < scriptLines.Length)
+            {
+                currCommandLine = scriptLines[scriptLineNum];
+                Console.WriteLine(currCommandLine);
+                scriptLineNum++;
+            }
+            else
+            {
+                currCommandLine = Console.ReadLine().Trim().ToUpper();
+            }
         }
 
         private static bool RunCommand()
@@ -151,13 +164,13 @@ namespace PirateAdventure
                 {
                     if (currNounNumber >= 1 && currNounNumber <= _exitDirections)
                     {
-                        if (darkFlag && _itemLocation[_litTorchItem] != currRoomNumber && _itemLocation[_litTorchItem] != -1)
+                        if (darkFlag && _itemLocation[_litTorchItem] != currRoomNumber && _itemLocation[_litTorchItem] != _itemInventory)
                         {
                             Console.WriteLine("DANGEROUS TO MOVE IN THE DARK!");
                         }
                         if (_roomExitArray[currRoomNumber, currNounNumber - 1] == 0)
                         {
-                            if (darkFlag && _itemLocation[_litTorchItem] != currRoomNumber && _itemLocation[_litTorchItem] != -1)
+                            if (darkFlag && _itemLocation[_litTorchItem] != currRoomNumber && _itemLocation[_litTorchItem] != _itemInventory)
                             {
                                 Console.WriteLine("I FELL DOWN AND BROKE MY NECK.");
                                 currRoomNumber = _roomCount - 1; // never-never land
@@ -182,10 +195,10 @@ namespace PirateAdventure
                 else if (currVerbNumber == 10) // take
                 {
                     int inventoryCount = 0;
-                    int foundItem = -1;
+                    int foundItem = _itemInventory;
                     for (int itemNum = 0; itemNum < _itemCount; itemNum++)
                     {
-                        if (_itemLocation[itemNum] == -1)
+                        if (_itemLocation[itemNum] == _itemInventory)
                         {
                             inventoryCount++;
                         }
@@ -216,17 +229,17 @@ namespace PirateAdventure
                     }
                     else
                     {
-                        _itemLocation[foundItem] = -1; // put in inventory
+                        _itemLocation[foundItem] = _itemInventory; // put in inventory
                         Console.WriteLine("TAKEN");
                     }
                     foundMatch = true;
                 }
                 else if (currVerbNumber == 18) // drop
                 {
-                    int foundItem = -1;
+                    int foundItem = _itemInventory;
                     for (int itemNum = 0; itemNum < _itemCount; itemNum++)
                     {
-                        if (_itemLocation[itemNum] == -1)
+                        if (_itemLocation[itemNum] == _itemInventory)
                         {
                             string itemName = _verbNounList[currNounNumber, 1];
                             if (itemName.StartsWith("*"))
