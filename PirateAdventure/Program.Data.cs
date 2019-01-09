@@ -8,7 +8,7 @@ namespace PirateAdventure
         private const int _version = 20190109;
 
         private const int _itemCount = 61;
-        private const int _commandCount = 153;
+        private const int _commandCount = 154;
         private const int _commandValueCount = 8;
         private const int _wordCount = 60;
         private const int _roomCount = 34;
@@ -37,7 +37,7 @@ namespace PirateAdventure
          3 = matches found
          4 = at treasure island
          5 = set of plans found
-         6 =
+         6 = showed intro message
          7 = walked 30 paces in barren field
          8 = walked 30 paces anywhere else
          9 =
@@ -216,7 +216,8 @@ namespace PirateAdventure
                 { 6300, 184, 242, 0, 0, 0, 3600, 0 },             // 149
                 { 7800, 921, 160, 140, 0, 0, 7410, 9000 },        // 150
                 { 6300, 0, 0, 0, 0, 0, 450, 0 },                  // 151
-                { 4350, 0, 0, 0, 0, 0, 18600, 0 },                // 152 - new command
+                { 100, 129, 120, 0, 0, 0, 6508, 0 },              // 152 - intro message
+                { 4350, 0, 0, 0, 0, 0, 18600, 0 },                // 153 - new command
             };
 
         private static string[,] _verbNounList = new string[_wordCount, 2]
