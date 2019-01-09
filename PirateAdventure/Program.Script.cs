@@ -3,6 +3,7 @@
     public partial class Program
     {
         public static int scriptLineNum = 0;
+        public static bool scriptBreakFlag = false;
 
         public static string[] scriptLines = {
 "TAKE RUM",
@@ -24,6 +25,7 @@
 "GO EAST",
 "GO SHACK",
 "DROP RUM",
+"BREAK UNTIL PIRATE TAKES BOTTLE, USE 'WAIT'",
 "GO WEST",
 "TAKE MONGOOSE",
 "GO WEST",
@@ -90,6 +92,7 @@
 "GO CAVE",
 "GO DOWN",
 "DROP FISH",
+"BREAK UNTIL CROCS EAT FISH, USE 'WAIT'",
 "UNLOCK DOOR",
 "DROP KEYS",
 "DROP BOTTLE",
@@ -138,10 +141,20 @@
 "TAKE SHOVEL",
 "TAKE WINGS",
 "GO LAGOON",
+"LOOK",
+"BREAK UNTIL ANCHOR VISIBLE, KEEP USING 'WAIT' AND 'LOOK'",
 "DIG",
 "TAKE ANCHOR",
+"BREAK UNTIL ANCHOR HAS BEEN TAKEN, KEEP USING 'WAIT' AND 'TAKE ANCHOR'",
 "GO SOUTH",
-
+"DROP ANCHOR",
+"DROP WINGS",
+"TAKE MONGOOSE",
+"BUILD SHIP",
+"GO SHIP",
+"DROP MAP",
+"SET SAIL",
+"BREAK UNTIL TIDE IS IN, KEEP USING 'WAIT' AND 'SET SAIL'",
         };
     }
 }

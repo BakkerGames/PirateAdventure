@@ -1,4 +1,4 @@
-﻿// Program.cs - 01/08/2019
+﻿// Program.cs - 01/09/2019
 
 using System;
 
@@ -112,15 +112,27 @@ namespace PirateAdventure
         {
             Console.WriteLine();
             Console.Write(_enterCommand);
-            if (runScript && scriptLineNum < scriptLines.Length)
+            if (runScript && !scriptBreakFlag && scriptLineNum < scriptLines.Length)
             {
-                currCommandLine = scriptLines[scriptLineNum];
+                currCommandLine = scriptLines[scriptLineNum].Trim().ToUpper();
                 Console.WriteLine(currCommandLine);
                 scriptLineNum++;
+                if (currCommandLine.StartsWith("BREAK"))
+                {
+                    scriptBreakFlag = true;
+                    Console.WriteLine();
+                    Console.WriteLine("ENTER 'CONTINUE' TO RESUME SCRIPT");
+                    currCommandLine = ""; // get another command
+                }
             }
             else
             {
                 currCommandLine = Console.ReadLine().Trim().ToUpper();
+                if (currCommandLine.Equals("CONTINUE"))
+                {
+                    scriptBreakFlag = false;
+                    currCommandLine = ""; // get another command
+                }
             }
         }
 
