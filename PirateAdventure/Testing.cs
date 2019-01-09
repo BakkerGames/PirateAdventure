@@ -1,4 +1,4 @@
-﻿// Testing.cs - 12/14/2018
+﻿// Testing.cs - 01/09/2019
 
 using System;
 
@@ -6,48 +6,50 @@ namespace PirateAdventure
 {
     partial class Program
     {
+        private static string CommandOutputFilename = "D:\\Projects\\PirateAdventure\\PirateAdventure\\Resources\\Commands.txt";
+        
         public static void TestData()
         {
             for (int X = 0; X < _commandCount; X++)
             {
-                Console.Write($"{X.ToString("000")}:");
+                TestingWrite($"{X.ToString("000")}:");
                 for (int i = 0; i < _commandValueCount; i++)
                 {
-                    Console.Write($" {_commandArray[X, i]}");
+                    TestingWrite($" {_commandArray[X, i]}");
                 }
-                Console.WriteLine();
-                Console.Write("    ");
+                TestingWriteLine();
+                TestingWrite("    ");
                 for (int i = 0; i < _commandValueCount; i++)
                 {
                     if (i < 1 || i > 5)
                     {
-                        Console.Write($" {_commandArray[X, i] / 150}/{_commandArray[X, i] % 150}");
+                        TestingWrite($" {_commandArray[X, i] / 150}/{_commandArray[X, i] % 150}");
                     }
                     else
                     {
-                        Console.Write($" {_commandArray[X, i] / 20}/{_commandArray[X, i] % 20}");
+                        TestingWrite($" {_commandArray[X, i] / 20}/{_commandArray[X, i] % 20}");
                     }
                 }
-                Console.WriteLine();
+                TestingWriteLine();
                 int verb = _commandArray[X, 0] / 150;
                 int noun = _commandArray[X, 0] % 150;
                 if (verb == 0)
                 {
-                    Console.WriteLine($"{noun}%");
+                    TestingWriteLine($"{noun}%");
                 }
                 else if (noun == 0)
                 {
-                    Console.WriteLine($"{_verbNounList[verb, 0]}");
+                    TestingWriteLine($"{_verbNounList[verb, 0]}");
                 }
                 else
                 {
                     if (verb == 41 && noun == 20)
                     {
-                        Console.WriteLine("UNLIGHT TORCH"); // unlock and unlight are both the verb "UNL", need special handling
+                        TestingWriteLine("UNLIGHT TORCH"); // unlock and unlight are both the verb "UNL", need special handling
                     }
                     else
                     {
-                        Console.WriteLine($"{_verbNounList[verb, 0]} {_verbNounList[noun, 1]}");
+                        TestingWriteLine($"{_verbNounList[verb, 0]} {_verbNounList[noun, 1]}");
                     }
                 }
                 for (int w = 1; w <= 5; w++)
@@ -60,49 +62,49 @@ namespace PirateAdventure
                             // nothing
                             break;
                         case 1:
-                            Console.WriteLine($"    if {ItemDesc(ll)} carried");
+                            TestingWriteLine($"    if {ItemDesc(ll)} carried");
                             break;
                         case 2:
-                            Console.WriteLine($"    if {ItemDesc(ll)} in room");
+                            TestingWriteLine($"    if {ItemDesc(ll)} in room");
                             break;
                         case 3:
-                            Console.WriteLine($"    if {ItemDesc(ll)} carried or in room");
+                            TestingWriteLine($"    if {ItemDesc(ll)} carried or in room");
                             break;
                         case 4:
-                            Console.WriteLine($"    if room = {RoomDesc(ll)}");
+                            TestingWriteLine($"    if room = {RoomDesc(ll)}");
                             break;
                         case 5:
-                            Console.WriteLine($"    if {ItemDesc(ll)} not in room");
+                            TestingWriteLine($"    if {ItemDesc(ll)} not in room");
                             break;
                         case 6:
-                            Console.WriteLine($"    if {ItemDesc(ll)} not carried");
+                            TestingWriteLine($"    if {ItemDesc(ll)} not carried");
                             break;
                         case 7:
-                            Console.WriteLine($"    if room not {RoomDesc(ll)}");
+                            TestingWriteLine($"    if room not {RoomDesc(ll)}");
                             break;
                         case 8:
-                            Console.WriteLine($"    if flag {ll} true");
+                            TestingWriteLine($"    if flag {ll} true");
                             break;
                         case 9:
-                            Console.WriteLine($"    if flag {ll} false");
+                            TestingWriteLine($"    if flag {ll} false");
                             break;
                         case 10:
-                            Console.WriteLine($"    if carrying anything");
+                            TestingWriteLine($"    if carrying anything");
                             break;
                         case 11:
-                            Console.WriteLine($"    if carrying nothing");
+                            TestingWriteLine($"    if carrying nothing");
                             break;
                         case 12:
-                            Console.WriteLine($"    if {ItemDesc(ll)} not carried or in room");
+                            TestingWriteLine($"    if {ItemDesc(ll)} not carried or in room");
                             break;
                         case 13:
-                            Console.WriteLine($"    if {ItemDesc(ll)} somewhere");
+                            TestingWriteLine($"    if {ItemDesc(ll)} somewhere");
                             break;
                         case 14:
-                            Console.WriteLine($"    if {ItemDesc(ll)} nowhere");
+                            TestingWriteLine($"    if {ItemDesc(ll)} nowhere");
                             break;
                         default:
-                            Console.WriteLine($"    #UNUSED# {k} {ll}");
+                            TestingWriteLine($"    #UNUSED# {k} {ll}");
                             break;
                     }
                 }
@@ -114,9 +116,25 @@ namespace PirateAdventure
                     TestDoAction(y1, X, ref IP);
                     TestDoAction(y2, X, ref IP);
                 }
-                Console.WriteLine();
+                TestingWriteLine();
             }
             Console.ReadLine();
+        }
+
+        private static void TestingWriteLine()
+        {
+            TestingWrite("\n");
+        }
+
+        private static void TestingWriteLine(string value)
+        {
+            TestingWrite(value);
+            TestingWrite("\r\n");
+        }
+
+        private static void TestingWrite(string value)
+        {
+            Console.Write(value);
         }
 
         private static void TestDoAction(int value, int X, ref int IP)
