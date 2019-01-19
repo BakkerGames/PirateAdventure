@@ -1164,3 +1164,10 @@ HELP
 WAIT
     > TIME PASSES...
 
+154: 5908 626 1143 0 0 0 18750 0
+     39/58 31/6 57/3 0/0 0/0 0/0 125/0 0/0
+OPEN BOX
+    if CLAW_HAMMER not carried
+    if PLAIN_WOODEN_BOX carried or in room
+    > ITS NAILED SHUT
+

@@ -10,7 +10,7 @@ namespace PirateAdventure
         {
             if (args.Length > 0)
             {
-                if (args[0].Equals("/test", StringComparison.OrdinalIgnoreCase))
+                if (args[0].Equals("/commands", StringComparison.OrdinalIgnoreCase))
                 {
                     OutputCommands();
                     return 0;
