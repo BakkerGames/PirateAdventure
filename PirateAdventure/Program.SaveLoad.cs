@@ -1,4 +1,4 @@
-﻿// Program.SaveLoad.cs - 01/09/2019
+﻿// Program.SaveLoad.cs - 01/19/2019
 
 // Note: This Save/Load has checksum logic which relies on ordering of key/value pairs
 // in a JObject. When a JObject is converted to a string and back, if the order of the
@@ -24,6 +24,7 @@ namespace PirateAdventure
         private static void SaveGameData()
         {
             JObject saveData = new JObject();
+            JObject fullData = new JObject();
             saveData.Add("gamename", _gameName);
             saveData.Add("version", _version);
             saveData.Add("savedate", DateTime.UtcNow);
@@ -40,12 +41,13 @@ namespace PirateAdventure
             {
                 saveData.Add($"systemflag_{i}", _systemFlags[i]);
             }
-            saveData.Add("checksum", CalcMD5OfString(saveData.ToString()));
+            fullData.Add(_gameName, saveData);
+            fullData.Add("checksum", CalcMD5OfString(saveData.ToString()));
             if (!Directory.Exists(savePath))
             {
                 Directory.CreateDirectory(savePath);
             }
-            File.WriteAllText($"{savePath}\\{saveFilename}", saveData.ToString());
+            File.WriteAllText($"{savePath}\\{saveFilename}", fullData.ToString());
         }
 
         private static bool LoadGameData()
@@ -64,16 +66,23 @@ namespace PirateAdventure
             }
             Console.Write("LOAD SAVE GAME FILE? [Y/N] ");
             string answer = Console.ReadLine();
-            if (!string.IsNullOrEmpty(answer))
+            if (!string.IsNullOrEmpty(answer) && !answer.ToUpper().StartsWith("Y"))
             {
-                if (!answer.ToUpper().StartsWith("Y"))
+                Console.Write("DELETE OLD SAVE GAME FILE? [Y/N] ");
+                answer = Console.ReadLine();
+                if (!string.IsNullOrEmpty(answer) && !answer.ToUpper().StartsWith("Y"))
                 {
+                    Console.WriteLine();
                     return false;
                 }
+                File.Delete($"{savePath}\\{saveFilename}");
+                Console.WriteLine("SAVE GAME FILE DELETED");
+                Console.WriteLine();
+                return false;
             }
-            JObject saveData = JObject.Parse(File.ReadAllText($"{savePath}\\{saveFilename}"));
-            string md5Checksum = (string)saveData.GetValue("checksum");
-            saveData.Remove("checksum"); // checksum value is not part of the checksum
+            JObject fullData = JObject.Parse(File.ReadAllText($"{savePath}\\{saveFilename}"));
+            JObject saveData = (JObject)fullData.GetValue(_gameName);
+            string md5Checksum = (string)fullData.GetValue("checksum");
             if (!md5Checksum.Equals(CalcMD5OfString(saveData.ToString())))
             {
                 throw new SystemException("Corrupt SaveData file found");
@@ -86,7 +95,6 @@ namespace PirateAdventure
             DateTime saveDataTime = (DateTime)saveData.GetValue("savedate");
             Console.WriteLine();
             Console.WriteLine($"LOADING DATA FROM {TimeZoneInfo.ConvertTimeFromUtc(saveDataTime, TimeZoneInfo.Local)}...");
-            Console.WriteLine();
             gameOver = (bool)saveData.GetValue("gameover");
             numMoves = (int)saveData.GetValue("nummoves");
             currRoomNumber = (int)saveData.GetValue("currroomnumber");
@@ -100,7 +108,8 @@ namespace PirateAdventure
             {
                 _systemFlags[i] = (bool)saveData.GetValue($"systemflag_{i}");
             }
-            File.Delete($"{savePath}\\{saveFilename}");
+            //File.Delete($"{savePath}\\{saveFilename}");
+            Console.WriteLine();
             return true;
         }
 
