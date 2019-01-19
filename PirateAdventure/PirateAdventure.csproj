@@ -65,10 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Documents\COMMANDS.TXT" />
-    <Content Include="OriginalSourceScans\PIRATE_DATATAPE.TXT" />
-    <Content Include="OriginalSourceScans\PIRATE_RAW.TXT" />
-    <Content Include="OriginalSourceScans\PIRATE_TOKEN.TXT" />
-    <Content Include="OriginalSourceScans\PIRATE_TOKEN_LINES.TXT" />
     <Content Include="OriginalSourceScans\ScansToText\SCAN02.TXT" />
     <Content Include="OriginalSourceScans\ScansToText\SCAN03.TXT" />
     <Content Include="OriginalSourceScans\ScansToText\SCAN04.TXT" />
@@ -86,6 +82,10 @@
     <Content Include="OriginalSourceScans\Scans\scan07.png" />
     <Content Include="OriginalSourceScans\Scans\scan08.png" />
     <Content Include="OriginalSourceScans\Scans\scan09.png" />
+    <Content Include="OriginalSourceScans\SourceCode\PIRATE_DATATAPE.TXT" />
+    <Content Include="OriginalSourceScans\SourceCode\PIRATE_RAW.TXT" />
+    <Content Include="OriginalSourceScans\SourceCode\PIRATE_TOKEN.TXT" />
+    <Content Include="OriginalSourceScans\SourceCode\PIRATE_TOKEN_LINES.TXT" />
     <Content Include="RUN_SCRIPT.TXT">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
