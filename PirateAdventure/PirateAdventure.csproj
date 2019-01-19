@@ -58,7 +58,7 @@
     <Compile Include="Program.Script.cs" />
     <Compile Include="Program.Variables.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Testing.cs" />
+    <Compile Include="Program.OutputCommands.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
