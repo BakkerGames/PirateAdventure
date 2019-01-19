@@ -86,7 +86,7 @@
     <Content Include="OriginalSourceScans\Scans\scan07.png" />
     <Content Include="OriginalSourceScans\Scans\scan08.png" />
     <Content Include="OriginalSourceScans\Scans\scan09.png" />
-    <Content Include="Scripts\RUN_SCRIPT.TXT">
+    <Content Include="RUN_SCRIPT.TXT">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
