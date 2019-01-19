@@ -23,6 +23,7 @@ namespace PirateAdventure
 #endif
                 if (args[0].Equals("/script", StringComparison.OrdinalIgnoreCase))
                 {
+                    FillScriptLines();
                     runScript = true;
                 }
             }

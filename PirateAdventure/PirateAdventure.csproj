@@ -85,6 +85,9 @@
     <Content Include="Resources\Scans\scan07.png" />
     <Content Include="Resources\Scans\scan08.png" />
     <Content Include="Resources\Scans\scan09.png" />
+    <Content Include="Scripts\RUN_SCRIPT.TXT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
