@@ -8,7 +8,7 @@ namespace PirateAdventure
         private const int _version = 20190109;
 
         private const int _itemCount = 61;
-        private const int _commandCount = 154;
+        private const int _commandCount = 155;
         private const int _commandValueCount = 8;
         private const int _wordCount = 60;
         private const int _roomCount = 34;
@@ -18,7 +18,7 @@ namespace PirateAdventure
         private const int _totalTreasures = 2;
         private const int _wordSize = 3;
         private const int _lightTotal = 200;
-        private const int _messageCount = 75;
+        private const int _messageCount = 76;
         private const int _treasureRoom = 1;
         private const int _flagCount = 16;
         private const int _itemNowhere = 0;
@@ -218,6 +218,7 @@ namespace PirateAdventure
                 { 6300, 0, 0, 0, 0, 0, 450, 0 },                  // 151
                 { 100, 129, 120, 0, 0, 0, 6508, 0 },              // 152 - intro message
                 { 4350, 0, 0, 0, 0, 0, 18600, 0 },                // 153 - new command
+                { 5908, 626, 1143, 0, 0, 0, 18750, 0 },           // 154 - new command
             };
 
         private static string[,] _verbNounList = new string[_wordCount, 2]
@@ -437,6 +438,7 @@ namespace PirateAdventure
                 /* 72 */ "TAKEN",
                 /* 73 */ "THE ANCHOR COMES LOOSE",
                 /* 74 */ "TIME PASSES...",
+                /* 75 */ "ITS NAILED SHUT",
             };
 
         private static string[] _itemDescriptions = new string[_itemCount]
