@@ -12,13 +12,15 @@ namespace PirateAdventure
             {
                 if (args[0].Equals("/test", StringComparison.OrdinalIgnoreCase))
                 {
-                    TestData();
+                    OutputCommands();
                     return 0;
                 }
+#if DEBUG
                 if (args[0].Equals("/debug", StringComparison.OrdinalIgnoreCase))
                 {
                     debugFullMessages = true;
                 }
+#endif
                 if (args[0].Equals("/script", StringComparison.OrdinalIgnoreCase))
                 {
                     runScript = true;

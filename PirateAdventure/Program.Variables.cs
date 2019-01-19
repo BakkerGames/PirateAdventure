@@ -20,7 +20,9 @@ namespace PirateAdventure
         private static bool countsAsMove = false;
         private static bool darkFlag = false;
         private static int lightRemaining = _lightTotal;
+#if DEBUG
         private static bool debugFullMessages = false;
+#endif
         private static bool runScript = false;
 
         private static void Initialize()

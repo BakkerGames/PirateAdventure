@@ -1,4 +1,4 @@
-﻿// Testing.cs - 01/09/2019
+﻿// OutputCommands.cs - 01/17/2019
 
 using System;
 using System.IO;
@@ -12,7 +12,7 @@ namespace PirateAdventure
 
         private static StringBuilder commandCodeText = new StringBuilder();
 
-        public static void TestData()
+        public static void OutputCommands()
         {
             for (int X = 0; X < _commandCount; X++)
             {
