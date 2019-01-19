@@ -65,26 +65,27 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Documents\COMMANDS.TXT" />
-    <Content Include="Resources\PIRATE_RAW.TXT" />
-    <Content Include="Resources\PIRATE_TOKEN.TXT" />
-    <Content Include="Resources\PIRATE_TOKEN_LINES.TXT" />
-    <Content Include="Resources\ScansText\SCAN02.TXT" />
-    <Content Include="Resources\ScansText\SCAN03.TXT" />
-    <Content Include="Resources\ScansText\SCAN04.TXT" />
-    <Content Include="Resources\ScansText\SCAN05.TXT" />
-    <Content Include="Resources\ScansText\SCAN06.TXT" />
-    <Content Include="Resources\ScansText\SCAN07.TXT" />
-    <Content Include="Resources\ScansText\SCAN08.TXT" />
-    <Content Include="Resources\Scans\scan01.png" />
-    <Content Include="Resources\Scans\scan10.png" />
-    <Content Include="Resources\Scans\scan02.png" />
-    <Content Include="Resources\Scans\scan03.png" />
-    <Content Include="Resources\Scans\scan04.png" />
-    <Content Include="Resources\Scans\scan05.png" />
-    <Content Include="Resources\Scans\scan06.png" />
-    <Content Include="Resources\Scans\scan07.png" />
-    <Content Include="Resources\Scans\scan08.png" />
-    <Content Include="Resources\Scans\scan09.png" />
+    <Content Include="OriginalSourceScans\PIRATE_DATATAPE.TXT" />
+    <Content Include="OriginalSourceScans\PIRATE_RAW.TXT" />
+    <Content Include="OriginalSourceScans\PIRATE_TOKEN.TXT" />
+    <Content Include="OriginalSourceScans\PIRATE_TOKEN_LINES.TXT" />
+    <Content Include="OriginalSourceScans\ScansToText\SCAN02.TXT" />
+    <Content Include="OriginalSourceScans\ScansToText\SCAN03.TXT" />
+    <Content Include="OriginalSourceScans\ScansToText\SCAN04.TXT" />
+    <Content Include="OriginalSourceScans\ScansToText\SCAN05.TXT" />
+    <Content Include="OriginalSourceScans\ScansToText\SCAN06.TXT" />
+    <Content Include="OriginalSourceScans\ScansToText\SCAN07.TXT" />
+    <Content Include="OriginalSourceScans\ScansToText\SCAN08.TXT" />
+    <Content Include="OriginalSourceScans\Scans\scan01.png" />
+    <Content Include="OriginalSourceScans\Scans\scan10.png" />
+    <Content Include="OriginalSourceScans\Scans\scan02.png" />
+    <Content Include="OriginalSourceScans\Scans\scan03.png" />
+    <Content Include="OriginalSourceScans\Scans\scan04.png" />
+    <Content Include="OriginalSourceScans\Scans\scan05.png" />
+    <Content Include="OriginalSourceScans\Scans\scan06.png" />
+    <Content Include="OriginalSourceScans\Scans\scan07.png" />
+    <Content Include="OriginalSourceScans\Scans\scan08.png" />
+    <Content Include="OriginalSourceScans\Scans\scan09.png" />
     <Content Include="Scripts\RUN_SCRIPT.TXT">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
