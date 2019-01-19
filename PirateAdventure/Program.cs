@@ -1,4 +1,4 @@
-﻿// Program.cs - 01/09/2019
+﻿// Program.cs - 01/19/2019
 
 using System;
 
@@ -32,6 +32,7 @@ namespace PirateAdventure
                 if (!LoadGameData())
                 {
                     Initialize();
+                    ShowIntroduction();
                 }
                 RunGame();
                 if (!gameSaved)
@@ -53,7 +54,6 @@ namespace PirateAdventure
 
         private static void RunGame()
         {
-            ShowIntroduction();
             while (!gameOver)
             {
                 RunBackground();
