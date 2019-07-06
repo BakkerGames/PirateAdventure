@@ -1,4 +1,4 @@
-﻿// Program.Script.cs - 01/19/2019
+﻿// Program.Script.cs - 01/29/2019
 
 using System;
 using System.IO;
@@ -13,7 +13,7 @@ namespace PirateAdventure
 
         public static string[] scriptLines;
 
-        public static void FillScriptLines() {
+        public static bool FillScriptLines() {
             Console.Write("Enter script filename: ");
             string _scriptFilename = Console.ReadLine();
             if (string.IsNullOrEmpty(_scriptFilename))
@@ -21,7 +21,7 @@ namespace PirateAdventure
                 Console.WriteLine("Filename not specified!");
                 Console.Write("Press enter to continue...");
                 Console.ReadLine();
-                return;
+                return false;
             }
             // handle a string with quotes, as from shift-right-click "Copy as path"
             if (_scriptFilename.StartsWith("\""))
@@ -34,6 +34,7 @@ namespace PirateAdventure
             }
             // load script into memory
             scriptLines = File.ReadAllLines(_scriptFilename);
+            return true;
         }
     }
 }

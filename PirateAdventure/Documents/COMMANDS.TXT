@@ -282,12 +282,13 @@ LIGHT TORCH
     > TORCH IS LIT
     : look
 
-035: 6170 181 180 160 0 0 8302 0
-     41/20 9/1 9/0 8/0 0/0 0/0 55/52 0/0
+035: 6170 181 180 160 0 0 8302 18900
+     41/20 9/1 9/0 8/0 0/0 0/0 55/52 126/0
 UNLIGHT TORCH
     if LIT_TORCH carried
     : send LIT_TORCH to nowhere
     : take UNLIT_TORCH
+    > THE TORCH IS OUT
 
 036: 6300 104 0 0 0 0 900 0
      42/0 5/4 0/0 0/0 0/0 0/0 6/0 0/0

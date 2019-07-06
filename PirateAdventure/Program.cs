@@ -1,4 +1,4 @@
-﻿// Program.cs - 01/19/2019
+﻿// Program.cs - 01/29/2019
 
 using System;
 
@@ -8,23 +8,31 @@ namespace PirateAdventure
     {
         public static int Main(string[] args)
         {
-            if (args.Length > 0)
+            foreach (string arg in args)
             {
-                if (args[0].Equals("/commands", StringComparison.OrdinalIgnoreCase))
+                if (arg.Equals("/commands", StringComparison.OrdinalIgnoreCase) ||
+                    arg.Equals("-commands", StringComparison.OrdinalIgnoreCase) ||
+                    arg.Equals("/c", StringComparison.OrdinalIgnoreCase) ||
+                    arg.Equals("-c", StringComparison.OrdinalIgnoreCase))
                 {
                     OutputCommands();
                     return 0;
                 }
 #if DEBUG
-                if (args[0].Equals("/debug", StringComparison.OrdinalIgnoreCase))
+                if (arg.Equals("/debug", StringComparison.OrdinalIgnoreCase) ||
+                    arg.Equals("-debug", StringComparison.OrdinalIgnoreCase) ||
+                    arg.Equals("/d", StringComparison.OrdinalIgnoreCase) ||
+                    arg.Equals("-d", StringComparison.OrdinalIgnoreCase))
                 {
                     debugFullMessages = true;
                 }
 #endif
-                if (args[0].Equals("/script", StringComparison.OrdinalIgnoreCase))
+                if (arg.Equals("/script", StringComparison.OrdinalIgnoreCase) ||
+                    arg.Equals("-script", StringComparison.OrdinalIgnoreCase) ||
+                    arg.Equals("/s", StringComparison.OrdinalIgnoreCase) ||
+                    arg.Equals("-s", StringComparison.OrdinalIgnoreCase))
                 {
-                    FillScriptLines();
-                    runScript = true;
+                    runScript = FillScriptLines();
                 }
             }
             try

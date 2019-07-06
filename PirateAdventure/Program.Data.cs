@@ -18,7 +18,7 @@ namespace PirateAdventure
         private const int _totalTreasures = 2;
         private const int _wordSize = 3;
         private const int _lightTotal = 200;
-        private const int _messageCount = 76;
+        private const int _messageCount = 77;
         private const int _treasureRoom = 1;
         private const int _flagCount = 16;
         private const int _itemNowhere = 0;
@@ -90,7 +90,8 @@ namespace PirateAdventure
                 { 4800, 107, 100, 61, 89, 0, 10507, 8164 },       // 32
                 { 4063, 22, 0, 0, 0, 0, 647, 0 },                 // 33
                 { 5570, 161, 203, 160, 180, 0, 10870, 1264 },     // 34
-                { 6170, 181, 180, 160, 0, 0, 8302, 0 },           // 35
+                // { 6170, 181, 180, 160, 0, 0, 8302, 0 },        // 35 - wrong
+                { 6170, 181, 180, 160, 0, 0, 8302, 18900 },       // 35 - fixed
                 { 6300, 104, 0, 0, 0, 0, 900, 0 },                // 36
                 // { 1529, 442, 465, 440, 0, 0, 7800, 0 },        // 37 - wrong
                 { 1529, 442, 465, 440, 0, 0, 7922, 0 },           // 37 - fixed
@@ -439,6 +440,7 @@ namespace PirateAdventure
                 /* 73 */ "THE ANCHOR COMES LOOSE",
                 /* 74 */ "TIME PASSES...",
                 /* 75 */ "ITS NAILED SHUT",
+                /* 76 */ "THE TORCH IS OUT",
             };
 
         private static string[] _itemDescriptions = new string[_itemCount]
