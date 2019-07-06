@@ -1,4 +1,3 @@
-# CDS-specific files
 .*
 !.gitignore
 *.dbmdl
@@ -11,7 +10,7 @@
 *.xls
 *.xlsx
 _*.json
-*proj.user
+!*proj.user
 ~*.*
 BuildAll.bat
 BuildAll.log
